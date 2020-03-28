@@ -18,7 +18,7 @@ class SinglyLinkedList {
 
     insertAtStart(val){
         try{
-            if(val){
+            if(val==0 || val==false || val){
                 const newNode = new SinglyLinkedListNode(val);
                 if(this.head == null){
                     this.head = newNode;
@@ -34,7 +34,7 @@ class SinglyLinkedList {
                 }
             }
             else{
-                throw new Error('Cannot find passed value');
+                throw new Error('Cannot find passed value or passed value is undefined');
             }
         }
         catch(e){
@@ -44,7 +44,7 @@ class SinglyLinkedList {
 
     insertAtEnd(val){
         try{
-            if(val){
+            if(val==0 || val==false || val){
                 const newNode = new SinglyLinkedListNode(val);
                 if(this.head == null){
                     this.head = newNode;
@@ -60,7 +60,7 @@ class SinglyLinkedList {
                 }
             }
             else{
-                throw new Error('Cannot find passed value');
+                throw new Error('Cannot find passed value or passed value is undefined');
             }
         }
         catch(e){
@@ -190,26 +190,26 @@ class SinglyLinkedList {
 
     search(val){
         try{
-            if(val){
+            if(val==0 || val==false || val){
                 if(!this.isEmpty()){
                     let traverse = this.head;
                     while (traverse.next != null) {
                         if (traverse.value === val) {
-                            return true;
+                            return val;
                         }
                         traverse = traverse.next;
                     }
                     if (traverse.value === val) {
-                        return true;
+                        return val;
                     }
-                    return false;
+                    return undefined;
                 }
                 else{
-                    return false;
+                    return undefined;
                 }
             }
             else{
-                throw new Error('Cannot find passed value');
+                throw new Error('Cannot find passed value or passed value is undefined');
             }
         }
         catch(e){
@@ -219,7 +219,7 @@ class SinglyLinkedList {
 
     delete(val){
         try{
-            if(val){
+            if(val==0 || val==false || val){
                 if(this.search(val)){
                     if (this.head.value === val) {
                         return this.deleteFromStart(val);
@@ -247,11 +247,11 @@ class SinglyLinkedList {
                     }
                 }
                 else{
-                    return false;
+                    return undefined;
                 }
             }
             else{
-                throw new Error('Cannot find passed value');
+                throw new Error('Cannot find passed value or passed value is undefined');
             }
         }
         catch(e){
@@ -299,18 +299,87 @@ class SinglyLinkedList {
             console.log(e);
         }
     }
+
+    get(index){
+        try{
+            if(index==0 || index){
+                if(typeof(index)==='number'){
+                    if (index < this.size && index>=0) {
+                        let traverse = this.head;
+                        for (let i = 0; i < index; i++) {
+                            traverse = traverse.next;
+                        }
+                        return traverse.value;
+                    }
+                    else {
+                        throw new Error('Index out of range');
+                    }
+                }
+                else{
+                    throw new Error('Index is not integer');
+                }
+            }
+            else{
+                throw new Error('Cannot find passed value');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    set(val,index){
+        try{
+            if(index==0 || index){
+                if(typeof(index)==='number'){
+                    if(index>=0 && index<=this.size){
+                        if(index == 0){
+                            return this.insertAtStart(val);
+                        }
+                        else if(index == this.size){
+                            return this.insertAtEnd(val);
+                        }
+                        else{
+                            let newNode = new SinglyLinkedListNode(val);
+                            let backNode = this.head;
+                            let frontNode = this.head.next;
+                            for(let i=0;i<(index-1);i++){
+                                backNode = frontNode;
+                                frontNode = frontNode.next;
+                            }
+                            newNode.next = frontNode;
+                            backNode.next = newNode;
+                            this.size++;
+                            return val;
+                        }
+                    }
+                    else{
+                        throw new Error('Index out of range, So cannot set value');
+                    }
+                }
+                else{
+                    throw new Error('Index is not integer');
+                }
+            }
+            else{
+                throw new Error('Cannot find passed value');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
 }
 
 
 const my = new SinglyLinkedList();
 
-const myarr = [10,20,30,40,40];
+const myarr = [0,false,{name : 'Abhinav'},'0',10,20];
 myarr.forEach(ele => {
     my.insertAtEnd(ele);
 });
 
-console.log(my.reverse());
-console.log(my.toArray());
+console.log(my.set(100,'my'));
 console.log(my);
 
 
