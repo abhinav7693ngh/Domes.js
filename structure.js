@@ -1,4 +1,4 @@
-// Singly Linked List Data Structures
+// ===== Singly Linked List ===== //
 
 class SinglyLinkedListNode {
     constructor(data) {
@@ -173,13 +173,127 @@ class SinglyLinkedList {
     toArray(){
         try{
             let toReturn = [];
-            let traverse = this.head;
-            while(traverse.next != null){
+            if(!this.isEmpty()){
+                let traverse = this.head;
+                while (traverse.next != null) {
+                    toReturn.push(traverse.value);
+                    traverse = traverse.next;
+                }
                 toReturn.push(traverse.value);
-                traverse = traverse.next;
             }
-            toReturn.push(traverse.value);
             return toReturn;
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    search(val){
+        try{
+            if(val){
+                if(!this.isEmpty()){
+                    let traverse = this.head;
+                    while (traverse.next != null) {
+                        if (traverse.value === val) {
+                            return true;
+                        }
+                        traverse = traverse.next;
+                    }
+                    if (traverse.value === val) {
+                        return true;
+                    }
+                    return false;
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                throw new Error('Cannot find passed value');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    delete(val){
+        try{
+            if(val){
+                if(this.search(val)){
+                    if (this.head.value === val) {
+                        return this.deleteFromStart(val);
+                    }
+                    else if (this.tail.value === val) {
+                        return this.deleteFromEnd(val);
+                    }
+                    else {
+                        let backNode = this.head;
+                        let currentNode = this.head.next;
+                        let frontNode = this.head.next.next;
+                        while (frontNode.next != null) {
+                            if(currentNode.value === val){
+                                backNode.next = frontNode;
+                                this.size--;
+                                return val;
+                            }
+                            backNode = currentNode;
+                            currentNode = frontNode;
+                            frontNode = frontNode.next;
+                        }
+                        backNode.next = frontNode;
+                        this.size--;
+                        return val;
+                    }
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                throw new Error('Cannot find passed value');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    reverse(){
+        try{
+            if(!this.isEmpty()){
+                if(this.size === 1){
+                    return true;
+                }
+                else if(this.size === 2){
+                    this.tail.next = this.head;
+                    let temp = this.head;
+                    this.head = this.tail;
+                    this.tail = temp;
+                    this.tail.next = null;
+                    return true;
+                }
+                else{
+                    let backNode = this.head;
+                    let currentNode = this.head.next;
+                    let frontNode = this.head.next.next;
+                    while(currentNode.next != null){
+                        currentNode.next = backNode;
+                        backNode = currentNode;
+                        currentNode = frontNode;
+                        frontNode = frontNode.next;
+                    }
+                    currentNode.next = backNode;
+                    let temp = this.head;
+                    this.head = this.tail;
+                    this.tail = temp;
+                    this.tail.next = null;
+                    return true;
+                }
+            }
+            else{
+                return false;
+            }
         }
         catch(e){
             console.log(e);
@@ -190,12 +304,14 @@ class SinglyLinkedList {
 
 const my = new SinglyLinkedList();
 
-const myarr = [10,20,30];
+const myarr = [10,20,30,40,40];
 myarr.forEach(ele => {
     my.insertAtEnd(ele);
 });
 
+console.log(my.reverse());
 console.log(my.toArray());
+console.log(my);
 
 
 //my.insertAtStart('myvalue');
