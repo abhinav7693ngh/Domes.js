@@ -330,7 +330,7 @@ class SinglyLinkedList {
 
     set(val,index){
         try{
-            if(index==0 || index){
+            if((index==0 || index) && (val==0 || val==false || val)){
                 if(typeof(index)==='number'){
                     if(index>=0 && index<=this.size){
                         if(index == 0){
@@ -362,7 +362,7 @@ class SinglyLinkedList {
                 }
             }
             else{
-                throw new Error('Cannot find passed value');
+                throw new Error('Cannot find passed value or passed value is undefined');
             }
         }
         catch(e){
@@ -379,7 +379,7 @@ myarr.forEach(ele => {
     my.insertAtEnd(ele);
 });
 
-console.log(my.set(100,'my'));
+console.log(my.set(false,7));
 console.log(my);
 
 
