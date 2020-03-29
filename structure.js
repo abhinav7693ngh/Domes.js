@@ -34,7 +34,7 @@ class SinglyLinkedList {
                 }
             }
             else{
-                throw new Error('Cannot find passed value or passed value is undefined');
+                throw new Error('Cannot find passed value or passed value is undefined/null');
             }
         }
         catch(e){
@@ -60,7 +60,7 @@ class SinglyLinkedList {
                 }
             }
             else{
-                throw new Error('Cannot find passed value or passed value is undefined');
+                throw new Error('Cannot find passed value or passed value is undefined/null');
             }
         }
         catch(e){
@@ -209,7 +209,7 @@ class SinglyLinkedList {
                 }
             }
             else{
-                throw new Error('Cannot find passed value or passed value is undefined');
+                throw new Error('Cannot find passed value or passed value is undefined/null');
             }
         }
         catch(e){
@@ -251,7 +251,7 @@ class SinglyLinkedList {
                 }
             }
             else{
-                throw new Error('Cannot find passed value or passed value is undefined');
+                throw new Error('Cannot find passed value or passed value is undefined/null');
             }
         }
         catch(e){
@@ -320,7 +320,7 @@ class SinglyLinkedList {
                 }
             }
             else{
-                throw new Error('Cannot find passed value or passed value is undefined');
+                throw new Error('Cannot find passed value or passed value is undefined/null');
             }
         }
         catch(e){
@@ -362,7 +362,7 @@ class SinglyLinkedList {
                 }
             }
             else{
-                throw new Error('Cannot find passed value or passed values are undefined');
+                throw new Error('Cannot find passed value or passed values are undefined/null');
             }
         }
         catch(e){
@@ -421,7 +421,7 @@ class DoublyLinkedList{
                 }
             }
             else{
-                throw new Error('Cannot find passed value or passed value is undefined')
+                throw new Error('Cannot find passed value or passed value is undefined/null')
             }
         }
         catch(e){
@@ -448,7 +448,7 @@ class DoublyLinkedList{
                 }
             }
             else{
-                throw new Error('Cannot find passed value or passed value is undefined');
+                throw new Error('Cannot find passed value or passed value is undefined/null');
             }
         }
         catch(e){
@@ -602,7 +602,7 @@ class DoublyLinkedList{
                 }
             }
             else{
-                throw new Error('Cannot find passed value or passed value is undefined');
+                throw new Error('Cannot find passed value or passed value is undefined/null');
             }
         }
         catch(e){
@@ -630,7 +630,7 @@ class DoublyLinkedList{
                 }
             }
             else{
-                throw new Error('Cannot find passed value or passed value is undefined');
+                throw new Error('Cannot find passed value or passed value is undefined/null');
             }
         }
         catch(e){
@@ -674,7 +674,7 @@ class DoublyLinkedList{
                 }
             }
             else{
-                throw new Error('Cannot find passed value or passed values are undefined');
+                throw new Error('Cannot find passed value or passed values are undefined/null');
             }
         }
         catch(e){
@@ -731,7 +731,7 @@ class DoublyLinkedList{
                 }
             }
             else{
-                throw new Error('Cannot find passed value or passed value is undefined')
+                throw new Error('Cannot find passed value or passed value is undefined/null')
             }
         }
         catch(e){
@@ -815,7 +815,7 @@ class Stack{
                 }
             }
             else{
-                throw new Error('Cannot find passed value or passed value is undefined');
+                throw new Error('Cannot find passed value or passed value is undefined/null');
             }
         }
         catch(e){
@@ -849,61 +849,268 @@ class Stack{
             console.log(e);
         }
     }
+
+    top(){
+        try{
+            if(this.head == null){
+                return null;
+            }
+            else{
+                return this.head.value;
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    isEmpty(){
+        try{
+            if(this.head == null){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    toArray(){
+        try{
+            let toReturn = [];
+            if(!this.isEmpty()){
+                let traverse = this.head;
+                toReturn.push(traverse.value);
+                while(traverse.next != null){
+                    traverse = traverse.next;
+                    toReturn.push(traverse.value);
+                }
+                return toReturn;
+            }
+            else{
+                return toReturn;
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    search(val){
+        try{
+            if(val == 0 || val == false || val){
+                if(!this.isEmpty()){
+                    let traverse = this.head;
+                    if(traverse.value === val){
+                        return val;
+                    }
+                    while(traverse.next != null){
+                        traverse = traverse.next;
+                        if(traverse.value === val){
+                            return val;
+                        }
+                    }
+                    return null;
+                }
+                else{
+                    return null;
+                }
+            }
+            else{
+                throw new Error('Cannot find passed value or passed value is undefined/null');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
 }
 
 
 
 
 
-
-
-
-// const my = new Stack();
-
-// const myarr = [10,20,30,40];
-// myarr.forEach(ele => {
-//     console.log(my.push(ele));
-// });
-
-// console.log(my.push('ele'));
-// console.log(my.push(true));
-// console.log(my.push(null));
+// ======================= //
 
 
 
 
-// console.log(my);
 
-// let check = null;
-// console.log(check);
-// if(!check){
-//     console.log('Success');
-// }
+// ======== Queues ======== //
 
 
 
-// let some = undefined;
-// if(typeof(some)==='undefined'){
-//     console.log('I am success');
-// }
+class QueueNode{
 
-let my = new DoublyLinkedList();
+    constructor(data){
+        this.value = data;
+        this.next = null;
+    }
+
+}
 
 
-const myarr = [10,20,30,40];
+class Queue{
 
+    constructor(){
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+    }
+
+    isEmpty(){
+        try{
+            if(this.head == null){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    enqueue(val){
+        try{
+            if(val == 0 || val == false || val){
+                let newNode = new QueueNode(val);
+                if(this.head == null){
+                    this.head = newNode;
+                    this.tail = newNode;
+                    this.size++;
+                    return val;
+                }
+                else{
+                    this.tail.next = newNode;
+                    this.tail = newNode;
+                    this.size++;
+                    return val;
+                }
+            }
+            else{
+                throw new Error('Cannot find passed value or passed value is undefined/null');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    dequeue(){
+        try{
+            if(this.head == null){
+                return null;
+            }
+            else{
+                if(this.head == this.tail){
+                    let toDequeue = this.head.value;
+                    this.head = null;
+                    this.tail = null;
+                    this.size--;
+                    return toDequeue;
+                }
+                else{
+                    let toDequeue = this.head.value;
+                    let newHead = this.head.next;
+                    this.head = newHead;
+                    this.size--;
+                    return toDequeue;
+                }
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    toArray(){
+        try{
+            let toReturn = [];
+            if(!this.isEmpty()){
+                let traverse = this.head;
+                toReturn.push(traverse.value);
+                while(traverse.next != null){
+                    traverse = traverse.next;
+                    toReturn.push(traverse.value);
+                }
+                return toReturn;
+            }
+            else{
+                return toReturn;
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    peek(){
+        try{
+            if(this.head == null){
+                return null;
+            }
+            else{
+                return this.tail.value;
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    search(val) {
+        try {
+            if (val == 0 || val == false || val) {
+                if (!this.isEmpty()) {
+                    let traverse = this.head;
+                    if (traverse.value === val) {
+                        return val;
+                    }
+                    while (traverse.next != null) {
+                        traverse = traverse.next;
+                        if (traverse.value === val) {
+                            return val;
+                        }
+                    }
+                    return null;
+                }
+                else {
+                    return null;
+                }
+            }
+            else {
+                throw new Error('Cannot find passed value or passed value is undefined/null');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+}
+
+
+
+
+// ============================ //
+
+
+
+
+
+
+
+const my = new Queue();
+
+const myarr = [10,20,30];
 myarr.forEach(ele => {
-    my.insertAtEnd(ele);
+    my.enqueue(ele);
 });
 
-console.log(my.delete(10));
-console.log(my.delete(20));
-console.log(my.delete(100));
-console.log(my.delete(30));
-console.log(my.delete(50));
-console.log(my.delete(40));
-console.log(my.delete(100));
-console.log(my.delete(300));
-
-
+console.log(my.dequeue());
+console.log(my.toArray());
 console.log(my);
