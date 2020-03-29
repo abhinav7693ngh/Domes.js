@@ -797,7 +797,7 @@ class DoublyLinkedList{
                 }
             }
             else{
-                throw new Error('Cannot find passed value or passed value is undefined/null')
+                throw new Error('Cannot find passed value or passed value is undefined/null');
             }
         }
         catch(e){
@@ -828,6 +828,72 @@ class DoublyLinkedList{
             }
             else{
                 return false;
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    searchAll(val) {
+        try {
+            if (val == 0 || val == false || val) {
+                let toReturn = {
+                    count: 0,
+                    positions: []
+                };
+                if (!this.isEmpty()) {
+                    let traverse = this.head;
+                    let i;
+                    for (i = 0; i < (this.size - 1); i++) {
+                        if (traverse.value === val) {
+                            toReturn.count++;
+                            toReturn.positions.push(i);
+                        }
+                        traverse = traverse.next;
+                    }
+                    if (traverse.value === val) {
+                        toReturn.count++;
+                        toReturn.positions.push(i);
+                    }
+                    return toReturn;
+                }
+                else {
+                    return toReturn;
+                }
+            }
+            else {
+                throw new Error('Cannot find passed value or passed value is undefined/null');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    deleteAll(val){
+        try{
+            if(val == 0 || val == false || val){
+                let newDoubly = new DoublyLinkedList();
+                if(!this.isEmpty()){
+                    let traverse = this.head;
+                    while(traverse.next != null){
+                        if(traverse.value !== val){
+                            newDoubly.insertAtEnd(traverse.value);
+                        }
+                        traverse = traverse.next;
+                    }
+                    if(traverse.value !== val){
+                        newDoubly.insertAtEnd(traverse.value);
+                    }
+                    return newDoubly;
+                }
+                else{
+                    return newDoubly;
+                }
+            }
+            else{
+                throw new Error('Cannot find passed value or passed value is undefined/null');
             }
         }
         catch(e){
@@ -1179,11 +1245,12 @@ class Queue{
 
 
 
-const my = new SinglyLinkedList();
+const my = new DoublyLinkedList;
 
-const myarr = [];
+const myarr = [10,20,30,10,40,50,10,20];
 myarr.forEach(ele => {
     my.insertAtEnd(ele);
 });
+console.log(my.deleteAll(1000));
 console.log(my);
 //console.log(my.searchAll(20));
