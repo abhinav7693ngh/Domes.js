@@ -369,6 +369,72 @@ class SinglyLinkedList {
             console.log(e);
         }
     }
+
+    searchAll(val){
+        try{
+            if(val == 0 || val == false || val){
+                let toReturn = {
+                    count : 0,
+                    positions : []
+                };
+                if(!this.isEmpty()){
+                    let traverse = this.head;
+                    let i;
+                    for(i=0;i<(this.size-1);i++){
+                        if(traverse.value === val){
+                            toReturn.count++;
+                            toReturn.positions.push(i);
+                        }
+                        traverse = traverse.next;
+                    }
+                    if(traverse.value === val){
+                        toReturn.count++;
+                        toReturn.positions.push(i);
+                    }
+                    return toReturn;
+                }
+                else{
+                    return toReturn;
+                }
+            }
+            else{
+                throw new Error('Cannot find passed value or passed value is undefined/null');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    deleteAll(val){
+        try{
+            if(val==0 || val==false || val){
+                let newSingly = new SinglyLinkedList();
+                if(!this.isEmpty()){
+                    let traverse = this.head;
+                    while(traverse.next != null){
+                        if(traverse.value !== val){
+                            newSingly.insertAtEnd(traverse.value);
+                        }
+                        traverse = traverse.next;
+                    }
+                    if(traverse.value !== val){
+                        newSingly.insertAtEnd(traverse.value);
+                    }
+                    return newSingly;
+                }
+                else{
+                    return newSingly;
+                }
+            }
+            else{
+                throw new Error('Cannot find passed value or passed value is undefined/null');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
 }
 
 
@@ -1096,7 +1162,12 @@ class Queue{
 
 
 
-// ============================ //
+// =============================== //
+
+
+
+
+// ===== Binary Search Trees ===== //
 
 
 
@@ -1104,13 +1175,15 @@ class Queue{
 
 
 
-const my = new Queue();
 
-const myarr = [10,20,30];
+
+
+
+const my = new SinglyLinkedList();
+
+const myarr = [];
 myarr.forEach(ele => {
-    my.enqueue(ele);
+    my.insertAtEnd(ele);
 });
-
-console.log(my.dequeue());
-console.log(my.toArray());
 console.log(my);
+//console.log(my.searchAll(20));
