@@ -681,20 +681,104 @@ class DoublyLinkedList{
             console.log(e);
         }
     }
+
+    delete(val){
+        try{
+            if(val==0 || val==false || val){
+                if(!this.isEmpty()){
+                    if(this.head.value === val){
+                        return this.deleteFromStart(val);
+                    }
+                    else if(this.tail.value === val){
+                        return this.deleteFromEnd(val);
+                    }
+                    else{
+                        let backNode = this.head;
+                        let currentNode = this.head.next;
+                        let frontNode = this.head.next.next;
+                        while(frontNode.next != null){
+                            if(currentNode.value === val){
+                                let deletedNodeValue = currentNode.value;
+                                backNode.next = frontNode;
+                                frontNode.prev = backNode;
+                                currentNode.next = null;
+                                currentNode.prev = null;
+                                this.size--;
+                                return deletedNodeValue;
+                            }
+                            backNode = currentNode;
+                            currentNode = frontNode;
+                            frontNode = frontNode.next;
+                        }
+                        if(currentNode.value === val){
+                            let deletedNodeValue = currentNode.value;
+                            backNode.next = frontNode;
+                            frontNode.prev = backNode;
+                            currentNode.next = null;
+                            currentNode.prev = null;
+                            this.size--;
+                            return deletedNodeValue;
+                        }
+                        return undefined;
+                    }
+                }
+                else{
+                    return undefined;
+                }
+            }
+            else{
+                throw new Error('Cannot find passed value or passed value is undefined')
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    reverse(){
+        try{
+            if(!this.isEmpty()){
+                if(this.size == 1){
+                    return true;
+                }
+                else{
+                    let traverse = this.head;
+                    let temp;
+                    for(let i=0;i<this.size;i++){
+                        temp = traverse.next;
+                        traverse.next = traverse.prev;
+                        traverse.prev = temp;
+                        traverse = traverse.prev;
+                    }
+                    temp = this.head;
+                    this.head = this.tail;
+                    this.tail = temp;
+                    return true;
+                }
+            }
+            else{
+                return false;
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
 }
 
 
 
 const my = new DoublyLinkedList();
 
-const myarr = [10,20,30,40];
+const myarr = [10,20,30];
 
 
 myarr.forEach(ele => {
     my.insertAtEnd(ele);
 });
+console.log(my.reverse());
+console.log(my.toArray());
 
-console.log(my.set('yup',undefined));
 
 
 
