@@ -71,7 +71,7 @@ class SinglyLinkedList {
     lookStart(){
         try{
             if(this.head == null){
-                return undefined;
+                return null;
             }
             else if(this.head != null){
                 return this.head.value;
@@ -85,7 +85,7 @@ class SinglyLinkedList {
     lookEnd(){
         try{
             if(this.head == null){
-                return undefined;
+                return null;
             }
             else if(this.head != null){
                 return this.tail.value;
@@ -99,7 +99,7 @@ class SinglyLinkedList {
     deleteFromStart(){
         try{
             if(this.head == null){
-                return undefined;
+                return null;
             }
             else if(this.head != null){
                 if(this.head == this.tail){
@@ -126,7 +126,7 @@ class SinglyLinkedList {
     deleteFromEnd(){
         try{
             if(this.head == null){
-                return undefined;
+                return null;
             }
             else if(this.head != null){
                 if(this.head == this.tail){
@@ -202,10 +202,10 @@ class SinglyLinkedList {
                     if (traverse.value === val) {
                         return val;
                     }
-                    return undefined;
+                    return null;
                 }
                 else{
-                    return undefined;
+                    return null;
                 }
             }
             else{
@@ -247,7 +247,7 @@ class SinglyLinkedList {
                     }
                 }
                 else{
-                    return undefined;
+                    return null;
                 }
             }
             else{
@@ -459,7 +459,7 @@ class DoublyLinkedList{
     deleteFromStart(){
         try{
             if(this.head == null){
-                return undefined;
+                return null;
             }
             else if(this.head != null){
                 if(this.head == this.tail){
@@ -487,7 +487,7 @@ class DoublyLinkedList{
     deleteFromEnd(){
         try{
             if(this.head == null){
-                return undefined;
+                return null;
             }
             else if(this.head != null){
                 if(this.head == this.tail){
@@ -535,7 +535,7 @@ class DoublyLinkedList{
     lookStart(){
         try{
             if(this.isEmpty()){
-                return undefined;
+                return null;
             }
             else{
                 return this.head.value;
@@ -549,7 +549,7 @@ class DoublyLinkedList{
     lookEnd(){
         try{
             if(this.isEmpty()){
-                return undefined;
+                return null;
             }
             else{
                 return this.tail.value;
@@ -595,10 +595,10 @@ class DoublyLinkedList{
                     if(traverse.value === val){
                         return val;
                     }
-                    return undefined;
+                    return null;
                 }
                 else{
-                    return undefined;
+                    return null;
                 }
             }
             else{
@@ -686,18 +686,32 @@ class DoublyLinkedList{
         try{
             if(val==0 || val==false || val){
                 if(!this.isEmpty()){
-                    if(this.head.value === val){
-                        return this.deleteFromStart(val);
-                    }
-                    else if(this.tail.value === val){
-                        return this.deleteFromEnd(val);
-                    }
-                    else{
-                        let backNode = this.head;
-                        let currentNode = this.head.next;
-                        let frontNode = this.head.next.next;
-                        while(frontNode.next != null){
-                            if(currentNode.value === val){
+                    if(this.search(val)){
+                        if (this.head.value === val) {
+                            return this.deleteFromStart(val);
+                        }
+                        else if (this.tail.value === val) {
+                            return this.deleteFromEnd(val);
+                        }
+                        else {
+                            let backNode = this.head;
+                            let currentNode = this.head.next;
+                            let frontNode = this.head.next.next;
+                            while (frontNode.next != null) {
+                                if (currentNode.value === val) {
+                                    let deletedNodeValue = currentNode.value;
+                                    backNode.next = frontNode;
+                                    frontNode.prev = backNode;
+                                    currentNode.next = null;
+                                    currentNode.prev = null;
+                                    this.size--;
+                                    return deletedNodeValue;
+                                }
+                                backNode = currentNode;
+                                currentNode = frontNode;
+                                frontNode = frontNode.next;
+                            }
+                            if (currentNode.value === val) {
                                 let deletedNodeValue = currentNode.value;
                                 backNode.next = frontNode;
                                 frontNode.prev = backNode;
@@ -706,24 +720,14 @@ class DoublyLinkedList{
                                 this.size--;
                                 return deletedNodeValue;
                             }
-                            backNode = currentNode;
-                            currentNode = frontNode;
-                            frontNode = frontNode.next;
                         }
-                        if(currentNode.value === val){
-                            let deletedNodeValue = currentNode.value;
-                            backNode.next = frontNode;
-                            frontNode.prev = backNode;
-                            currentNode.next = null;
-                            currentNode.prev = null;
-                            this.size--;
-                            return deletedNodeValue;
-                        }
-                        return undefined;
+                    }
+                    else{
+                        return null;
                     }
                 }
                 else{
-                    return undefined;
+                    return null;
                 }
             }
             else{
@@ -768,19 +772,138 @@ class DoublyLinkedList{
 
 
 
-const my = new DoublyLinkedList();
 
-const myarr = [10,20,30];
 
+// ================================== //
+
+
+
+// ============ Stacks ============== //
+
+
+
+class StackNode{
+    constructor(data){
+        this.value = data;
+        this.next = null;
+    }
+}
+
+
+class Stack{
+    constructor() {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+    }
+
+    push(val){
+        try{
+            if(val==0 || val== false || val){
+                let newNode = new StackNode(val);
+                if(this.head == null){
+                    this.head = newNode;
+                    this.tail = newNode;
+                    this.size++;
+                    return val;
+                }
+                else if(this.head != null){
+                    newNode.next = this.head;
+                    this.head = newNode;
+                    this.size++;
+                    return val;
+                }
+            }
+            else{
+                throw new Error('Cannot find passed value or passed value is undefined');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    pop(){
+        try{
+            if(this.head == null){
+                return null;
+            }
+            else{
+                if(this.head == this.tail){
+                    let toPop = this.head.value;
+                    this.head = null;
+                    this.tail = null;
+                    this.size--;
+                    return toPop;
+                }
+                else{
+                    let toPop = this.head.value;
+                    let newHead = this.head.next;
+                    this.head = newHead;
+                    this.size--;
+                    return toPop;
+                }
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+// const my = new Stack();
+
+// const myarr = [10,20,30,40];
+// myarr.forEach(ele => {
+//     console.log(my.push(ele));
+// });
+
+// console.log(my.push('ele'));
+// console.log(my.push(true));
+// console.log(my.push(null));
+
+
+
+
+// console.log(my);
+
+// let check = null;
+// console.log(check);
+// if(!check){
+//     console.log('Success');
+// }
+
+
+
+// let some = undefined;
+// if(typeof(some)==='undefined'){
+//     console.log('I am success');
+// }
+
+let my = new DoublyLinkedList();
+
+
+const myarr = [10,20,30,40];
 
 myarr.forEach(ele => {
     my.insertAtEnd(ele);
 });
-console.log(my.reverse());
-console.log(my.toArray());
 
-
-
+console.log(my.delete(10));
+console.log(my.delete(20));
+console.log(my.delete(100));
+console.log(my.delete(30));
+console.log(my.delete(50));
+console.log(my.delete(40));
+console.log(my.delete(100));
+console.log(my.delete(300));
 
 
 console.log(my);
