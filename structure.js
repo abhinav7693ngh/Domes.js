@@ -1375,6 +1375,54 @@ class BinarySearchTree{
         }
     }
 
+    search(val){
+        try{
+            const myCurrentType = typesMap[this.type];
+            if (typeof (val) === myCurrentType) {
+                if(this.root != null){
+                    let traverse = this.root;
+                    while(true){
+                        if(traverse.value === val){
+                            return true;
+                            break;
+                        }
+                        else if(val <= traverse.value && traverse.left!=null){
+                            traverse = traverse.left;
+                        }
+                        else if(val > traverse.value && traverse.right!=null){
+                            traverse = traverse.right;
+                        }
+                        else{
+                            return false;
+                        }
+                    }
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                throw new Error('Passed value does not match the type of Binary Search Tree');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    isEmpty(){
+        try{
+            if(this.root == null){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
 }
 
 
@@ -1393,7 +1441,10 @@ my.insert(10);
 my.insert(20);
 my.insert(40);
 my.insert(50);
-// my.insert('Singh');
+
+console.log(my.search(10));
+
+console.log(my.isEmpty());
 
 
 
