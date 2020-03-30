@@ -1441,6 +1441,49 @@ function leaveNodes(current,leaves){
     leaveNodes(current.right,leaves);
 }
 
+function findHeight(current){
+    if(current == null){
+        return 0;
+    }
+    else{
+        let l = findHeight(current.left);
+        let r = findHeight(current.right);
+        return Math.max(l,r) + 1;
+    }
+}
+
+function childs(current,id){
+    if(current == null){
+        return null;
+    }
+    else if(current.id === id){
+        let toReturn = {};
+        if(current.left != null){
+            toReturn['left']  = {
+                value : current.left.value,
+                id : current.left.id
+            }
+        }
+        else{
+            toReturn['left']=null;
+        }
+        if(current.right != null){
+            toReturn['right'] = {
+                value : current.right.value,
+                id : current.right.id
+            }
+        }
+        else{
+            toReturn['right'] = null;
+        }
+        return toReturn;
+    }
+    else{
+        childs(current.left);
+        childs(current.right);
+    }
+}
+
 
 
 
@@ -1689,17 +1732,18 @@ class BinarySearchTree{
     }
 
     height(id){
-        try{
-            if(arguments.length > 0){
+        try {
+            if (arguments.length > 0) {
                 if (typeof (id) === 'number') {
                     if (id >= 1 && id <= this.noOfNodes) {
-
+                        let myroot = this.nodeIDMap[id];
+                        return findHeight.call(this,myroot);
                     }
                     else {
                         throw new Error('Please give a valid ID or Binary Search Tree is Empty');
                     }
                 }
-                else{
+                else {
                     throw new Error('ID passed is not of type number');
                 }
             }
@@ -1707,7 +1751,7 @@ class BinarySearchTree{
                 throw new Error('Argument not passed');
             }
         }
-        catch(e){
+        catch (e) {
             console.log(e);
         }
     }
@@ -1734,15 +1778,10 @@ class BinarySearchTree{
                     if(arguments.length > 1){
                         if(typeof(id) === 'number'){
                             if(id >=1 && id<=this.noOfNodes){
-                                if (this.nodeIDMap[id]) {
-                                    let myroot = this.nodeIDMap[id];
-                                    let mynodes = [];
-                                    getIdFromValue.call(this, myroot, mynodes, val);
-                                    return mynodes;
-                                }
-                                else {
-                                    return null;
-                                }
+                                let myroot = this.nodeIDMap[id];
+                                let mynodes = [];
+                                getIdFromValue.call(this, myroot, mynodes, val);
+                                return mynodes;
                             }
                             else{
                                 throw new Error('Please give a valid ID or Binary Search Tree is Empty');
@@ -1784,7 +1823,7 @@ class BinarySearchTree{
                     if(id>=1 && id<=this.noOfNodes){
                         let myroot = this.nodeIDMap[id];
                         let leaves = [];
-                        leaveNodes.call(this,myroot,leaves);
+                        leaveNodes.call(this, myroot, leaves);
                         return leaves;
                     }
                     else{
@@ -1795,18 +1834,43 @@ class BinarySearchTree{
                     throw new Error('ID passed is not of type number');
                 }
             }
-            else if(arguments.length === 0){
-                console.log('I am here');
-                if(!this.isEmpty()){
-                    let myroot = this.nodeIDMap[this.rootNodeID()];
-                    let leaves = [];
-                    leaveNodes.call(this,myroot,leaves);
-                    return leaves;
+            else{
+                throw new Error('Argument not passed')
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    childNodes(id){
+        try{
+            if(arguments.length > 0){
+                if(typeof(id)==='number'){
+                    if(id>=1 && id<=this.noOfNodes){
+                        let myroot = this.nodeIDMap[id];
+                        return childs.call(this,myroot,id);
+                    }
+                    else{
+                        throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                    }
                 }
                 else{
-                    return null;
+                    throw new Error('ID passed is not of type number');
                 }
             }
+            else{
+                throw new Error('Argument not passed');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    delete(id){
+        try{
+
         }
         catch(e){
             console.log(e);
@@ -1818,39 +1882,17 @@ class BinarySearchTree{
 
 
 
-// const my = new DoublyLinkedList();
-
-// let myarr = [10,20,30,40,50];
-
-// myarr.forEach(ele => {
-//     my.insertAtEnd(ele);
-// })
-// console.log(my.remove(4));
-// console.log(my.remove(2));
-
-// console.log(my);
 const my = new BinarySearchTree(1,1);
-
-
-my.insert(30);
-my.insert(10);
-my.insert(20);
-my.insert(30);
-my.insert(40);
-my.insert(50);
-my.insert(60);
-console.log(my.leaveNodes(1,2));
-//my.getID();
-
-// console.log(my.BFS(1));
-// console.log(my.DFSInOrder(1));
-// console.log(my.DFSPreOrder(1));
-// console.log(my.DFSPostOrder(1));
-// console.log(my.getIdsOfValue(30,7,40));
-
+console.log(my.insert(30));
+console.log(my.insert(20));
+console.log(my.insert(50));
+console.log(my.insert(10));
+console.log(my.insert(25));
+console.log(my.insert(40));
+console.log(my.insert(60));
+console.log(my.insert(15));
+console.log(my.childNodes(3));
 console.log(my);
 
-// let some = my.search(10);
-// some.value = 100;
 
 
