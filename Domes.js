@@ -1397,7 +1397,7 @@ function inOrder(current,visited){
         return;
     }
     inOrder(current.left,visited);
-    visited.push(current.value);
+    visited.push({value : current.value, id : current.id});
     inOrder(current.right,visited);
 }
 
@@ -1405,7 +1405,7 @@ function preOrder(current,visited){
     if (current == null) {
         return;
     }
-    visited.push(current.value);
+    visited.push({ value: current.value, id: current.id });
     inOrder(current.left, visited);
     inOrder(current.right, visited);
 }
@@ -1416,7 +1416,29 @@ function postOrder(current,visited){
     }
     inOrder(current.left, visited);
     inOrder(current.right, visited);
-    visited.push(current.value);
+    visited.push({ value: current.value, id: current.id });
+}
+
+function getIdFromValue(current,mynodes,val){
+    if(current == null){
+        return;
+    }
+    if(current.value === val){
+        mynodes.push({value : current.value, id : current.id});
+    }
+    getIdFromValue(current.left, mynodes,val);
+    getIdFromValue(current.right, mynodes, val);
+}
+
+function leaveNodes(current,leaves){
+    if(current == null){
+        return;
+    }
+    if (current.left == null && current.right == null) {
+        leaves.push({ value: current.value, id: current.id });
+    }
+    leaveNodes(current.left,leaves);
+    leaveNodes(current.right,leaves);
 }
 
 
@@ -1449,38 +1471,43 @@ class BinarySearchTree{
     insert(val){
         try{
             const myCurrentType = typesMap[this.type];
-            if (typeof (val) === myCurrentType){
-                const supportedMethods = typesAndMethods[parseInt(this.type)];
-                if(supportedMethods.find(ele => parseInt(ele)===parseInt(this.method))){
-                    if (this.root == null) {
-                        this.noOfNodes++;
-                        let newNode = new BinarySearchTreeNode(val,this.noOfNodes);
-                        this.nodeIDMap[this.noOfNodes] = newNode;
-                        this.root = newNode;
-                        return val;
+            if(arguments.length > 0){
+                if (typeof (val) === myCurrentType) {
+                    const supportedMethods = typesAndMethods[parseInt(this.type)];
+                    if (supportedMethods.find(ele => parseInt(ele) === parseInt(this.method))) {
+                        if (this.root == null) {
+                            this.noOfNodes++;
+                            let newNode = new BinarySearchTreeNode(val, this.noOfNodes);
+                            this.nodeIDMap[this.noOfNodes] = newNode;
+                            this.root = newNode;
+                            return val;
+                        }
+                        else if (this.type === 1 && this.method === 1) {
+                            this.noOfNodes++;
+                            insertNumberAndStringAscii.call(this, val);
+                            return val;
+                        }
+                        else if (this.type === 2 && this.method === 1) {
+                            this.noOfNodes++;
+                            insertNumberAndStringAscii.call(this, val);
+                            return val;
+                        }
+                        else if (this.type === 2 && this.method === 2) {
+                            this.noOfNodes++;
+                            insertStringLength.call(this, val);
+                            return val;
+                        }
                     }
-                    else if (this.type === 1 && this.method === 1) {
-                        this.noOfNodes++;
-                        insertNumberAndStringAscii.call(this, val);
-                        return val;
-                    }
-                    else if (this.type === 2 && this.method === 1) {
-                        this.noOfNodes++;
-                        insertNumberAndStringAscii.call(this, val);
-                        return val;
-                    }
-                    else if (this.type === 2 && this.method === 2) {
-                        this.noOfNodes++;
-                        insertStringLength.call(this, val);
-                        return val;
+                    else {
+                        throw new Error('Method specified is not supported for this selected type please refer documentation for supported methods')
                     }
                 }
-                else{
-                    throw new Error('Method specified is not supported for this selected type please refer documentation for supported methods')
+                else {
+                    throw new Error('Passed value does not match the type of Binary Search Tree');
                 }
             }
             else{
-                throw new Error('Passed value does not match the type of Binary Search Tree');
+                throw new Error('Argument not passed');
             }
         }
         catch(e){
@@ -1491,31 +1518,36 @@ class BinarySearchTree{
     search(val){
         try{
             const myCurrentType = typesMap[this.type];
-            if (typeof (val) === myCurrentType) {
-                if(this.root != null){
-                    let traverse = this.root;
-                    while(true){
-                        if(traverse.value === val){
-                            return val;
-                            break;
-                        }
-                        else if(val <= traverse.value && traverse.left!=null){
-                            traverse = traverse.left;
-                        }
-                        else if(val > traverse.value && traverse.right!=null){
-                            traverse = traverse.right;
-                        }
-                        else{
-                            return null;
+            if(arguments.length > 0){
+                if (typeof (val) === myCurrentType) {
+                    if (this.root != null) {
+                        let traverse = this.root;
+                        while (true) {
+                            if (traverse.value === val) {
+                                return { value: traverse.value, id: traverse.id };
+                                break;
+                            }
+                            else if (val <= traverse.value && traverse.left != null) {
+                                traverse = traverse.left;
+                            }
+                            else if (val > traverse.value && traverse.right != null) {
+                                traverse = traverse.right;
+                            }
+                            else {
+                                return null;
+                            }
                         }
                     }
+                    else {
+                        return null;
+                    }
                 }
-                else{
-                    return null;
+                else {
+                    throw new Error('Passed value does not match the type of Binary Search Tree');
                 }
             }
             else{
-                throw new Error('Passed value does not match the type of Binary Search Tree');
+                throw new Error('Argument not passed');
             }
         }
         catch(e){
@@ -1539,30 +1571,35 @@ class BinarySearchTree{
 
     BFS(id){
         try{
-            if(typeof(id)==='number'){
-                if(id>=1 && id<=this.noOfNodes){
-                    const myroot = this.nodeIDMap[id];
-                    let queue = new Queue();
-                    let visited = [];
-                    queue.enqueue(myroot);
-                    while(queue.size > 0){
-                        let toBeChecked = queue.dequeue();
-                        visited.push(toBeChecked.value);
-                        if(toBeChecked.left != null){
-                            queue.enqueue(toBeChecked.left);
+            if(arguments.length > 0){
+                if (typeof (id) === 'number') {
+                    if (id >= 1 && id <= this.noOfNodes) {
+                        const myroot = this.nodeIDMap[id];
+                        let queue = new Queue();
+                        let visited = [];
+                        queue.enqueue(myroot);
+                        while (queue.size > 0) {
+                            let toBeChecked = queue.dequeue();
+                            visited.push({ value: toBeChecked.value, id: toBeChecked.id });
+                            if (toBeChecked.left != null) {
+                                queue.enqueue(toBeChecked.left);
+                            }
+                            if (toBeChecked.right != null) {
+                                queue.enqueue(toBeChecked.right);
+                            }
                         }
-                        if(toBeChecked.right != null){
-                            queue.enqueue(toBeChecked.right);
-                        }
+                        return visited;
                     }
-                    return visited;
+                    else {
+                        throw new Error('Please give a valid ID or Binary Search is Empty');
+                    }
                 }
-                else{
-                    throw new Error('Please give a valid ID or Binary Search is Empty');
+                else {
+                    throw new Error('ID passed is not of type number')
                 }
             }
             else{
-                throw new Error('ID passed is not of type number or it is not passed.')
+                throw new Error('Argument not passed');
             }
         }
         catch(e){
@@ -1572,19 +1609,24 @@ class BinarySearchTree{
 
     DFSInOrder(id){
         try{
-            if(typeof(id)==='number'){
-                if(id>=1 && id<=this.noOfNodes){
-                    const myroot = this.nodeIDMap[id];
-                    let visited = [];
-                    inOrder.call(this,myroot,visited);
-                    return visited;
-                }   
-                else{
-                    throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+            if(arguments.length > 0){
+                if (typeof (id) === 'number') {
+                    if (id >= 1 && id <= this.noOfNodes) {
+                        const myroot = this.nodeIDMap[id];
+                        let visited = [];
+                        inOrder.call(this, myroot, visited);
+                        return visited;
+                    }
+                    else {
+                        throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                    }
+                }
+                else {
+                    throw new Error('ID passed is not of type number');
                 }
             }
             else{
-                throw new Error('ID passed is not of type number or it is not passed');
+                throw new Error('Argument not passed');
             }
         }
         catch(e){
@@ -1594,19 +1636,24 @@ class BinarySearchTree{
 
     DFSPreOrder(id) {
         try {
-            if (typeof (id) === 'number') {
-                if (id >= 1 && id <= this.noOfNodes) {
-                    const myroot = this.nodeIDMap[id];
-                    let visited = [];
-                    preOrder.call(this, myroot, visited);
-                    return visited;
+            if(arguments.length > 0){
+                if (typeof (id) === 'number') {
+                    if (id >= 1 && id <= this.noOfNodes) {
+                        const myroot = this.nodeIDMap[id];
+                        let visited = [];
+                        preOrder.call(this, myroot, visited);
+                        return visited;
+                    }
+                    else {
+                        throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                    }
                 }
                 else {
-                    throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                    throw new Error('ID passed is not of type number');
                 }
             }
-            else {
-                throw new Error('ID passed is not of type number or it is not passed');
+            else{
+                throw new Error('Argument not passed');
             }
         }
         catch (e) {
@@ -1616,22 +1663,152 @@ class BinarySearchTree{
 
     DFSPostOrder(id) {
         try {
-            if (typeof (id) === 'number') {
-                if (id >= 1 && id <= this.noOfNodes) {
-                    const myroot = this.nodeIDMap[id];
-                    let visited = [];
-                    postOrder.call(this, myroot, visited);
-                    return visited;
+            if(arguments.length > 0){
+                if (typeof (id) === 'number') {
+                    if (id >= 1 && id <= this.noOfNodes) {
+                        const myroot = this.nodeIDMap[id];
+                        let visited = [];
+                        postOrder.call(this, myroot, visited);
+                        return visited;
+                    }
+                    else {
+                        throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                    }
                 }
                 else {
-                    throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                    throw new Error('ID passed is not of type number');
                 }
             }
-            else {
-                throw new Error('ID passed is not of type number or it is not passed');
+            else{
+                throw new Error('Argument not passed');
             }
         }
         catch (e) {
+            console.log(e);
+        }
+    }
+
+    height(id){
+        try{
+            if(arguments.length > 0){
+                if (typeof (id) === 'number') {
+                    if (id >= 1 && id <= this.noOfNodes) {
+
+                    }
+                    else {
+                        throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                    }
+                }
+                else{
+                    throw new Error('ID passed is not of type number');
+                }
+            }
+            else{
+                throw new Error('Argument not passed');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    rootNodeID(){
+        try{
+            if(this.root != null){
+                return parseInt(this.root.id);
+            }
+            else{
+                return null;
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    getIdsOfValue(val,id){
+        try{
+            if(arguments.length > 0){
+                const myCurrentType = typesMap[this.type];
+                if (typeof (val) === myCurrentType) {
+                    if(arguments.length > 1){
+                        if(typeof(id) === 'number'){
+                            if(id >=1 && id<=this.noOfNodes){
+                                if (this.nodeIDMap[id]) {
+                                    let myroot = this.nodeIDMap[id];
+                                    let mynodes = [];
+                                    getIdFromValue.call(this, myroot, mynodes, val);
+                                    return mynodes;
+                                }
+                                else {
+                                    return null;
+                                }
+                            }
+                            else{
+                                throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                            }
+                        }
+                        else{
+                            throw new Error('ID passed is not of type number');
+                        }
+                    }
+                    else{
+                        if(!this.isEmpty()){
+                            let myroot = this.nodeIDMap[this.rootNodeID()];
+                            let mynodes = [];
+                            getIdFromValue.call(this,myroot,mynodes,val);
+                            return mynodes;
+                        }
+                        else{
+                            return null;
+                        }
+                    }
+                }
+                else {
+                    throw new Error('Passed value does not match the type of Binary Search Tree');
+                }
+            }
+            else{
+                throw new Error('Argument/s not passed');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    leaveNodes(id){
+        try{
+            if(arguments.length>0){
+                if(typeof(id) === 'number'){
+                    if(id>=1 && id<=this.noOfNodes){
+                        let myroot = this.nodeIDMap[id];
+                        let leaves = [];
+                        leaveNodes.call(this,myroot,leaves);
+                        return leaves;
+                    }
+                    else{
+                        throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                    }
+                }
+                else{
+                    throw new Error('ID passed is not of type number');
+                }
+            }
+            else if(arguments.length === 0){
+                console.log('I am here');
+                if(!this.isEmpty()){
+                    let myroot = this.nodeIDMap[this.rootNodeID()];
+                    let leaves = [];
+                    leaveNodes.call(this,myroot,leaves);
+                    return leaves;
+                }
+                else{
+                    return null;
+                }
+            }
+        }
+        catch(e){
             console.log(e);
         }
     }
@@ -1658,14 +1835,18 @@ const my = new BinarySearchTree(1,1);
 my.insert(30);
 my.insert(10);
 my.insert(20);
+my.insert(30);
 my.insert(40);
 my.insert(50);
 my.insert(60);
+console.log(my.leaveNodes(1,2));
+//my.getID();
 
 // console.log(my.BFS(1));
 // console.log(my.DFSInOrder(1));
 // console.log(my.DFSPreOrder(1));
 // console.log(my.DFSPostOrder(1));
+// console.log(my.getIdsOfValue(30,7,40));
 
 console.log(my);
 
