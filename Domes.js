@@ -370,6 +370,42 @@ class SinglyLinkedList {
         }
     }
 
+    remove(index){
+        try{
+            if (index == 0 || index == false || index) {
+                if (typeof (index) === 'number') {
+                    if (index < this.size && index >= 0) {
+                        if(index === 0){
+                            return this.deleteFromStart(this.head.value);
+                        }
+                        else if(index === (this.size-1)){
+                            return this.deleteFromEnd(this.tail.value);
+                        }
+                        else{
+                            let traverse = this.head.next;
+                            for (let i = 1; i < index; i++) {
+                                traverse = traverse.next;
+                            }
+                            return this.delete(traverse.value);
+                        }
+                    }
+                    else {
+                        throw new Error('Index out of range');
+                    }
+                }
+                else {
+                    throw new Error('Index is not a number');
+                }
+            }
+            else {
+                throw new Error('Cannot find passed value or passed value is undefined/null');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
     searchAll(val){
         try{
             if(val == 0 || val == false || val){
@@ -900,6 +936,42 @@ class DoublyLinkedList{
             console.log(e);
         }
     }
+
+    remove(index) {
+        try {
+            if (index == 0 || index == false || index) {
+                if (typeof (index) === 'number') {
+                    if (index < this.size && index >= 0) {
+                        if (index === 0) {
+                            return this.deleteFromStart(this.head.value);
+                        }
+                        else if (index === (this.size - 1)) {
+                            return this.deleteFromEnd(this.tail.value);
+                        }
+                        else {
+                            let traverse = this.head.next;
+                            for (let i = 1; i < index; i++) {
+                                traverse = traverse.next;
+                            }
+                            return this.delete(traverse.value);
+                        }
+                    }
+                    else {
+                        throw new Error('Index out of range');
+                    }
+                }
+                else {
+                    throw new Error('Index is not a number');
+                }
+            }
+            else {
+                throw new Error('Cannot find passed value or passed value is undefined/null');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
 }
 
 
@@ -1267,7 +1339,7 @@ const typesAndMethods = {
 
 
 function insertNumberAndStringAscii(val){
-    let newNode = new BinarySearchTreeNode(val);
+    let newNode = new BinarySearchTreeNode(val,this.noOfNodes);
     let traverse = this.root;
     while (true) {
         if (newNode.value <= traverse.value) {
@@ -1292,7 +1364,7 @@ function insertNumberAndStringAscii(val){
 }
 
 function insertStringLength(val){
-    let newNode = new BinarySearchTreeNode(val);
+    let newNode = new BinarySearchTreeNode(val,this.noOfNodes);
     let traverse = this.root;
     while (true) {
         if (newNode.value.length <= traverse.value.length) {
@@ -1321,10 +1393,11 @@ function insertStringLength(val){
 
 class BinarySearchTreeNode{
 
-    constructor(data){
+    constructor(data,id){
         this.value = data;
         this.left = null;
         this.right = null;
+        this.id = id;
     }
 
 }
@@ -1337,6 +1410,7 @@ class BinarySearchTree{
         this.root = null;
         this.type = type;
         this.method = method;
+        this.noOfNodes = 0;
     }
 
     insert(val){
@@ -1346,19 +1420,23 @@ class BinarySearchTree{
                 const supportedMethods = typesAndMethods[parseInt(this.type)];
                 if(supportedMethods.find(ele => parseInt(ele)===parseInt(this.method))){
                     if (this.root == null) {
-                        let newNode = new BinarySearchTreeNode(val);
+                        this.noOfNodes++;
+                        let newNode = new BinarySearchTreeNode(val,this.noOfNodes);
                         this.root = newNode;
                         return val;
                     }
                     else if (this.type === 1 && this.method === 1) {
+                        this.noOfNodes++;
                         insertNumberAndStringAscii.call(this, val);
                         return val;
                     }
                     else if (this.type === 2 && this.method === 1) {
+                        this.noOfNodes++;
                         insertNumberAndStringAscii.call(this, val);
                         return val;
                     }
                     else if (this.type === 2 && this.method === 2) {
+                        this.noOfNodes++;
                         insertStringLength.call(this, val);
                         return val;
                     }
@@ -1425,34 +1503,40 @@ class BinarySearchTree{
         }
     }
 
-    
+    BFS(){
+        let toReturn = {
+            visitedValues : [],
+            visitedNodes : []
+        }
+    }
 }
 
 
 
 
 
+const my = new DoublyLinkedList();
 
+let myarr = [10,20,30,40,50];
 
-
-
-const my = new BinarySearchTree(1,1);
-
-
-my.insert(30);
-my.insert(10);
-my.insert(20);
-my.insert(40);
-my.insert(50);
-my.insert(60);
-
-let some = my.search(10);
-some.value = 100;
-
-
-
-
-
-
+myarr.forEach(ele => {
+    my.insertAtEnd(ele);
+})
+console.log(my.remove(4));
+console.log(my.remove(2));
 
 console.log(my);
+// const my = new BinarySearchTree(1,1);
+
+
+// my.insert(30);
+// my.insert(10);
+// my.insert(20);
+// my.insert(40);
+// my.insert(50);
+// my.insert(60);
+
+// let some = my.search(10);
+// some.value = 100;
+
+
