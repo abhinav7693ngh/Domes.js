@@ -1243,7 +1243,8 @@ class Queue{
     2. string
 
 =>  Comparison Methods of Binray Search Trees
-    1. number -> no comparison method as of now comparing only based on greater than and less than operators, so don't pass anything strictly
+    1. number
+        1. Normal comparison (<,>,=)
     2. string
         1. Normal ASCII Comparing
         2. Based on Length 
