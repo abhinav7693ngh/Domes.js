@@ -1348,6 +1348,7 @@ function insertNumberAndStringAscii(val){
             }
             else {
                 traverse.left = newNode;
+                this.nodeIDMap[this.noOfNodes] = newNode;
                 break;
             }
         }
@@ -1357,6 +1358,7 @@ function insertNumberAndStringAscii(val){
             }
             else {
                 traverse.right = newNode;
+                this.nodeIDMap[this.noOfNodes] = newNode;
                 break;
             }
         }
@@ -1373,6 +1375,7 @@ function insertStringLength(val){
             }
             else {
                 traverse.left = newNode;
+                this.nodeIDMap[this.noOfNodes] = newNode;
                 break;
             }
         }
@@ -1382,11 +1385,40 @@ function insertStringLength(val){
             }
             else {
                 traverse.right = newNode;
+                this.nodeIDMap[this.noOfNodes] = newNode;
                 break;
             }
         }
     }
 }
+
+function inOrder(current,visited){
+    if(current == null){
+        return;
+    }
+    inOrder(current.left,visited);
+    visited.push(current.value);
+    inOrder(current.right,visited);
+}
+
+function preOrder(current,visited){
+    if (current == null) {
+        return;
+    }
+    visited.push(current.value);
+    inOrder(current.left, visited);
+    inOrder(current.right, visited);
+}
+
+function postOrder(current,visited){
+    if (current == null) {
+        return;
+    }
+    inOrder(current.left, visited);
+    inOrder(current.right, visited);
+    visited.push(current.value);
+}
+
 
 
 
@@ -1411,6 +1443,7 @@ class BinarySearchTree{
         this.type = type;
         this.method = method;
         this.noOfNodes = 0;
+        this.nodeIDMap = {}
     }
 
     insert(val){
@@ -1422,6 +1455,7 @@ class BinarySearchTree{
                     if (this.root == null) {
                         this.noOfNodes++;
                         let newNode = new BinarySearchTreeNode(val,this.noOfNodes);
+                        this.nodeIDMap[this.noOfNodes] = newNode;
                         this.root = newNode;
                         return val;
                     }
@@ -1503,10 +1537,102 @@ class BinarySearchTree{
         }
     }
 
-    BFS(){
-        let toReturn = {
-            visitedValues : [],
-            visitedNodes : []
+    BFS(id){
+        try{
+            if(typeof(id)==='number'){
+                if(id>=1 && id<=this.noOfNodes){
+                    const myroot = this.nodeIDMap[id];
+                    let queue = new Queue();
+                    let visited = [];
+                    queue.enqueue(myroot);
+                    while(queue.size > 0){
+                        let toBeChecked = queue.dequeue();
+                        visited.push(toBeChecked.value);
+                        if(toBeChecked.left != null){
+                            queue.enqueue(toBeChecked.left);
+                        }
+                        if(toBeChecked.right != null){
+                            queue.enqueue(toBeChecked.right);
+                        }
+                    }
+                    return visited;
+                }
+                else{
+                    throw new Error('Please give a valid ID or Binary Search is Empty');
+                }
+            }
+            else{
+                throw new Error('ID passed is not of type number or it is not passed.')
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    DFSInOrder(id){
+        try{
+            if(typeof(id)==='number'){
+                if(id>=1 && id<=this.noOfNodes){
+                    const myroot = this.nodeIDMap[id];
+                    let visited = [];
+                    inOrder.call(this,myroot,visited);
+                    return visited;
+                }   
+                else{
+                    throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                }
+            }
+            else{
+                throw new Error('ID passed is not of type number or it is not passed');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    DFSPreOrder(id) {
+        try {
+            if (typeof (id) === 'number') {
+                if (id >= 1 && id <= this.noOfNodes) {
+                    const myroot = this.nodeIDMap[id];
+                    let visited = [];
+                    preOrder.call(this, myroot, visited);
+                    return visited;
+                }
+                else {
+                    throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                }
+            }
+            else {
+                throw new Error('ID passed is not of type number or it is not passed');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    DFSPostOrder(id) {
+        try {
+            if (typeof (id) === 'number') {
+                if (id >= 1 && id <= this.noOfNodes) {
+                    const myroot = this.nodeIDMap[id];
+                    let visited = [];
+                    postOrder.call(this, myroot, visited);
+                    return visited;
+                }
+                else {
+                    throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                }
+            }
+            else {
+                throw new Error('ID passed is not of type number or it is not passed');
+            }
+        }
+        catch (e) {
+            console.log(e);
         }
     }
 }
@@ -1515,26 +1641,33 @@ class BinarySearchTree{
 
 
 
-const my = new DoublyLinkedList();
+// const my = new DoublyLinkedList();
 
-let myarr = [10,20,30,40,50];
+// let myarr = [10,20,30,40,50];
 
-myarr.forEach(ele => {
-    my.insertAtEnd(ele);
-})
-console.log(my.remove(4));
-console.log(my.remove(2));
+// myarr.forEach(ele => {
+//     my.insertAtEnd(ele);
+// })
+// console.log(my.remove(4));
+// console.log(my.remove(2));
+
+// console.log(my);
+const my = new BinarySearchTree(1,1);
+
+
+my.insert(30);
+my.insert(10);
+my.insert(20);
+my.insert(40);
+my.insert(50);
+my.insert(60);
+
+// console.log(my.BFS(1));
+// console.log(my.DFSInOrder(1));
+// console.log(my.DFSPreOrder(1));
+// console.log(my.DFSPostOrder(1));
 
 console.log(my);
-// const my = new BinarySearchTree(1,1);
-
-
-// my.insert(30);
-// my.insert(10);
-// my.insert(20);
-// my.insert(40);
-// my.insert(50);
-// my.insert(60);
 
 // let some = my.search(10);
 // some.value = 100;
