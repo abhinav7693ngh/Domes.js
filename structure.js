@@ -1236,6 +1236,145 @@ class Queue{
 // ===== Binary Search Trees ===== //
 
 
+/*
+
+=>  Types of Binary Search Trees 
+    1. number
+    2. string
+
+=>  Comparison Methods of Binray Search Trees
+    1. number -> no comparison method as of now comparing only based on greater than and less than operators, so don't pass anything strictly
+    2. string
+        1. Normal ASCII Comparing
+        2. Based on Length 
+
+*/
+
+
+const typesMap = {
+    1 : 'number',
+    2 : 'string'
+}
+
+
+const typesAndMethods = {
+    1 : [1],
+    2 : [1,2]
+}
+
+
+
+
+function insertNumberAndStringAscii(val){
+    let newNode = new BinarySearchTreeNode(val);
+    let traverse = this.root;
+    while (true) {
+        if (newNode.value <= traverse.value) {
+            if (traverse.left != null) {
+                traverse = traverse.left;
+            }
+            else {
+                traverse.left = newNode;
+                break;
+            }
+        }
+        else if (newNode.value > traverse.value) {
+            if (traverse.right != null) {
+                traverse = traverse.right;
+            }
+            else {
+                traverse.right = newNode;
+                break;
+            }
+        }
+    }
+}
+
+function insertStringLength(val){
+    let newNode = new BinarySearchTreeNode(val);
+    let traverse = this.root;
+    while (true) {
+        if (newNode.value.length <= traverse.value.length) {
+            if (traverse.left != null) {
+                traverse = traverse.left;
+            }
+            else {
+                traverse.left = newNode;
+                break;
+            }
+        }
+        else if (newNode.value.length > traverse.value.length) {
+            if (traverse.right != null) {
+                traverse = traverse.right;
+            }
+            else {
+                traverse.right = newNode;
+                break;
+            }
+        }
+    }
+}
+
+
+
+class BinarySearchTreeNode{
+
+    constructor(data){
+        this.value = data;
+        this.left = null;
+        this.right = null;
+    }
+
+}
+
+
+
+class BinarySearchTree{
+
+    constructor(type,method){
+        this.root = null;
+        this.type = type;
+        this.method = method;
+    }
+
+    insert(val){
+        try{
+            const myCurrentType = typesMap[this.type];
+            if (typeof (val) === myCurrentType){
+                const supportedMethods = typesAndMethods[parseInt(this.type)];
+                if(supportedMethods.find(ele => parseInt(ele)===parseInt(this.method))){
+                    if (this.root == null) {
+                        let newNode = new BinarySearchTreeNode(val);
+                        this.root = newNode;
+                        return val;
+                    }
+                    else if (this.type === 1 && this.method === 1) {
+                        insertNumberAndStringAscii.call(this, val);
+                        return val;
+                    }
+                    else if (this.type === 2 && this.method === 1) {
+                        insertNumberAndStringAscii.call(this, val);
+                        return val;
+                    }
+                    else if (this.type === 2 && this.method === 2) {
+                        insertStringLength.call(this, val);
+                        return val;
+                    }
+                }
+                else{
+                    throw new Error('Method specified is not supported for this selected type please refer documentation for supported methods')
+                }
+            }
+            else{
+                throw new Error('Passed value does not match the type of Binary Search Tree');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+}
 
 
 
@@ -1245,12 +1384,19 @@ class Queue{
 
 
 
-const my = new DoublyLinkedList;
+const my = new BinarySearchTree(1,1);
 
-const myarr = [10,20,30,10,40,50,10,20];
-myarr.forEach(ele => {
-    my.insertAtEnd(ele);
-});
-console.log(my.deleteAll(1000));
+
+my.insert(30);
+my.insert(10);
+my.insert(20);
+my.insert(40);
+my.insert(50);
+// my.insert('Singh');
+
+
+
+
+
+
 console.log(my);
-//console.log(my.searchAll(20));
