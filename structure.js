@@ -195,12 +195,12 @@ class SinglyLinkedList {
                     let traverse = this.head;
                     while (traverse.next != null) {
                         if (traverse.value === val) {
-                            return val;
+                            return traverse;
                         }
                         traverse = traverse.next;
                     }
                     if (traverse.value === val) {
-                        return val;
+                        return traverse;
                     }
                     return null;
                 }
@@ -309,7 +309,7 @@ class SinglyLinkedList {
                         for (let i = 0; i < index; i++) {
                             traverse = traverse.next;
                         }
-                        return traverse.value;
+                        return traverse;
                     }
                     else {
                         throw new Error('Index out of range');
@@ -654,12 +654,12 @@ class DoublyLinkedList{
                     let traverse = this.head;
                     while(traverse.next != null){
                         if(traverse.value === val){
-                            return val;
+                            return traverse;
                         }
                         traverse = traverse.next;
                     }
                     if(traverse.value === val){
-                        return val;
+                        return traverse;
                     }
                     return null;
                 }
@@ -685,7 +685,7 @@ class DoublyLinkedList{
                         for(let i=0;i<index;i++){
                             traverse = traverse.next;
                         }
-                        return traverse.value;
+                        return traverse;
                     }
                     else{
                         throw new Error('Index out of range')
@@ -1037,12 +1037,12 @@ class Stack{
                 if(!this.isEmpty()){
                     let traverse = this.head;
                     if(traverse.value === val){
-                        return val;
+                        return traverse;
                     }
                     while(traverse.next != null){
                         traverse = traverse.next;
                         if(traverse.value === val){
-                            return val;
+                            return traverse;
                         }
                     }
                     return null;
@@ -1201,12 +1201,12 @@ class Queue{
                 if (!this.isEmpty()) {
                     let traverse = this.head;
                     if (traverse.value === val) {
-                        return val;
+                        return traverse;
                     }
                     while (traverse.next != null) {
                         traverse = traverse.next;
                         if (traverse.value === val) {
-                            return val;
+                            return traverse;
                         }
                     }
                     return null;
@@ -1318,6 +1318,7 @@ function insertStringLength(val){
 
 
 
+
 class BinarySearchTreeNode{
 
     constructor(data){
@@ -1383,7 +1384,7 @@ class BinarySearchTree{
                     let traverse = this.root;
                     while(true){
                         if(traverse.value === val){
-                            return true;
+                            return val;
                             break;
                         }
                         else if(val <= traverse.value && traverse.left!=null){
@@ -1393,12 +1394,12 @@ class BinarySearchTree{
                             traverse = traverse.right;
                         }
                         else{
-                            return false;
+                            return null;
                         }
                     }
                 }
                 else{
-                    return false;
+                    return null;
                 }
             }
             else{
@@ -1423,6 +1424,8 @@ class BinarySearchTree{
             console.log(e);
         }
     }
+
+    
 }
 
 
@@ -1441,10 +1444,11 @@ my.insert(10);
 my.insert(20);
 my.insert(40);
 my.insert(50);
+my.insert(60);
 
-console.log(my.search(10));
+let some = my.search(10);
+some.value = 100;
 
-console.log(my.isEmpty());
 
 
 
