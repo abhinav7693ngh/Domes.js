@@ -1457,12 +1457,15 @@ function childs(current,id){
         return null;
     }
     else if(current.id === id){
-        let toReturn = {};
+        let toReturn = {
+            count : 0
+        };
         if(current.left != null){
             toReturn['left']  = {
                 value : current.left.value,
                 id : current.left.id
-            }
+            };
+            toReturn['count']++;
         }
         else{
             toReturn['left']=null;
@@ -1471,7 +1474,8 @@ function childs(current,id){
             toReturn['right'] = {
                 value : current.right.value,
                 id : current.right.id
-            }
+            };
+            toReturn['count']++;
         }
         else{
             toReturn['right'] = null;
@@ -1483,6 +1487,25 @@ function childs(current,id){
         childs(current.right);
     }
 }
+
+function fixingID(){
+    let myroot = this.root;
+    let queue = new Queue();
+    let count = 1;
+    queue.enqueue(myroot);
+    while(queue.size > 0){
+        let toChange = queue.dequeue();
+        toChange.id = count;
+        count++;
+        if(toChange.left != null){
+            queue.enqueue(toChange.left);
+        }
+        if(toChange.right != null){
+            queue.enqueue(toChange.right);
+        }
+    }
+}
+
 
 
 
@@ -1870,7 +1893,63 @@ class BinarySearchTree{
 
     delete(id){
         try{
+            if(arguments.length > 0){
+                if(typeof(id)==='number'){
+                    if(id>=1 && id<=this.noOfNodes){
+                        let myroot = this.root;
+                        let node,parentNode;
+                        let mystack = new Stack();
+                        mystack.push(myroot);
+                        while(mystack.size > 0){
+                            let current = mystack.pop();
+                            if(current.id === id){
+                                node = current;
+                                parentNode = null;
+                                break;
+                            }
+                            if(current.left != null){
+                                if(current.left.id === id){
+                                    parentNode = current;
+                                    node = current.left;
+                                    break;
+                                }
+                            }
+                            if(current.right != null){
+                                if(current.right.id === id){
+                                    parentNode = current;
+                                    node = current.right;
+                                    break;
+                                }
+                            }
+                            if(current.left != null){
+                                mystack.push(current.left);
+                            }
+                            if(current.right != null){
+                                mystack.push(current.right);
+                            }
+                        }
+                        console.log(node,parentNode);
+                        // if(noOfChilds === 0){
 
+                        // }
+                        // else if(noOfChilds === 1){
+
+                        // }
+                        // else if(noOfChilds === 2){
+
+                        // }
+                    }
+                    else{
+                        throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                    }
+                }
+                else{
+                    throw new Error('ID passed is not of type number');
+                }
+            }
+            else{
+                throw new Error('Argument not passed');
+            }
         }
         catch(e){
             console.log(e);
@@ -1883,15 +1962,16 @@ class BinarySearchTree{
 
 
 const my = new BinarySearchTree(1,1);
-console.log(my.insert(30));
-console.log(my.insert(20));
-console.log(my.insert(50));
-console.log(my.insert(10));
-console.log(my.insert(25));
-console.log(my.insert(40));
-console.log(my.insert(60));
-console.log(my.insert(15));
-console.log(my.childNodes(3));
+my.insert(30);
+my.insert(20);
+my.insert(50);
+my.insert(10);
+my.insert(25);
+my.insert(40);
+my.insert(60);
+my.insert(15);
+console.log(my.childNodes(4));
+my.delete(3);
 console.log(my);
 
 
