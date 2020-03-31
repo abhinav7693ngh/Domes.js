@@ -1549,6 +1549,26 @@ function treeTraverse(myroot,id){
     }
 }
 
+function returnNodeUsingValue(myroot,val){
+    let queue = new Queue();
+    queue.enqueue(myroot);
+    while (queue.size > 0) {
+        let my = queue.dequeue();
+        if (my.value === val) {
+            return my;
+        }
+        if (my.left != null) {
+            queue.enqueue(my.left);
+        }
+        if (my.right != null) {
+            queue.enqueue(my.right);
+        }
+    }
+    return null;
+}
+
+
+
 
 
 
@@ -2103,6 +2123,61 @@ class BinarySearchTree{
             console.log(e);
         }
     }
+
+    updateWithValue(val,updatedVal){
+        try{
+            if(arguments.length > 0){
+                const myCurrentType = typesMap[this.type];
+                if(typeof(val) === myCurrentType && typeof(updatedVal) === myCurrentType){
+                    let toUpdate = returnNodeUsingValue.call(this,this.root,val);
+                    if(toUpdate != null){
+                        this.delete(toUpdate.id);
+                        this.insert(updatedVal);
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+                else{
+                    throw new Error('Passed value does not match the type of Binary Search Tree');
+                }
+            }
+            else{
+                throw new Error('Argument not passed');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    updateWithID(id,updatedVal){
+        try{
+            if(arguments.length > 0){
+                const myCurrentType = typesMap[this.type];
+                if(typeof(id)==='number' && typeof(updatedVal)===myCurrentType){
+                    if(id>=1 && id<=this.noOfNodes){
+                        this.delete(id);
+                        this.insert(updatedVal);
+                        return true;
+                    }
+                    else{
+                        throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                    }
+                }
+                else{
+                    throw new Error('Passed updated value does not match the type of Binary Search Tree or id is not number');
+                }
+            }
+            else{
+                throw new Error('Argument not passed');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
 }
 
 
@@ -2118,7 +2193,6 @@ my.insert(25);
 my.insert(40);
 my.insert(60);
 my.insert(15);
-my.delete(3);
 console.log(my);
 
 
