@@ -1,3 +1,41 @@
+// === Deeply check two objects are equal or not === //
+
+
+
+Object.compare = function (obj1, obj2) {
+    //Loop through properties in object 1
+    for (var p in obj1) {
+        //Check property exists on both objects
+        if (obj1.hasOwnProperty(p) !== obj2.hasOwnProperty(p)) return false;
+
+        switch (typeof (obj1[p])) {
+            //Deep compare objects
+            case 'object':
+                if (!Object.compare(obj1[p], obj2[p])) return false;
+                break;
+            //Compare function code
+            case 'function':
+                if (typeof (obj2[p]) == 'undefined' || (p != 'compare' && obj1[p].toString() != obj2[p].toString())) return false;
+                break;
+            //Compare values
+            default:
+                if (obj1[p] != obj2[p]) return false;
+        }
+    }
+
+    //Check object 2 for any extra properties
+    for (var p in obj2) {
+        if (typeof (obj1[p]) == 'undefined') return false;
+    }
+    return true;
+};
+
+
+
+
+// ================================================= //
+
+
 // ===== Singly Linked List ===== //
 
 class SinglyLinkedListNode {
@@ -192,17 +230,32 @@ class SinglyLinkedList {
         try{
             if(val==0 || val==false || val){
                 if(!this.isEmpty()){
-                    let traverse = this.head;
-                    while (traverse.next != null) {
+                    if(typeof(val) === 'object'){
+                        let traverse = this.head;
+                        while (traverse.next != null) {
+                            if (Object.compare(traverse.value,val)) {
+                                return traverse;
+                            }
+                            traverse = traverse.next;
+                        }
+                        if (Object.compare(traverse.value,val)) {
+                            return traverse;
+                        }
+                        return null;
+                    }
+                    else{
+                        let traverse = this.head;
+                        while (traverse.next != null) {
+                            if (traverse.value === val) {
+                                return traverse;
+                            }
+                            traverse = traverse.next;
+                        }
                         if (traverse.value === val) {
                             return traverse;
                         }
-                        traverse = traverse.next;
+                        return null;
                     }
-                    if (traverse.value === val) {
-                        return traverse;
-                    }
-                    return null;
                 }
                 else{
                     return null;
@@ -221,29 +274,57 @@ class SinglyLinkedList {
         try{
             if(val==0 || val==false || val){
                 if(this.search(val)){
-                    if (this.head.value === val) {
-                        return this.deleteFromStart(val);
-                    }
-                    else if (this.tail.value === val) {
-                        return this.deleteFromEnd(val);
-                    }
-                    else {
-                        let backNode = this.head;
-                        let currentNode = this.head.next;
-                        let frontNode = this.head.next.next;
-                        while (frontNode.next != null) {
-                            if(currentNode.value === val){
-                                backNode.next = frontNode;
-                                this.size--;
-                                return val;
-                            }
-                            backNode = currentNode;
-                            currentNode = frontNode;
-                            frontNode = frontNode.next;
+                    if(typeof(val)==='object'){
+                        if(Object.compare(this.head.value,val)){
+                            return this.deleteFromStart(val);
                         }
-                        backNode.next = frontNode;
-                        this.size--;
-                        return val;
+                        else if(Object.compare(this.tail.value,val)){
+                            return this.deleteFromEnd(val);
+                        }
+                        else{
+                            let backNode = this.head;
+                            let currentNode = this.head.next;
+                            let frontNode = this.head.next.next;
+                            while (frontNode.next != null) {
+                                if (Object.compare(currentNode.value,val)) {
+                                    backNode.next = frontNode;
+                                    this.size--;
+                                    return val;
+                                }
+                                backNode = currentNode;
+                                currentNode = frontNode;
+                                frontNode = frontNode.next;
+                            }
+                            backNode.next = frontNode;
+                            this.size--;
+                            return val;
+                        }
+                    }
+                    else{
+                        if (this.head.value === val) {
+                            return this.deleteFromStart(val);
+                        }
+                        else if (this.tail.value === val) {
+                            return this.deleteFromEnd(val);
+                        }
+                        else {
+                            let backNode = this.head;
+                            let currentNode = this.head.next;
+                            let frontNode = this.head.next.next;
+                            while (frontNode.next != null) {
+                                if (currentNode.value === val) {
+                                    backNode.next = frontNode;
+                                    this.size--;
+                                    return val;
+                                }
+                                backNode = currentNode;
+                                currentNode = frontNode;
+                                frontNode = frontNode.next;
+                            }
+                            backNode.next = frontNode;
+                            this.size--;
+                            return val;
+                        }
                     }
                 }
                 else{
@@ -376,10 +457,10 @@ class SinglyLinkedList {
                 if (typeof (index) === 'number') {
                     if (index < this.size && index >= 0) {
                         if(index === 0){
-                            return this.deleteFromStart(this.head.value);
+                            return this.deleteFromStart();
                         }
                         else if(index === (this.size-1)){
-                            return this.deleteFromEnd(this.tail.value);
+                            return this.deleteFromEnd();
                         }
                         else{
                             let traverse = this.head.next;
@@ -414,20 +495,38 @@ class SinglyLinkedList {
                     positions : []
                 };
                 if(!this.isEmpty()){
-                    let traverse = this.head;
-                    let i;
-                    for(i=0;i<(this.size-1);i++){
-                        if(traverse.value === val){
+                    if(typeof(val) === 'object'){
+                        let traverse = this.head;
+                        let i;
+                        for (i = 0; i < (this.size - 1); i++) {
+                            if (Object.compare(traverse.value,val)) {
+                                toReturn.count++;
+                                toReturn.positions.push(i);
+                            }
+                            traverse = traverse.next;
+                        }
+                        if (Object.compare(traverse.value,val)) {
                             toReturn.count++;
                             toReturn.positions.push(i);
                         }
-                        traverse = traverse.next;
+                        return toReturn;
                     }
-                    if(traverse.value === val){
-                        toReturn.count++;
-                        toReturn.positions.push(i);
+                    else{
+                        let traverse = this.head;
+                        let i;
+                        for (i = 0; i < (this.size - 1); i++) {
+                            if (traverse.value === val) {
+                                toReturn.count++;
+                                toReturn.positions.push(i);
+                            }
+                            traverse = traverse.next;
+                        }
+                        if (traverse.value === val) {
+                            toReturn.count++;
+                            toReturn.positions.push(i);
+                        }
+                        return toReturn;
                     }
-                    return toReturn;
                 }
                 else{
                     return toReturn;
@@ -447,17 +546,32 @@ class SinglyLinkedList {
             if(val==0 || val==false || val){
                 let newSingly = new SinglyLinkedList();
                 if(!this.isEmpty()){
-                    let traverse = this.head;
-                    while(traverse.next != null){
-                        if(traverse.value !== val){
+                    if(typeof(val)==='object'){
+                        let traverse = this.head;
+                        while (traverse.next != null) {
+                            if (!Object.compare(traverse.value,val)) {
+                                newSingly.insertAtEnd(traverse.value);
+                            }
+                            traverse = traverse.next;
+                        }
+                        if (!Object.compare(traverse.value,val)) {
                             newSingly.insertAtEnd(traverse.value);
                         }
-                        traverse = traverse.next;
+                        return newSingly;
                     }
-                    if(traverse.value !== val){
-                        newSingly.insertAtEnd(traverse.value);
+                    else{
+                        let traverse = this.head;
+                        while (traverse.next != null) {
+                            if (traverse.value !== val) {
+                                newSingly.insertAtEnd(traverse.value);
+                            }
+                            traverse = traverse.next;
+                        }
+                        if (traverse.value !== val) {
+                            newSingly.insertAtEnd(traverse.value);
+                        }
+                        return newSingly;
                     }
-                    return newSingly;
                 }
                 else{
                     return newSingly;
@@ -520,6 +634,66 @@ class SinglyLinkedList {
             }
         }
         catch(e){
+            console.log(e);
+        }
+    }
+
+    updateAllWithValue(val,updatedVal){
+        try {
+            if ((val == 0 || val == false || val) && (updatedVal == 0 || updatedVal == false || updatedVal)) {
+                if (!this.isEmpty()) {
+                    if(typeof(val)==='object'){
+                        let traverse = this.head;
+                        let count = 0;
+                        while (traverse.next != null) {
+                            if (Object.compare(traverse.value,val)) {
+                                traverse.value = updatedVal;
+                                count++;
+                            }
+                            traverse = traverse.next;
+                        }
+                        if (Object.compare(traverse.value,val)) {
+                            traverse.value = updatedVal;
+                            count++;
+                        }
+                        if (count > 0) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                    else{
+                        let traverse = this.head;
+                        let count = 0;
+                        while (traverse.next != null) {
+                            if (traverse.value === val) {
+                                traverse.value = updatedVal;
+                                count++;
+                            }
+                            traverse = traverse.next;
+                        }
+                        if (traverse.value === val) {
+                            traverse.value = updatedVal;
+                            count++;
+                        }
+                        if (count > 0) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                throw new Error('Cannot find passed value or passed value is undefined/null');
+            }
+        }
+        catch (e) {
             console.log(e);
         }
     }
@@ -739,17 +913,32 @@ class DoublyLinkedList{
         try{
             if(val==0 || val== false || val){
                 if(!this.isEmpty()){
-                    let traverse = this.head;
-                    while(traverse.next != null){
-                        if(traverse.value === val){
+                    if(typeof(val)==='object'){
+                        let traverse = this.head;
+                        while (traverse.next != null) {
+                            if (Object.compare(traverse.value,val)) {
+                                return traverse;
+                            }
+                            traverse = traverse.next;
+                        }
+                        if (Object.compare(traverse.value,val)) {
                             return traverse;
                         }
-                        traverse = traverse.next;
+                        return null;
                     }
-                    if(traverse.value === val){
-                        return traverse;
+                    else{
+                        let traverse = this.head;
+                        while (traverse.next != null) {
+                            if (traverse.value === val) {
+                                return traverse;
+                            }
+                            traverse = traverse.next;
+                        }
+                        if (traverse.value === val) {
+                            return traverse;
+                        }
+                        return null;
                     }
-                    return null;
                 }
                 else{
                     return null;
@@ -841,17 +1030,67 @@ class DoublyLinkedList{
             if(val==0 || val==false || val){
                 if(!this.isEmpty()){
                     if(this.search(val)){
-                        if (this.head.value === val) {
-                            return this.deleteFromStart(val);
+                        if(typeof(val) === 'object'){
+                            if (Object.compare(this.head.value,val)) {
+                                return this.deleteFromStart(val);
+                            }
+                            else if (Object.compare(this.tail.value,val)) {
+                                return this.deleteFromEnd(val);
+                            }
+                            else {
+                                let backNode = this.head;
+                                let currentNode = this.head.next;
+                                let frontNode = this.head.next.next;
+                                while (frontNode.next != null) {
+                                    if (Object.compare(currentNode.value,val)) {
+                                        let deletedNodeValue = currentNode.value;
+                                        backNode.next = frontNode;
+                                        frontNode.prev = backNode;
+                                        currentNode.next = null;
+                                        currentNode.prev = null;
+                                        this.size--;
+                                        return deletedNodeValue;
+                                    }
+                                    backNode = currentNode;
+                                    currentNode = frontNode;
+                                    frontNode = frontNode.next;
+                                }
+                                if (Object.compare(currentNode.value,val)) {
+                                    let deletedNodeValue = currentNode.value;
+                                    backNode.next = frontNode;
+                                    frontNode.prev = backNode;
+                                    currentNode.next = null;
+                                    currentNode.prev = null;
+                                    this.size--;
+                                    return deletedNodeValue;
+                                }
+                            }
                         }
-                        else if (this.tail.value === val) {
-                            return this.deleteFromEnd(val);
-                        }
-                        else {
-                            let backNode = this.head;
-                            let currentNode = this.head.next;
-                            let frontNode = this.head.next.next;
-                            while (frontNode.next != null) {
+                        else{
+                            if (this.head.value === val) {
+                                return this.deleteFromStart(val);
+                            }
+                            else if (this.tail.value === val) {
+                                return this.deleteFromEnd(val);
+                            }
+                            else {
+                                let backNode = this.head;
+                                let currentNode = this.head.next;
+                                let frontNode = this.head.next.next;
+                                while (frontNode.next != null) {
+                                    if (currentNode.value === val) {
+                                        let deletedNodeValue = currentNode.value;
+                                        backNode.next = frontNode;
+                                        frontNode.prev = backNode;
+                                        currentNode.next = null;
+                                        currentNode.prev = null;
+                                        this.size--;
+                                        return deletedNodeValue;
+                                    }
+                                    backNode = currentNode;
+                                    currentNode = frontNode;
+                                    frontNode = frontNode.next;
+                                }
                                 if (currentNode.value === val) {
                                     let deletedNodeValue = currentNode.value;
                                     backNode.next = frontNode;
@@ -861,18 +1100,6 @@ class DoublyLinkedList{
                                     this.size--;
                                     return deletedNodeValue;
                                 }
-                                backNode = currentNode;
-                                currentNode = frontNode;
-                                frontNode = frontNode.next;
-                            }
-                            if (currentNode.value === val) {
-                                let deletedNodeValue = currentNode.value;
-                                backNode.next = frontNode;
-                                frontNode.prev = backNode;
-                                currentNode.next = null;
-                                currentNode.prev = null;
-                                this.size--;
-                                return deletedNodeValue;
                             }
                         }
                     }
@@ -931,20 +1158,38 @@ class DoublyLinkedList{
                     positions: []
                 };
                 if (!this.isEmpty()) {
-                    let traverse = this.head;
-                    let i;
-                    for (i = 0; i < (this.size - 1); i++) {
+                    if(typeof(val) === 'object'){
+                        let traverse = this.head;
+                        let i;
+                        for (i = 0; i < (this.size - 1); i++) {
+                            if (Object.compare(traverse.value,val)) {
+                                toReturn.count++;
+                                toReturn.positions.push(i);
+                            }
+                            traverse = traverse.next;
+                        }
+                        if (Object.compare(traverse.value,val)) {
+                            toReturn.count++;
+                            toReturn.positions.push(i);
+                        }
+                        return toReturn;
+                    }
+                    else{
+                        let traverse = this.head;
+                        let i;
+                        for (i = 0; i < (this.size - 1); i++) {
+                            if (traverse.value === val) {
+                                toReturn.count++;
+                                toReturn.positions.push(i);
+                            }
+                            traverse = traverse.next;
+                        }
                         if (traverse.value === val) {
                             toReturn.count++;
                             toReturn.positions.push(i);
                         }
-                        traverse = traverse.next;
+                        return toReturn;
                     }
-                    if (traverse.value === val) {
-                        toReturn.count++;
-                        toReturn.positions.push(i);
-                    }
-                    return toReturn;
                 }
                 else {
                     return toReturn;
@@ -964,17 +1209,32 @@ class DoublyLinkedList{
             if(val == 0 || val == false || val){
                 let newDoubly = new DoublyLinkedList();
                 if(!this.isEmpty()){
-                    let traverse = this.head;
-                    while(traverse.next != null){
-                        if(traverse.value !== val){
+                    if(typeof(val) === 'object'){
+                        let traverse = this.head;
+                        while (traverse.next != null) {
+                            if (!Object.compare(traverse.value,val)) {
+                                newDoubly.insertAtEnd(traverse.value);
+                            }
+                            traverse = traverse.next;
+                        }
+                        if (!Object.compare(traverse.value,val)) {
                             newDoubly.insertAtEnd(traverse.value);
                         }
-                        traverse = traverse.next;
+                        return newDoubly;
                     }
-                    if(traverse.value !== val){
-                        newDoubly.insertAtEnd(traverse.value);
+                    else{
+                        let traverse = this.head;
+                        while (traverse.next != null) {
+                            if (traverse.value !== val) {
+                                newDoubly.insertAtEnd(traverse.value);
+                            }
+                            traverse = traverse.next;
+                        }
+                        if (traverse.value !== val) {
+                            newDoubly.insertAtEnd(traverse.value);
+                        }
+                        return newDoubly;
                     }
-                    return newDoubly;
                 }
                 else{
                     return newDoubly;
@@ -995,10 +1255,10 @@ class DoublyLinkedList{
                 if (typeof (index) === 'number') {
                     if (index < this.size && index >= 0) {
                         if (index === 0) {
-                            return this.deleteFromStart(this.head.value);
+                            return this.deleteFromStart();
                         }
                         else if (index === (this.size - 1)) {
-                            return this.deleteFromEnd(this.tail.value);
+                            return this.deleteFromEnd();
                         }
                         else {
                             let traverse = this.head.next;
@@ -1070,6 +1330,66 @@ class DoublyLinkedList{
             }
             else {
                 throw new Error('Cannot find passed values or passed value is undefined/null');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    updateAllWithValue(val, updatedVal) {
+        try {
+            if ((val == 0 || val == false || val) && (updatedVal == 0 || updatedVal == false || updatedVal)) {
+                if (!this.isEmpty()) {
+                    if(typeof(val) === 'object'){
+                        let traverse = this.head;
+                        let count = 0;
+                        while (traverse.next != null) {
+                            if (Object.compare(traverse.value,val)) {
+                                traverse.value = updatedVal;
+                                count++;
+                            }
+                            traverse = traverse.next;
+                        }
+                        if (Object.compare(traverse.value,val)) {
+                            traverse.value = updatedVal;
+                            count++;
+                        }
+                        if (count > 0) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                    else{
+                        let traverse = this.head;
+                        let count = 0;
+                        while (traverse.next != null) {
+                            if (traverse.value === val) {
+                                traverse.value = updatedVal;
+                                count++;
+                            }
+                            traverse = traverse.next;
+                        }
+                        if (traverse.value === val) {
+                            traverse.value = updatedVal;
+                            count++;
+                        }
+                        if (count > 0) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                throw new Error('Cannot find passed value or passed value is undefined/null');
             }
         }
         catch (e) {
@@ -1211,17 +1531,32 @@ class Stack{
         try{
             if(val == 0 || val == false || val){
                 if(!this.isEmpty()){
-                    let traverse = this.head;
-                    if(traverse.value === val){
-                        return traverse;
-                    }
-                    while(traverse.next != null){
-                        traverse = traverse.next;
-                        if(traverse.value === val){
+                    if(typeof(val)==='object'){
+                        let traverse = this.head;
+                        if (Object.compare(traverse.value,val)) {
                             return traverse;
                         }
+                        while (traverse.next != null) {
+                            traverse = traverse.next;
+                            if (Object.compare(traverse.value,val)) {
+                                return traverse;
+                            }
+                        }
+                        return null;
                     }
-                    return null;
+                    else{
+                        let traverse = this.head;
+                        if (traverse.value === val) {
+                            return traverse;
+                        }
+                        while (traverse.next != null) {
+                            traverse = traverse.next;
+                            if (traverse.value === val) {
+                                return traverse;
+                            }
+                        }
+                        return null;
+                    }
                 }
                 else{
                     return null;
@@ -1375,17 +1710,32 @@ class Queue{
         try {
             if (val == 0 || val == false || val) {
                 if (!this.isEmpty()) {
-                    let traverse = this.head;
-                    if (traverse.value === val) {
-                        return traverse;
+                    if(typeof(val) === 'object'){
+                        let traverse = this.head;
+                        if (Object.compare(traverse.value,val)) {
+                            return traverse;
+                        }
+                        while (traverse.next != null) {
+                            traverse = traverse.next;
+                            if (Object.compare(traverse.value,val)) {
+                                return traverse;
+                            }
+                        }
+                        return null;
                     }
-                    while (traverse.next != null) {
-                        traverse = traverse.next;
+                    else{
+                        let traverse = this.head;
                         if (traverse.value === val) {
                             return traverse;
                         }
+                        while (traverse.next != null) {
+                            traverse = traverse.next;
+                            if (traverse.value === val) {
+                                return traverse;
+                            }
+                        }
+                        return null;
                     }
-                    return null;
                 }
                 else {
                     return null;
@@ -2286,25 +2636,37 @@ class BinarySearchTree{
 
 
 
-const my = new DoublyLinkedList();
 
-let myarr = [10,20,'yo',40,10];
+
+// ================================ //
+
+
+
+
+
+
+
+// ======= Binary Heaps =========== //
+
+
+
+
+
+const my = new SinglyLinkedList();
+
+let myarr = [10,20,{name : 'Abhinav', some : {so : 'nested'}},40,{name : 'Abhinav'}];
 myarr.forEach(ele => {
     my.insertAtEnd(ele);
 });
-//console.log(my.updateWithIndex(4,'Abhimav'));
-// console.log(my.updateWithIndex(-1,'Abhinav'));
-// console.log(my);
-// const my = new BinarySearchTree(1,1);
-// my.insert(30);
-// my.insert(20);
-// my.insert(50);
-// my.insert(10);
-// my.insert(25);
-// my.insert(40);
-// my.insert(60);
-// my.insert(15);
-// console.log(my);
+
+
+console.log(my.search({name : 'Abhinav',some  : {so : 'nested'}}));
+
+// console.log(my.updateWithV(0,100));
+
+
+
+console.log(my);
 
 
 
