@@ -1496,12 +1496,55 @@ function fixingID(){
     while(queue.size > 0){
         let toChange = queue.dequeue();
         toChange.id = count;
+        this.nodeIDMap[count] = toChange;
         count++;
         if(toChange.left != null){
             queue.enqueue(toChange.left);
         }
         if(toChange.right != null){
             queue.enqueue(toChange.right);
+        }
+    }
+}
+
+function deleteHelperBFS(myroot){
+    let queue = new Queue();
+    queue.enqueue(myroot);
+    let myarr = [];
+    while(queue.size > 0){
+        let my = queue.dequeue();
+        if(myarr.length === 0){
+            myarr.push({value : my.value, id : my.id});
+        }
+        if(myarr.length > 0){
+            if(my.value <= myarr[0].value){
+                myarr.pop();
+                myarr.push({value : my.value, id : my.id});
+            }
+        }
+        if(my.left != null){
+            queue.enqueue(my.left);
+        }
+        if(my.right != null){
+            queue.enqueue(my.right);
+        }
+    }
+    return myarr;
+}
+
+function treeTraverse(myroot,id){
+    let queue = new Queue();
+    queue.enqueue(myroot);
+    while (queue.size > 0) {
+        let my = queue.dequeue();
+        if(my.id === id){
+            return my;
+        }
+        if (my.left != null) {
+            queue.enqueue(my.left);
+        }
+        if (my.right != null) {
+            queue.enqueue(my.right);
         }
     }
 }
@@ -1928,16 +1971,121 @@ class BinarySearchTree{
                                 mystack.push(current.right);
                             }
                         }
-                        console.log(node,parentNode);
-                        // if(noOfChilds === 0){
-
-                        // }
-                        // else if(noOfChilds === 1){
-
-                        // }
-                        // else if(noOfChilds === 2){
-
-                        // }
+                        let noOfChilds = this.childNodes(id);
+                        let deletedNode = {
+                            value: node.value,
+                            id: node.id
+                        };
+                        if(node.id === myroot.id){
+                            if(noOfChilds.count === 0){
+                                this.root = null;
+                                this.noOfNodes--;
+                                this.nodeIDMap = {};
+                                return deletedNode;
+                            }
+                            else if(noOfChilds.count === 1){
+                                if(node.left != null){
+                                    this.root = node.left;
+                                    this.noOfNodes--;
+                                    this.nodeIDMap = {};
+                                    fixingID.call(this);
+                                    return deletedNode;
+                                }
+                                if(node.right != null){
+                                    this.root = node.right;
+                                    this.noOfNodes--;
+                                    this.nodeIDMap = {};
+                                    fixingID.call(this);
+                                    return deletedNode;
+                                }
+                            }
+                            else if(noOfChilds.count === 2){
+                                let minLeftObj =  deleteHelperBFS.call(this,node.right);
+                                let myNextNode = treeTraverse.call(this, this.root, minLeftObj[0].id);
+                                let temp = this.root.value;
+                                this.root.value = myNextNode.value;
+                                myNextNode.value = temp;
+                                this.delete(parseInt(myNextNode.id));
+                            }
+                        }
+                        else{
+                            if(noOfChilds.count === 0){
+                                if(parentNode.left != null){
+                                    if (parentNode.left.id === node.id) {
+                                        parentNode.left = null;
+                                        this.noOfNodes--;
+                                        this.nodeIDMap = {};
+                                        fixingID.call(this);
+                                        return deletedNode;
+                                    }
+                                }
+                                if(parentNode.right != null){
+                                    if (parentNode.right.id === node.id) {
+                                        parentNode.right = null;
+                                        this.noOfNodes--;
+                                        this.nodeIDMap = {};
+                                        fixingID.call(this);
+                                        return deletedNode;
+                                    }
+                                }
+                            }
+                            else if(noOfChilds.count === 1){
+                                if(node.left != null){
+                                    if (parentNode.left.id === node.id) {
+                                        parentNode.left = node.left;
+                                        this.noOfNodes--;
+                                        this.nodeIDMap = {};
+                                        fixingID.call(this);
+                                        return deletedNode;
+                                    }
+                                    if (parentNode.right.id === node.id) {
+                                        parentNode.right = node.left;
+                                        this.noOfNodes--;
+                                        this.nodeIDMap = {};
+                                        fixingID.call(this);
+                                        return deletedNode;
+                                    }
+                                }
+                                if(node.right != null){
+                                    if (parentNode.left.id === node.id) {
+                                        parentNode.left = node.right;
+                                        this.noOfNodes--;
+                                        this.nodeIDMap = {};
+                                        fixingID.call(this);
+                                        return deletedNode;
+                                    }
+                                    if (parentNode.right.id === node.id) {
+                                        parentNode.right = node.right;
+                                        this.noOfNodes--;
+                                        this.nodeIDMap = {};
+                                        fixingID.call(this);
+                                        return deletedNode;
+                                    }
+                                }
+                            }
+                            else if(noOfChilds.count === 2){
+                                if(parentNode.left != null){
+                                    if (parentNode.left.id === node.id) {
+                                        let minLeftObj = deleteHelperBFS.call(this, node.right);
+                                        let myNextNode = treeTraverse.call(this, this.root, minLeftObj[0].id);
+                                        let temp = node.value;
+                                        node.value = myNextNode.value;
+                                        myNextNode.value = temp;
+                                        this.delete(parseInt(myNextNode.id));
+                                    }
+                                }
+                                if(parentNode.right != null){
+                                    if (parentNode.right.id === node.id) {
+                                        let minLeftObj = deleteHelperBFS.call(this, node.right);
+                                        let myNextNode = treeTraverse.call(this, this.root, minLeftObj[0].id);
+                                        let temp = node.value;
+                                        node.value = myNextNode.value;
+                                        myNextNode.value = temp;
+                                        this.delete(parseInt(myNextNode.id));
+                                    }
+                                }
+                            }
+                        }
                     }
                     else{
                         throw new Error('Please give a valid ID or Binary Search Tree is Empty');
@@ -1970,7 +2118,6 @@ my.insert(25);
 my.insert(40);
 my.insert(60);
 my.insert(15);
-console.log(my.childNodes(4));
 my.delete(3);
 console.log(my);
 
