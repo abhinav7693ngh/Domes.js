@@ -230,7 +230,7 @@ class SinglyLinkedList {
         try{
             if(val==0 || val==false || val){
                 if(!this.isEmpty()){
-                    if(typeof(val) === 'object'){
+                    if((typeof(val) === 'object') || (typeof(val) === 'function')){
                         let traverse = this.head;
                         while (traverse.next != null) {
                             if (Object.compare(traverse.value,val)) {
@@ -274,7 +274,7 @@ class SinglyLinkedList {
         try{
             if(val==0 || val==false || val){
                 if(this.search(val)){
-                    if(typeof(val)==='object'){
+                    if ((typeof(val) === 'object') || (typeof(val) === 'function')){
                         if(Object.compare(this.head.value,val)){
                             return this.deleteFromStart(val);
                         }
@@ -495,7 +495,7 @@ class SinglyLinkedList {
                     positions : []
                 };
                 if(!this.isEmpty()){
-                    if(typeof(val) === 'object'){
+                    if ((typeof(val) === 'object') || (typeof(val) === 'function')){
                         let traverse = this.head;
                         let i;
                         for (i = 0; i < (this.size - 1); i++) {
@@ -546,7 +546,7 @@ class SinglyLinkedList {
             if(val==0 || val==false || val){
                 let newSingly = new SinglyLinkedList();
                 if(!this.isEmpty()){
-                    if(typeof(val)==='object'){
+                    if ((typeof(val) === 'object') || (typeof(val) === 'function')){
                         let traverse = this.head;
                         while (traverse.next != null) {
                             if (!Object.compare(traverse.value,val)) {
@@ -642,7 +642,7 @@ class SinglyLinkedList {
         try {
             if ((val == 0 || val == false || val) && (updatedVal == 0 || updatedVal == false || updatedVal)) {
                 if (!this.isEmpty()) {
-                    if(typeof(val)==='object'){
+                    if ((typeof(val) === 'object') || (typeof(val) === 'function')){
                         let traverse = this.head;
                         let count = 0;
                         while (traverse.next != null) {
@@ -913,7 +913,7 @@ class DoublyLinkedList{
         try{
             if(val==0 || val== false || val){
                 if(!this.isEmpty()){
-                    if(typeof(val)==='object'){
+                    if ((typeof(val) === 'object') || (typeof(val) === 'function')){
                         let traverse = this.head;
                         while (traverse.next != null) {
                             if (Object.compare(traverse.value,val)) {
@@ -1030,7 +1030,7 @@ class DoublyLinkedList{
             if(val==0 || val==false || val){
                 if(!this.isEmpty()){
                     if(this.search(val)){
-                        if(typeof(val) === 'object'){
+                        if ((typeof(val) === 'object') || (typeof(val) === 'function')){
                             if (Object.compare(this.head.value,val)) {
                                 return this.deleteFromStart(val);
                             }
@@ -1158,7 +1158,7 @@ class DoublyLinkedList{
                     positions: []
                 };
                 if (!this.isEmpty()) {
-                    if(typeof(val) === 'object'){
+                    if ((typeof(val) === 'object') || (typeof(val) === 'function')){
                         let traverse = this.head;
                         let i;
                         for (i = 0; i < (this.size - 1); i++) {
@@ -1209,7 +1209,7 @@ class DoublyLinkedList{
             if(val == 0 || val == false || val){
                 let newDoubly = new DoublyLinkedList();
                 if(!this.isEmpty()){
-                    if(typeof(val) === 'object'){
+                    if ((typeof(val) === 'object') || (typeof(val) === 'function')){
                         let traverse = this.head;
                         while (traverse.next != null) {
                             if (!Object.compare(traverse.value,val)) {
@@ -1341,7 +1341,7 @@ class DoublyLinkedList{
         try {
             if ((val == 0 || val == false || val) && (updatedVal == 0 || updatedVal == false || updatedVal)) {
                 if (!this.isEmpty()) {
-                    if(typeof(val) === 'object'){
+                    if ((typeof(val) === 'object') || (typeof(val) === 'function')){
                         let traverse = this.head;
                         let count = 0;
                         while (traverse.next != null) {
@@ -1531,7 +1531,7 @@ class Stack{
         try{
             if(val == 0 || val == false || val){
                 if(!this.isEmpty()){
-                    if(typeof(val)==='object'){
+                    if ((typeof(val) === 'object') || (typeof(val) === 'function')){
                         let traverse = this.head;
                         if (Object.compare(traverse.value,val)) {
                             return traverse;
@@ -1710,7 +1710,7 @@ class Queue{
         try {
             if (val == 0 || val == false || val) {
                 if (!this.isEmpty()) {
-                    if(typeof(val) === 'object'){
+                    if ((typeof(val) === 'object') || (typeof(val) === 'function')){
                         let traverse = this.head;
                         if (Object.compare(traverse.value,val)) {
                             return traverse;
