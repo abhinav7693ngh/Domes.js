@@ -471,6 +471,58 @@ class SinglyLinkedList {
             console.log(e);
         }
     }
+
+    updateWithValue(val,updatedVal){
+        try{
+            if((val == 0 || val == false || val) && (updatedVal == 0 || updatedVal == false || updatedVal)){
+                if(!this.isEmpty()){
+                    let node = this.search(val);
+                    if(node != null){
+                        node.value = updatedVal;
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                throw new Error('Cannot find passed value or passed value is undefined/null');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    updateWithIndex(index,updatedVal){
+        try{
+            if((updatedVal == 0 || updatedVal == false || updatedVal) && (index == 0 || index == false || index)){
+                if(typeof(index)==='number'){
+                    if (index < this.size && index >= 0){
+                        let node = this.get(index);
+                        node.value = updatedVal;
+                        return true;
+                    }
+                    else{
+                        throw new Error('Index out of range');
+                    }
+                }
+                else{
+                    throw new Error('Index is not a number');
+                }
+            }
+            else{
+                throw new Error('Cannot find passed values or passed value is undefined/null');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
 }
 
 
@@ -966,6 +1018,58 @@ class DoublyLinkedList{
             }
             else {
                 throw new Error('Cannot find passed value or passed value is undefined/null');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    updateWithValue(val, updatedVal) {
+        try {
+            if ((val == 0 || val == false || val) && (updatedVal == 0 || updatedVal == false || updatedVal)) {
+                if (!this.isEmpty()) {
+                    let node = this.search(val);
+                    if (node != null) {
+                        node.value = updatedVal;
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                throw new Error('Cannot find passed value or passed value is undefined/null');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    updateWithIndex(index, updatedVal) {
+        try {
+            if ((updatedVal == 0 || updatedVal == false || updatedVal) && (index == 0 || index == false || index)) {
+                if (typeof (index) === 'number') {
+                    if (index < this.size && index >= 0) {
+                        let node = this.get(index);
+                        node.value = updatedVal;
+                        return true;
+                    }
+                    else {
+                        throw new Error('Index out of range');
+                    }
+                }
+                else {
+                    throw new Error('Index is not a number');
+                }
+            }
+            else {
+                throw new Error('Cannot find passed values or passed value is undefined/null');
             }
         }
         catch (e) {
@@ -2182,18 +2286,25 @@ class BinarySearchTree{
 
 
 
+const my = new DoublyLinkedList();
 
-
-const my = new BinarySearchTree(1,1);
-my.insert(30);
-my.insert(20);
-my.insert(50);
-my.insert(10);
-my.insert(25);
-my.insert(40);
-my.insert(60);
-my.insert(15);
-console.log(my);
+let myarr = [10,20,'yo',40,10];
+myarr.forEach(ele => {
+    my.insertAtEnd(ele);
+});
+//console.log(my.updateWithIndex(4,'Abhimav'));
+// console.log(my.updateWithIndex(-1,'Abhinav'));
+// console.log(my);
+// const my = new BinarySearchTree(1,1);
+// my.insert(30);
+// my.insert(20);
+// my.insert(50);
+// my.insert(10);
+// my.insert(25);
+// my.insert(40);
+// my.insert(60);
+// my.insert(15);
+// console.log(my);
 
 
 
