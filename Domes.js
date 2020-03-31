@@ -2480,6 +2480,7 @@ class BinarySearchTree{
                                 this.root.value = myNextNode.value;
                                 myNextNode.value = temp;
                                 this.delete(parseInt(myNextNode.id));
+                                return deletedNode;
                             }
                         }
                         else{
@@ -2546,6 +2547,7 @@ class BinarySearchTree{
                                         node.value = myNextNode.value;
                                         myNextNode.value = temp;
                                         this.delete(parseInt(myNextNode.id));
+                                        return deletedNode;
                                     }
                                 }
                                 if(parentNode.right != null){
@@ -2556,6 +2558,7 @@ class BinarySearchTree{
                                         node.value = myNextNode.value;
                                         myNextNode.value = temp;
                                         this.delete(parseInt(myNextNode.id));
+                                        return deletedNode;
                                     }
                                 }
                             }
@@ -2652,9 +2655,16 @@ class BinarySearchTree{
 
 
 let my = new BinarySearchTree(1,1);
+my.insert(30);
+my.insert(10);
+my.insert(50);
+my.insert(5);
+my.insert(20);
+my.insert(35);
+my.insert(60);
+my.insert(15);
+my.insert(40);
 
-console.log(my.insert(1));
-
-
+console.log(my.updateWithID(7,100));
 
 console.log(my);
