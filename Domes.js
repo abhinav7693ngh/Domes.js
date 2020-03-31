@@ -19,7 +19,7 @@ Object.compare = function (obj1, obj2) {
                 break;
             //Compare values
             default:
-                if (obj1[p] != obj2[p]) return false;
+                if (obj1[p] !== obj2[p]) return false;
         }
     }
 
@@ -2651,22 +2651,10 @@ class BinarySearchTree{
 
 
 
+let my = new BinarySearchTree(1,1);
 
-const my = new SinglyLinkedList();
-
-let myarr = [10,20,{name : 'Abhinav', some : {so : 'nested'}},40,{name : 'Abhinav'}];
-myarr.forEach(ele => {
-    my.insertAtEnd(ele);
-});
-
-
-console.log(my.search({name : 'Abhinav',some  : {so : 'nested'}}));
-
-// console.log(my.updateWithV(0,100));
+console.log(my.insert(1));
 
 
 
 console.log(my);
-
-
-
