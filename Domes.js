@@ -2786,10 +2786,19 @@ class MaxBinaryHeap{
                 }
                 else if(this.values.length === 3){
                     let max = this.values.shift();
-                    if (this.values[0] < this.values[1]) {
-                        let temp = this.values[1];
-                        this.values[1] = this.values[0];
-                        this.values[0] = temp;
+                    if(this.type === 2 && this.method === 2){
+                        if (this.values[0].length < this.values[1].length){
+                            let temp = this.values[1];
+                            this.values[1] = this.values[0];
+                            this.values[0] = temp;
+                        }
+                    }
+                    else{
+                        if (this.values[0] < this.values[1]){
+                            let temp = this.values[1];
+                            this.values[1] = this.values[0];
+                            this.values[0] = temp;
+                        }
                     }
                     return max;
                 }
@@ -2850,16 +2859,36 @@ class MaxBinaryHeap{
                                 this.values[index] = this.values[2 * index + 1];
                                 this.values[2 * index + 1] = temp2;
                                 index = 2 * index + 1;
-                                left = this.values[2 * index + 1];
-                                right = this.values[2 * index + 2];
+                                if ((2 * index + 1) > (this.values.length - 1)) {
+                                    left = { priority: -Infinity };
+                                }
+                                else {
+                                    left = this.values[2 * index + 1];
+                                }
+                                if (2 * index + 2 > (this.values.length - 1)) {
+                                    right = { priority: -Infinity };
+                                }
+                                else {
+                                    right = this.values[2 * index + 2];
+                                }
                             }
                             else {
                                 let temp2 = this.values[index];
                                 this.values[index] = this.values[2 * index + 2];
                                 this.values[2 * index + 2] = temp2;
                                 index = 2 * index + 2;
-                                left = this.values[2 * index + 1];
-                                right = this.values[2 * index + 2];
+                                if ((2 * index + 1) > (this.values.length - 1)) {
+                                    left = { priority: -Infinity };
+                                }
+                                else {
+                                    left = this.values[2 * index + 1];
+                                }
+                                if (2 * index + 2 > (this.values.length - 1)) {
+                                    right = { priority: -Infinity };
+                                }
+                                else {
+                                    right = this.values[2 * index + 2];
+                                }
                             }
                         }
                         return max;
@@ -2945,6 +2974,8 @@ class MaxBinaryHeap{
         2. Based on Length
 
 */
+
+
 
 
 const minHeaptypesMap = {
@@ -3038,19 +3069,28 @@ class MinBinaryHeap {
                     return this.values.shift();
                 }
                 else if (this.values.length === 3) {
-                    let max = this.values.shift();
-                    if (this.values[0] > this.values[1]) {
-                        let temp = this.values[1];
-                        this.values[1] = this.values[0];
-                        this.values[0] = temp;
+                    let min = this.values.shift();
+                    if (this.type === 2 && this.method === 2) {
+                        if (this.values[0].length > this.values[1].length) {
+                            let temp = this.values[1];
+                            this.values[1] = this.values[0];
+                            this.values[0] = temp;
+                        }
                     }
-                    return max;
+                    else {
+                        if (this.values[0] > this.values[1]) {
+                            let temp = this.values[1];
+                            this.values[1] = this.values[0];
+                            this.values[0] = temp;
+                        }
+                    }
+                    return min;
                 }
                 else {
                     let temp = this.values[0];
                     this.values[0] = this.values[this.values.length - 1];
                     this.values[this.values.length - 1] = temp;
-                    const max = this.values.pop();
+                    const min = this.values.pop();
                     let index = 0;
                     let left = this.values[2 * index + 1];
                     let right = this.values[2 * index + 2];
@@ -3073,7 +3113,7 @@ class MinBinaryHeap {
                                 right = this.values[2 * index + 2];
                             }
                         }
-                        return max;
+                        return min;
                     }
                     else if (this.type === 2 && this.method === 1) {
                         while (this.values[index] > left || this.values[index] > right) {
@@ -3094,7 +3134,7 @@ class MinBinaryHeap {
                                 right = this.values[2 * index + 2];
                             }
                         }
-                        return max;
+                        return min;
                     }
                     else if (this.type === 2 && this.method === 2) {
                         while (this.values[index].length > left.length || this.values[index].length > right.length) {
@@ -3103,19 +3143,39 @@ class MinBinaryHeap {
                                 this.values[index] = this.values[2 * index + 1];
                                 this.values[2 * index + 1] = temp2;
                                 index = 2 * index + 1;
-                                left = this.values[2 * index + 1];
-                                right = this.values[2 * index + 2];
+                                if ((2 * index + 1) > (this.values.length - 1)) {
+                                    left = { priority: Infinity };
+                                }
+                                else {
+                                    left = this.values[2 * index + 1];
+                                }
+                                if (2 * index + 2 > (this.values.length - 1)) {
+                                    right = { priority: Infinity };
+                                }
+                                else {
+                                    right = this.values[2 * index + 2];
+                                }
                             }
                             else {
                                 let temp2 = this.values[index];
                                 this.values[index] = this.values[2 * index + 2];
                                 this.values[2 * index + 2] = temp2;
                                 index = 2 * index + 2;
-                                left = this.values[2 * index + 1];
-                                right = this.values[2 * index + 2];
+                                if ((2 * index + 1) > (this.values.length - 1)) {
+                                    left = { priority: Infinity };
+                                }
+                                else {
+                                    left = this.values[2 * index + 1];
+                                }
+                                if (2 * index + 2 > (this.values.length - 1)) {
+                                    right = { priority: Infinity };
+                                }
+                                else {
+                                    right = this.values[2 * index + 2];
+                                }
                             }
                         }
-                        return max;
+                        return min;
                     }
                 }
             }
@@ -3165,39 +3225,329 @@ class MinBinaryHeap {
 
 
 
+// ===================================== //
 
 
 
 
 
-let my = new MinBinaryHeap(1,1);
-
-my.insert(55);
-my.insert(39);
-my.insert(41);
-my.insert(18);
-my.insert(27);
-my.insert(12);
-my.insert(33);
-
-console.log(my.extractMin());
-console.log(my.extractMin());
-console.log(my.extractMin());
-console.log(my.extractMin());
-console.log(my.extractMin());
-console.log(my.extractMin());
-console.log(my.extractMin());
-console.log(my.extractMin());
+// ========= Priority Queue ============ //
 
 
+
+
+
+/*
+
+Our Priority queue in general can take any value apart from undefined and null.
+
+But our priority will always be in number format
+
+In section will contain both MinHeap Priority queue and MaxHeap Priority Queue
+
+*/
+
+
+function minHeapifyPriorityQueue(myindex) {
+    let newNodeIndex = myindex;
+    let parentIndex = Math.floor(((newNodeIndex) - 1) / 2);
+    while (parentIndex >= 0 && this.values[parentIndex].priority > this.values[newNodeIndex].priority) {
+        let temp = this.values[parentIndex];
+        this.values[parentIndex] = this.values[newNodeIndex];
+        this.values[newNodeIndex] = temp;
+        newNodeIndex = parentIndex;
+        parentIndex = Math.floor((newNodeIndex - 1) / 2);
+    }
+}
+
+
+
+
+
+class PriorityQueueNode{
+
+    constructor(data,prior){
+        this.value = data;
+        this.priority = prior;
+    }
+
+}
+
+
+class MinHeapPriorityQueue{
+
+    constructor() {
+        this.values = [];
+    }
+
+    enqueue(val,priority){
+        try{
+            if(arguments.length > 0){
+                if(val === 0 || val === false || val){
+                    if(typeof(priority) === 'number' && (priority !== Infinity || priority !== -Infinity)){
+                        const newNode = new PriorityQueueNode(val, priority);
+                        this.values.push(newNode);
+                        let newNodeIndex = (this.values.length) - 1;
+                        let parentIndex = Math.floor(((newNodeIndex) - 1) / 2);
+                        while (parentIndex >= 0 && this.values[parentIndex].priority > this.values[newNodeIndex].priority) {
+                            let temp = this.values[parentIndex];
+                            this.values[parentIndex] = this.values[newNodeIndex];
+                            this.values[newNodeIndex] = temp;
+                            newNodeIndex = parentIndex;
+                            parentIndex = Math.floor((newNodeIndex - 1) / 2);
+                        }
+                        return val;
+                    }
+                    else{
+                        throw new Error('Priority is not of type number/Infinity/-Infinity');
+                    }
+                }
+                else{
+                    throw new Error('Passed value is undefined/null');
+                }
+            }
+            else{
+                throw new Error('Arguments not passed');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    dequeue(){
+        try{
+            if(this.values.length !== 0){
+                if (this.values.length === 1) {
+                    let myValue = this.values.pop();
+                    return myValue.value;
+                }
+                else if (this.values.length === 2) {
+                    let myValue;
+                    if (this.values[0].priority < this.values[1].priority) {
+                        myValue = this.values.shift();
+                    }
+                    else {
+                        myValue = this.values.pop();
+                    }
+                    return myValue.value;
+                }
+                else if (this.values.length === 3) {
+                    let myValue = this.values.shift();
+                    if (this.values[0].priority > this.values[1].priority) {
+                        let temp = this.values[0];
+                        this.values[0] = this.values[1];
+                        this.values[1] = temp;
+                    }
+                    return myValue.value;
+                }
+                else {
+                    let temp = this.values[0];
+                    this.values[0] = this.values[this.values.length - 1];
+                    this.values[this.values.length - 1] = temp;
+                    const myValue = this.values.pop();
+                    let index = 0;
+                    let left = this.values[2 * index + 1];
+                    let right = this.values[2 * index + 2];
+                    while (this.values[index].priority > left.priority || this.values[index].priority > right.priority) {
+                        if (right.priority > left.priority) {
+                            let temp2 = this.values[index];
+                            this.values[index] = this.values[2 * index + 1];
+                            this.values[2 * index + 1] = temp2;
+                            index = 2 * index + 1;
+                            if ((2*index + 1) > (this.values.length - 1)) {
+                                left = {priority : Infinity};
+                            }
+                            else{
+                                left = this.values[2 * index + 1];
+                            }
+                            if (2 * index + 2 > (this.values.length - 1)) {
+                                right = {priority : Infinity};
+                            }
+                            else{
+                                right = this.values[2 * index + 2];
+                            }
+                        }
+                        else {
+                            let temp2 = this.values[index];
+                            this.values[index] = this.values[2 * index + 2];
+                            this.values[2 * index + 2] = temp2;
+                            index = 2 * index + 2;
+                            if ((2 * index + 1) > (this.values.length - 1)) {
+                                left = {priority : Infinity};
+                            }
+                            else {
+                                left = this.values[2 * index + 1];
+                            }
+                            if (2 * index + 2 > (this.values.length - 1)) {
+                                right = {priority : Infinity};
+                            }
+                            else {
+                                right = this.values[2 * index + 2];
+                            }
+                        }
+                    }
+                    return myValue.value;
+                }
+            }
+            else{
+                return null;
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    size(){
+        try{
+            return this.values.length;
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    toArray(){
+        try{
+            let toReturn = [];
+            for(let i of this.values){
+                toReturn.push(i.value);
+            }
+            return toReturn;
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    getNodeValue(index){
+        try{
+            if(arguments.length > 0){
+                if(typeof(index) === 'number'){
+                    if(index >= 0 && index < this.values.length){
+                        if(this.values.length !== 0){
+                            for(let i=0;i<this.values.length;i++){
+                                if(i===index){
+                                    return this.values[index].value;
+                                }
+                            }
+                        }
+                        else{
+                            return null;
+                        }
+                    }
+                    else{
+                        throw new Error('Index out of range');
+                    }
+                }
+                else{
+                    throw new Error('Index is not of type number');
+                }
+            }
+            else{
+                throw new Error('Argument not passed');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    isEmpty(){
+        try{
+            if(this.values.length === 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    updatePriority(index,updatedPriority){
+        try{
+            if(arguments.length > 0){
+                if(typeof(index) === 'number' && typeof(updatedPriority) === 'number'){
+                    if(index>=0 && index < this.values.length){
+                        for(let i=0;i<this.values.length;i++){
+                            if(i === index){
+                                this.values[i].priority = updatedPriority;
+                                minHeapifyPriorityQueue.call(this,index);
+                                return true;
+                            }
+                        }
+                    }
+                    else{
+                        throw new Error('Index out of range');
+                    }
+                }
+                else{
+                    throw new Error('Index or Priority is not of type number');
+                }
+            }
+            else{
+                throw new Error('Arguments not passed');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    updateValue(index,updatedValue){
+        try {
+            if (arguments.length > 0) {
+                if (typeof (index) === 'number') {
+                    if (index >= 0 && index < this.values.length) {
+                        for (let i = 0; i < this.values.length; i++) {
+                            if (i === index) {
+                                this.values[i].value = updatedValue;
+                                return true;
+                            }
+                        }
+                    }
+                    else {
+                        throw new Error('Index out of range');
+                    }
+                }
+                else {
+                    throw new Error('Index is not of type number');
+                }
+            }
+            else {
+                throw new Error('Arguments not passed');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+}
+
+
+let my = new MinHeapPriorityQueue();
+
+
+my.enqueue(10,10);
+my.enqueue(20,20);
+// my.enqueue(30, 30);
+// my.enqueue(100,100);
+// my.enqueue(50,50);
+
+
+my.updatePriority(0,0);
+
+// console.log(my.dequeue());
+// console.log(my.dequeue());
+// console.log(my.dequeue());
+// console.log(my.dequeue());
+// console.log(my.dequeue());
+// console.log(my.dequeue());
+// console.log(my.dequeue());
 
 
 console.log(my);
-
-
-
-
-
-
-
-
