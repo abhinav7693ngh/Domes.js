@@ -2727,15 +2727,36 @@ class MaxBinaryHeap{
                         this.values.push(val);
                         let valueIndex = this.values.length - 1;
                         let parentIndex = Math.floor((valueIndex - 1) / 2);
-                        if()
-                        while (parentIndex >= 0 && this.values[parentIndex] < this.values[valueIndex]) {
-                            let temp = this.values[parentIndex];
-                            this.values[parentIndex] = this.values[valueIndex];
-                            this.values[valueIndex] = temp;
-                            valueIndex = parentIndex;
-                            parentIndex = Math.floor((valueIndex - 1) / 2);
+                        if(this.type === 1 && this.method === 1){
+                            while (parentIndex >= 0 && this.values[parentIndex] < this.values[valueIndex]) {
+                                let temp = this.values[parentIndex];
+                                this.values[parentIndex] = this.values[valueIndex];
+                                this.values[valueIndex] = temp;
+                                valueIndex = parentIndex;
+                                parentIndex = Math.floor((valueIndex - 1) / 2);
+                            }
+                            return val;
                         }
-                        return val;
+                        else if(this.type === 2 && this.method === 1){
+                            while (parentIndex >= 0 && this.values[parentIndex] < this.values[valueIndex]) {
+                                let temp = this.values[parentIndex];
+                                this.values[parentIndex] = this.values[valueIndex];
+                                this.values[valueIndex] = temp;
+                                valueIndex = parentIndex;
+                                parentIndex = Math.floor((valueIndex - 1) / 2);
+                            }
+                            return val;
+                        }
+                        else if(this.type === 2 && this.method === 2){
+                            while (parentIndex >= 0 && this.values[parentIndex].length < this.values[valueIndex].length) {
+                                let temp = this.values[parentIndex];
+                                this.values[parentIndex] = this.values[valueIndex];
+                                this.values[valueIndex] = temp;
+                                valueIndex = parentIndex;
+                                parentIndex = Math.floor((valueIndex - 1) / 2);
+                            }
+                            return val;
+                        }
                     }
                     else{
                         throw new Error('Method specified is not supported for this selected type please refer documentation for supported methods');
@@ -2780,25 +2801,69 @@ class MaxBinaryHeap{
                     let index = 0;
                     let left = this.values[2 * index + 1];
                     let right = this.values[2 * index + 2];
-                    while (this.values[index] < left || this.values[index] < right) {
-                        if (right < left) {
-                            let temp2 = this.values[index];
-                            this.values[index] = this.values[2 * index + 1];
-                            this.values[2 * index + 1] = temp2;
-                            index = 2 * index + 1;
-                            left = this.values[2 * index + 1];
-                            right = this.values[2 * index + 2];
+                    if(this.type === 1 && this.method === 1){
+                        while (this.values[index] < left || this.values[index] < right) {
+                            if (right < left) {
+                                let temp2 = this.values[index];
+                                this.values[index] = this.values[2 * index + 1];
+                                this.values[2 * index + 1] = temp2;
+                                index = 2 * index + 1;
+                                left = this.values[2 * index + 1];
+                                right = this.values[2 * index + 2];
+                            }
+                            else {
+                                let temp2 = this.values[index];
+                                this.values[index] = this.values[2 * index + 2];
+                                this.values[2 * index + 2] = temp2;
+                                index = 2 * index + 2;
+                                left = this.values[2 * index + 1];
+                                right = this.values[2 * index + 2];
+                            }
                         }
-                        else {
-                            let temp2 = this.values[index];
-                            this.values[index] = this.values[2 * index + 2];
-                            this.values[2 * index + 2] = temp2;
-                            index = 2 * index + 2;
-                            left = this.values[2 * index + 1];
-                            right = this.values[2 * index + 2];
-                        }
+                        return max;
                     }
-                    return max;
+                    else if(this.type === 2 && this.method === 1){
+                        while (this.values[index] < left || this.values[index] < right) {
+                            if (right < left) {
+                                let temp2 = this.values[index];
+                                this.values[index] = this.values[2 * index + 1];
+                                this.values[2 * index + 1] = temp2;
+                                index = 2 * index + 1;
+                                left = this.values[2 * index + 1];
+                                right = this.values[2 * index + 2];
+                            }
+                            else {
+                                let temp2 = this.values[index];
+                                this.values[index] = this.values[2 * index + 2];
+                                this.values[2 * index + 2] = temp2;
+                                index = 2 * index + 2;
+                                left = this.values[2 * index + 1];
+                                right = this.values[2 * index + 2];
+                            }
+                        }
+                        return max;
+                    }
+                    else if(this.type === 2 && this.method === 2){
+                        while (this.values[index].length < left.length || this.values[index].length < right.length) {
+                            if (right.length < left.length) {
+                                let temp2 = this.values[index];
+                                this.values[index] = this.values[2 * index + 1];
+                                this.values[2 * index + 1] = temp2;
+                                index = 2 * index + 1;
+                                left = this.values[2 * index + 1];
+                                right = this.values[2 * index + 2];
+                            }
+                            else {
+                                let temp2 = this.values[index];
+                                this.values[index] = this.values[2 * index + 2];
+                                this.values[2 * index + 2] = temp2;
+                                index = 2 * index + 2;
+                                left = this.values[2 * index + 1];
+                                right = this.values[2 * index + 2];
+                            }
+                        }
+                        return max;
+                    }
                 }
             }
             else{
@@ -2846,9 +2911,26 @@ class MaxBinaryHeap{
 
 
 
-let my = new MaxBinaryHeap();
+// let my = new MaxBinaryHeap(1,1);
 
-console.log(my.insert(10));
+// my.insert(55);
+// my.insert(39);
+// my.insert(41);
+// my.insert(18);
+// my.insert(27);
+// my.insert(12);
+// my.insert(33);
+
+// console.log(my.extractMax());
+// console.log(my.extractMax());
+// console.log(my.extractMax());
+// console.log(my.extractMax());
+// console.log(my.extractMax());
+// console.log(my.extractMax());
+// console.log(my.extractMax());
+// console.log(my.extractMax());
+
+// console.log(my);
 
 
 
