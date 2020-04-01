@@ -2851,18 +2851,39 @@ class MaxBinaryHeap{
                                 this.values[index] = this.values[2 * index + 1];
                                 this.values[2 * index + 1] = temp2;
                                 index = 2 * index + 1;
-                                left = this.values[2 * index + 1];
-                                right = this.values[2 * index + 2];
+                                if((2*index + 1) < (this.values.length)){
+                                    left = this.values[2 * index + 1];
+                                }
+                                else{
+                                    left = undefined;
+                                }
+                                if((2*index + 2) < (this.values.length)){
+                                    right = this.values[2 * index + 2];
+                                }
+                                else{
+                                    right = undefined;
+                                }
                             }
                             else {
                                 let temp2 = this.values[index];
                                 this.values[index] = this.values[2 * index + 2];
                                 this.values[2 * index + 2] = temp2;
                                 index = 2 * index + 2;
-                                left = this.values[2 * index + 1];
-                                right = this.values[2 * index + 2];
+                                if ((2 * index + 1) < (this.values.length)) {
+                                    left = this.values[2 * index + 1];
+                                }
+                                else {
+                                    left = undefined;
+                                }
+                                if ((2 * index + 2) < (this.values.length)) {
+                                    right = this.values[2 * index + 2];
+                                }
+                                else {
+                                    right = undefined;
+                                }
                             }
                         }
+                        this.values = this.values.filter(ele => ele !== undefined);
                         return max;
                     }
                     else if(this.type === 2 && this.method === 1){
@@ -2872,18 +2893,39 @@ class MaxBinaryHeap{
                                 this.values[index] = this.values[2 * index + 1];
                                 this.values[2 * index + 1] = temp2;
                                 index = 2 * index + 1;
-                                left = this.values[2 * index + 1];
-                                right = this.values[2 * index + 2];
+                                if ((2 * index + 1) < (this.values.length)) {
+                                    left = this.values[2 * index + 1];
+                                }
+                                else {
+                                    left = undefined;
+                                }
+                                if ((2 * index + 2) < (this.values.length)) {
+                                    right = this.values[2 * index + 2];
+                                }
+                                else {
+                                    right = undefined;
+                                }
                             }
                             else {
                                 let temp2 = this.values[index];
                                 this.values[index] = this.values[2 * index + 2];
                                 this.values[2 * index + 2] = temp2;
                                 index = 2 * index + 2;
-                                left = this.values[2 * index + 1];
-                                right = this.values[2 * index + 2];
+                                if ((2 * index + 1) < (this.values.length)) {
+                                    left = this.values[2 * index + 1];
+                                }
+                                else {
+                                    left = undefined;
+                                }
+                                if ((2 * index + 2) < (this.values.length)) {
+                                    right = this.values[2 * index + 2];
+                                }
+                                else {
+                                    right = undefined;
+                                }
                             }
                         }
+                        this.values = this.values.filter(ele => ele !== undefined);
                         return max;
                     }
                     else if(this.type === 2 && this.method === 2){
@@ -2894,13 +2936,13 @@ class MaxBinaryHeap{
                                 this.values[2 * index + 1] = temp2;
                                 index = 2 * index + 1;
                                 if ((2 * index + 1) > (this.values.length - 1)) {
-                                    left = { priority: -Infinity };
+                                    left = { length: -Infinity };
                                 }
                                 else {
                                     left = this.values[2 * index + 1];
                                 }
                                 if (2 * index + 2 > (this.values.length - 1)) {
-                                    right = { priority: -Infinity };
+                                    right = { length: -Infinity };
                                 }
                                 else {
                                     right = this.values[2 * index + 2];
@@ -2912,19 +2954,20 @@ class MaxBinaryHeap{
                                 this.values[2 * index + 2] = temp2;
                                 index = 2 * index + 2;
                                 if ((2 * index + 1) > (this.values.length - 1)) {
-                                    left = { priority: -Infinity };
+                                    left = { length: -Infinity };
                                 }
                                 else {
                                     left = this.values[2 * index + 1];
                                 }
                                 if (2 * index + 2 > (this.values.length - 1)) {
-                                    right = { priority: -Infinity };
+                                    right = { length: -Infinity };
                                 }
                                 else {
                                     right = this.values[2 * index + 2];
                                 }
                             }
                         }
+                        this.values = this.values.filter(ele => ele !== undefined);
                         return max;
                     }
                 }
@@ -3169,18 +3212,39 @@ class MinBinaryHeap {
                                 this.values[index] = this.values[2 * index + 1];
                                 this.values[2 * index + 1] = temp2;
                                 index = 2 * index + 1;
-                                left = this.values[2 * index + 1];
-                                right = this.values[2 * index + 2];
+                                if ((2 * index + 1) < (this.values.length)) {
+                                    left = this.values[2 * index + 1];
+                                }
+                                else {
+                                    left = undefined;
+                                }
+                                if ((2 * index + 2) < (this.values.length)) {
+                                    right = this.values[2 * index + 2];
+                                }
+                                else {
+                                    right = undefined;
+                                }
                             }
                             else {
                                 let temp2 = this.values[index];
                                 this.values[index] = this.values[2 * index + 2];
                                 this.values[2 * index + 2] = temp2;
                                 index = 2 * index + 2;
-                                left = this.values[2 * index + 1];
-                                right = this.values[2 * index + 2];
+                                if ((2 * index + 1) < (this.values.length)) {
+                                    left = this.values[2 * index + 1];
+                                }
+                                else {
+                                    left = undefined;
+                                }
+                                if ((2 * index + 2) < (this.values.length)) {
+                                    right = this.values[2 * index + 2];
+                                }
+                                else {
+                                    right = undefined;
+                                }
                             }
                         }
+                        this.values = this.values.filter(ele => ele !== undefined);
                         return min;
                     }
                     else if (this.type === 2 && this.method === 1) {
@@ -3190,18 +3254,39 @@ class MinBinaryHeap {
                                 this.values[index] = this.values[2 * index + 1];
                                 this.values[2 * index + 1] = temp2;
                                 index = 2 * index + 1;
-                                left = this.values[2 * index + 1];
-                                right = this.values[2 * index + 2];
+                                if ((2 * index + 1) < (this.values.length)) {
+                                    left = this.values[2 * index + 1];
+                                }
+                                else {
+                                    left = undefined;
+                                }
+                                if ((2 * index + 2) < (this.values.length)) {
+                                    right = this.values[2 * index + 2];
+                                }
+                                else {
+                                    right = undefined;
+                                }
                             }
                             else {
                                 let temp2 = this.values[index];
                                 this.values[index] = this.values[2 * index + 2];
                                 this.values[2 * index + 2] = temp2;
                                 index = 2 * index + 2;
-                                left = this.values[2 * index + 1];
-                                right = this.values[2 * index + 2];
+                                if ((2 * index + 1) < (this.values.length)) {
+                                    left = this.values[2 * index + 1];
+                                }
+                                else {
+                                    left = undefined;
+                                }
+                                if ((2 * index + 2) < (this.values.length)) {
+                                    right = this.values[2 * index + 2];
+                                }
+                                else {
+                                    right = undefined;
+                                }
                             }
                         }
+                        this.values = this.values.filter(ele => ele !== undefined);
                         return min;
                     }
                     else if (this.type === 2 && this.method === 2) {
@@ -3212,13 +3297,13 @@ class MinBinaryHeap {
                                 this.values[2 * index + 1] = temp2;
                                 index = 2 * index + 1;
                                 if ((2 * index + 1) > (this.values.length - 1)) {
-                                    left = { priority: Infinity };
+                                    left = { length: Infinity };
                                 }
                                 else {
                                     left = this.values[2 * index + 1];
                                 }
                                 if (2 * index + 2 > (this.values.length - 1)) {
-                                    right = { priority: Infinity };
+                                    right = { length: Infinity };
                                 }
                                 else {
                                     right = this.values[2 * index + 2];
@@ -3230,19 +3315,20 @@ class MinBinaryHeap {
                                 this.values[2 * index + 2] = temp2;
                                 index = 2 * index + 2;
                                 if ((2 * index + 1) > (this.values.length - 1)) {
-                                    left = { priority: Infinity };
+                                    left = { length: Infinity };
                                 }
                                 else {
                                     left = this.values[2 * index + 1];
                                 }
                                 if (2 * index + 2 > (this.values.length - 1)) {
-                                    right = { priority: Infinity };
+                                    right = { length: Infinity };
                                 }
                                 else {
                                     right = this.values[2 * index + 2];
                                 }
                             }
                         }
+                        this.values = this.values.filter(ele => ele !== undefined);
                         return min;
                     }
                 }
@@ -3455,6 +3541,7 @@ class MinPriorityQueue{
                             }
                         }
                     }
+                    this.values = this.values.filter(ele => ele.value!==undefined);
                     return myValue.value;
                 }
             }
@@ -3685,6 +3772,7 @@ class MaxPriorityQueue {
                             }
                         }
                     }
+                    this.values = this.values.filter(ele => ele.value !== undefined);
                     return myValue.value;
                 }
             }
@@ -3801,16 +3889,38 @@ class MaxPriorityQueue {
 
 
 
+let my = new MinBinaryHeap(1,1);
 
 
+// my.insert('A');
+// my.insert('Ab');
+// my.insert('Abh');
+// my.insert('Abhi');
+// my.insert('Abhin');
+// my.insert('Abhina');
+// my.insert('Abhinav');
 
-let my =  new MaxPriorityQueue();
 
-my.enqueue(9,10);
-my.enqueue(12,5);
-my.enqueue(13,8);
-my.enqueue(14,10);
-my.enqueue(15,4);
+// my.insert(50);
+// my.insert(30);
+// my.insert(40);
+// my.insert(20);
+// my.insert();
+// my.insert(80);
+// my.insert(70);
+// my.insert(60);
+// my.insert(100);
+// my.insert(90);
 
+// console.log(my.extractMin());
+// console.log(my.extractMin());
+// console.log(my.extractMin());
+// console.log(my.extractMin());
+// console.log(my.extractMin());
+// console.log(my.extractMin());
+// console.log(my.extractMin());
+// console.log(my.extractMin());
+// console.log(my.extractMin());
+// console.log(my.extractMin());
 
-console.log(my);
+// console.log(my.size());
