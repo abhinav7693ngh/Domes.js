@@ -2684,7 +2684,7 @@ class BinarySearchTree{
     1. number
     2. string
 
-=>  Comparison Methods of Binray Search Trees
+=>  Comparison Methods of Min Binary Heap
     1. number
         1. Normal comparison (<,>,=)
     2. string
@@ -2933,11 +2933,11 @@ class MaxBinaryHeap{
 
 /*
 
-=>  Types of Max Binary Heap
+=>  Types of Min Binary Heap
     1. number
     2. string
 
-=>  Comparison Methods of Binray Search Trees
+=>  Comparison Methods of Min Binary Heap
     1. number
         1. Normal comparison (<,>,=)
     2. string
