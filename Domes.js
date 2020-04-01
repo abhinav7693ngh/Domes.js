@@ -3453,7 +3453,7 @@ class MinPriorityQueue{
                         return val;
                     }
                     else{
-                        throw new Error('Priority is not of type number/Infinity/-Infinity');
+                        throw new Error('Priority is not of type number apart from Infinity/-Infinity or not passed');
                     }
                 }
                 else{
@@ -3566,8 +3566,8 @@ class MinPriorityQueue{
     toArray(){
         try{
             let toReturn = [];
-            for(let i of this.values){
-                toReturn.push(i.value);
+            for(let i=0;i<this.values.length;i++){
+                toReturn.push({value : this.values[i].value, priority : this.values[i].priority});
             }
             return toReturn;
         }
@@ -3628,11 +3628,16 @@ class MinPriorityQueue{
             if (arguments.length > 0) {
                 if (typeof (index) === 'number') {
                     if (index >= 0 && index < this.values.length) {
-                        for (let i = 0; i < this.values.length; i++) {
-                            if (i === index) {
-                                this.values[i].value = updatedValue;
-                                return true;
+                        if(updatedValue === 0 || updatedValue === false || updatedValue){
+                            for (let i = 0; i < this.values.length; i++) {
+                                if (i === index) {
+                                    this.values[i].value = updatedValue;
+                                    return true;
+                                }
                             }
+                        }
+                        else{
+                            throw new Error('Updated value not passed or passed undefined/null');
                         }
                     }
                     else {
@@ -3684,7 +3689,7 @@ class MaxPriorityQueue {
                         return val;
                     }
                     else {
-                        throw new Error('Priority is not of type number/Infinity/-Infinity');
+                        throw new Error('Priority is not of type number or not passed');
                     }
                 }
                 else {
@@ -3797,8 +3802,8 @@ class MaxPriorityQueue {
     toArray() {
         try {
             let toReturn = [];
-            for (let i of this.values) {
-                toReturn.push(i.value);
+            for (let i = 0; i < this.values.length; i++) {
+                toReturn.push({ value: this.values[i].value, priority: this.values[i].priority });
             }
             return toReturn;
         }
@@ -3859,11 +3864,16 @@ class MaxPriorityQueue {
             if (arguments.length > 0) {
                 if (typeof (index) === 'number') {
                     if (index >= 0 && index < this.values.length) {
-                        for (let i = 0; i < this.values.length; i++) {
-                            if (i === index) {
-                                this.values[i].value = updatedValue;
-                                return true;
+                        if (updatedValue === 0 || updatedValue === false || updatedValue) {
+                            for (let i = 0; i < this.values.length; i++) {
+                                if (i === index) {
+                                    this.values[i].value = updatedValue;
+                                    return true;
+                                }
                             }
+                        }
+                        else {
+                            throw new Error('Updated value not passed or passed undefined/null');
                         }
                     }
                     else {
@@ -3889,38 +3899,28 @@ class MaxPriorityQueue {
 
 
 
-let my = new MinBinaryHeap(1,1);
+// let my = new MaxPriorityQueue();
+
+// my.enqueue(10,5);
+// my.enqueue(10,3);
+// my.enqueue(20,2);
+// my.enqueue(30,1);
+// my.enqueue(40,0);
+// my.enqueue(0,-1);
+// my.enqueue(100,5);
+
+// console.log(my.dequeue());
+// console.log(my.dequeue());
+// console.log(my.dequeue());
+// console.log(my.dequeue());
+// console.log(my.dequeue());
+// console.log(my.dequeue());
+// console.log(my.dequeue());
+// console.log(my.dequeue());
 
 
-// my.insert('A');
-// my.insert('Ab');
-// my.insert('Abh');
-// my.insert('Abhi');
-// my.insert('Abhin');
-// my.insert('Abhina');
-// my.insert('Abhinav');
+// console.log(my.updateValue(2,{hey : 'there'}));
+// console.log(my);
+// console.log(my.updateValue(0,100));
 
 
-// my.insert(50);
-// my.insert(30);
-// my.insert(40);
-// my.insert(20);
-// my.insert();
-// my.insert(80);
-// my.insert(70);
-// my.insert(60);
-// my.insert(100);
-// my.insert(90);
-
-// console.log(my.extractMin());
-// console.log(my.extractMin());
-// console.log(my.extractMin());
-// console.log(my.extractMin());
-// console.log(my.extractMin());
-// console.log(my.extractMin());
-// console.log(my.extractMin());
-// console.log(my.extractMin());
-// console.log(my.extractMin());
-// console.log(my.extractMin());
-
-// console.log(my.size());
