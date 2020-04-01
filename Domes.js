@@ -2977,6 +2977,40 @@ class MaxBinaryHeap{
 
 
 
+function minHeapify(myindex){
+    let valueIndex = myindex;
+    let parentIndex = Math.floor((valueIndex - 1) / 2);
+    if (this.type === 1 && this.method === 1) {
+        while (parentIndex >= 0 && this.values[parentIndex] > this.values[valueIndex]) {
+            let temp = this.values[parentIndex];
+            this.values[parentIndex] = this.values[valueIndex];
+            this.values[valueIndex] = temp;
+            valueIndex = parentIndex;
+            parentIndex = Math.floor((valueIndex - 1) / 2);
+        }
+    }
+    else if (this.type === 2 && this.method === 1) {
+        while (parentIndex >= 0 && this.values[parentIndex] > this.values[valueIndex]) {
+            let temp = this.values[parentIndex];
+            this.values[parentIndex] = this.values[valueIndex];
+            this.values[valueIndex] = temp;
+            valueIndex = parentIndex;
+            parentIndex = Math.floor((valueIndex - 1) / 2);
+        }
+    }
+    else if (this.type === 2 && this.method === 2) {
+        while (parentIndex >= 0 && this.values[parentIndex].length > this.values[valueIndex].length) {
+            let temp = this.values[parentIndex];
+            this.values[parentIndex] = this.values[valueIndex];
+            this.values[valueIndex] = temp;
+            valueIndex = parentIndex;
+            parentIndex = Math.floor((valueIndex - 1) / 2);
+        }
+    }
+}
+
+
+
 
 const minHeaptypesMap = {
     1: 'number',
@@ -3216,6 +3250,37 @@ class MinBinaryHeap {
             return this.values.length;
         }
         catch (e) {
+            console.log(e);
+        }
+    }
+
+    updateValue(index,updatedValue){
+        try{
+            const myCurrentType = minHeaptypesMap[this.type];
+            if(arguments.length > 0){
+                if(typeof(index)==='number' && typeof(updatedValue)===myCurrentType){
+                    if(index>=0 && index<this.values.length){
+                        for(let i=0;i<this.values.length;i++){
+                            if(i===index){
+                                this.values[i] = updatedValue;
+                                minHeapify.call(this,index);
+                                return true;
+                            }
+                        }
+                    }
+                    else{
+                        throw new Error('Index out of range');
+                    }
+                }
+                else{
+                    throw new Error('Passed value does not match the type of Max Binary Heap or Index is not of type number');
+                }
+            }
+            else{
+                throw new Error('Argument not passed');
+            }
+        }
+        catch(e){
             console.log(e);
         }
     }
@@ -3529,25 +3594,11 @@ class MinHeapPriorityQueue{
 }
 
 
-let my = new MinHeapPriorityQueue();
 
+let my =  new MinBinaryHeap(1,1);
+my.insert(10);
+my.insert(9);
 
-my.enqueue(10,10);
-my.enqueue(20,20);
-// my.enqueue(30, 30);
-// my.enqueue(100,100);
-// my.enqueue(50,50);
-
-
-my.updatePriority(0,0);
-
-// console.log(my.dequeue());
-// console.log(my.dequeue());
-// console.log(my.dequeue());
-// console.log(my.dequeue());
-// console.log(my.dequeue());
-// console.log(my.dequeue());
-// console.log(my.dequeue());
-
+console.log(my.updateValue(0,5));
 
 console.log(my);
