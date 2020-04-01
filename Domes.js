@@ -2174,7 +2174,7 @@ class BinarySearchTree{
                         return visited;
                     }
                     else {
-                        throw new Error('Please give a valid ID or Binary Search is Empty');
+                        throw new Error(`Please give a valid ID or Binary Search Tree is Empty (Valid ID Ranges from ${1} and ${this.noOfNodes} both inclusive)`);
                     }
                 }
                 else {
@@ -2201,7 +2201,7 @@ class BinarySearchTree{
                         return visited;
                     }
                     else {
-                        throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                        throw new Error(`Please give a valid ID or Binary Search Tree is Empty (Valid ID Ranges from ${1} and ${this.noOfNodes} both inclusive)`);
                     }
                 }
                 else {
@@ -2228,7 +2228,7 @@ class BinarySearchTree{
                         return visited;
                     }
                     else {
-                        throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                        throw new Error(`Please give a valid ID or Binary Search Tree is Empty (Valid ID Ranges from ${1} and ${this.noOfNodes} both inclusive)`);
                     }
                 }
                 else {
@@ -2255,7 +2255,7 @@ class BinarySearchTree{
                         return visited;
                     }
                     else {
-                        throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                        throw new Error(`Please give a valid ID or Binary Search Tree is Empty (Valid ID Ranges from ${1} and ${this.noOfNodes} both inclusive)`);
                     }
                 }
                 else {
@@ -2280,7 +2280,7 @@ class BinarySearchTree{
                         return findHeight.call(this,myroot);
                     }
                     else {
-                        throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                        throw new Error(`Please give a valid ID or Binary Search Tree is Empty (Valid ID Ranges from ${1} and ${this.noOfNodes} both inclusive)`);
                     }
                 }
                 else {
@@ -2324,7 +2324,7 @@ class BinarySearchTree{
                                 return mynodes;
                             }
                             else{
-                                throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                                throw new Error(`Please give a valid ID or Binary Search Tree is Empty (Valid ID Ranges from ${1} and ${this.noOfNodes} both inclusive)`);
                             }
                         }
                         else{
@@ -2367,7 +2367,7 @@ class BinarySearchTree{
                         return leaves;
                     }
                     else{
-                        throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                        throw new Error(`Please give a valid ID or Binary Search Tree is Empty (Valid ID Ranges from ${1} and ${this.noOfNodes} both inclusive)`);
                     }
                 }
                 else{
@@ -2392,7 +2392,7 @@ class BinarySearchTree{
                         return childs.call(this,myroot,id);
                     }
                     else{
-                        throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                        throw new Error(`Please give a valid ID or Binary Search Tree is Empty (Valid ID Ranges from ${1} and ${this.noOfNodes} both inclusive)`);
                     }
                 }
                 else{
@@ -2565,7 +2565,7 @@ class BinarySearchTree{
                         }
                     }
                     else{
-                        throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                        throw new Error(`Please give a valid ID or Binary Search Tree is Empty (Valid ID Ranges from ${1} and ${this.noOfNodes} both inclusive)`);
                     }
                 }
                 else{
@@ -2620,7 +2620,7 @@ class BinarySearchTree{
                         return true;
                     }
                     else{
-                        throw new Error('Please give a valid ID or Binary Search Tree is Empty');
+                        throw new Error(`Please give a valid ID or Binary Search Tree is Empty (Valid ID Ranges from ${1} and ${this.noOfNodes} both inclusive)`);
                     }
                 }
                 else{
@@ -2632,6 +2632,32 @@ class BinarySearchTree{
             }
         }
         catch(e){
+            console.log(e);
+        }
+    }
+
+    getNodeValueWithId(id){
+        try {
+            if (arguments.length > 0) {
+                if (typeof (id) === 'number') {
+                    if (id >= 1 && id <= this.noOfNodes) {
+                        let myroot = this.nodeIDMap[id];
+                        let node = treeTraverse.call(this,myroot,id);
+                        return {value : node.value , id : node.id};
+                    }
+                    else {
+                        throw new Error(`Please give a valid ID or Binary Search Tree is Empty (Valid ID Ranges from ${1} and ${this.noOfNodes} both inclusive)`);
+                    }
+                }
+                else {
+                    throw new Error('ID passed is not of type number');
+                }
+            }
+            else {
+                throw new Error('Argument not passed');
+            }
+        }
+        catch (e) {
             console.log(e);
         }
     }
@@ -2665,6 +2691,7 @@ my.insert(60);
 my.insert(15);
 my.insert(40);
 
-console.log(my.updateWithID(7,100));
+console.log(my.getNodeValueWithId(10));
+
 
 console.log(my);
