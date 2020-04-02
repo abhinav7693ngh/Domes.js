@@ -3902,9 +3902,95 @@ class MaxPriorityQueue {
 
 
 
-// =========== Graphs ==================== //
+// =============== Graphs ================== //
+
+
+
+// Below is type of Graph Node ID Accepted
+
+const typeID = {
+    1 : 'number',
+    2 : 'string'
+};
+
+
+class GraphNode{
+
+    constructor(data,id) {
+        this.value = data;
+        this.id = id;
+    }
+
+}
+
+
+
+class UWUDGraph{
+
+    constructor(type) {
+        this.adjacencyList = {};
+        this.type=type;
+        this.allVertex = {};
+    }
+
+    addVertex(val,ID){
+        try{
+            if(arguments.length > 0){
+                const currentType = typeID[this.type];
+                if(currentType === typeof(ID)){
+                    if(currentType === 'number'){
+                        if(isFinite(ID)){
+                            if(val === 0 || val === false || val){
+                                if(this.allVertex.hasOwnProperty(ID)){
+                                    return false;
+                                }
+                                else{
+                                    let newNode = new GraphNode(val,ID);
+                                    this.allVertex[ID] = newNode;
+                                    return true;
+                                }
+                            }
+                            else{
+                                throw new Error('Value passed is undefined/null');
+                            }
+                        }
+                        else{
+                            throw new Error('ID passed is not finite');
+                        }
+                    }
+                    else if(currentType === 'string'){
+                        if(val === 0 || val === false || val){
+                            if (this.allVertex.hasOwnProperty(ID)) {
+                                return false;
+                            }
+                            else {
+                                let newNode = new GraphNode(val, ID);
+                                this.allVertex[ID] = newNode;
+                                return true;
+                            }
+                        }
+                        else{
+                            throw new Error('Value passed is undefined/null');
+                        }
+                    }
+                }
+                else{
+                    throw new Error('ID passed do not match the type of Graph');
+                }
+            }
+            else{
+                throw new Error('Arguments not passed')
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+}
 
 
 
 
+let my  = new UWUDGraph(2);
 
+console.log(my);
