@@ -3914,6 +3914,21 @@ const typeID = {
 };
 
 
+
+function BFSHelper(myans,myqueue,visited){
+    while(myqueue.size > 0){
+        let myvertex = myqueue.dequeue();
+        if(!visited[myvertex]){
+            myans.push({value : this.allVertex[myvertex].value, id : this.allVertex[myvertex].id});
+            visited[myvertex] = true;
+            for(let i of this.adjacencyList[myvertex]){
+                myqueue.enqueue(i.id);
+            }
+        }
+    }
+}
+
+
 class GraphNode{
 
     constructor(data,id) {
@@ -4143,8 +4158,8 @@ class UWUDGraph{
                                 }
                             }
                             if (this.adjacencyList.hasOwnProperty(ID1) && this.adjacencyList.hasOwnProperty(ID2)) {
-                                this.adjacencyList[ID1] = this.adjacencyList[ID1].filter(ele => ele.id != ID2);
-                                this.adjacencyList[ID2] = this.adjacencyList[ID2].filter(ele => ele.id != ID1);
+                                this.adjacencyList[ID1] = this.adjacencyList[ID1].filter(ele => ele.id !== ID2);
+                                this.adjacencyList[ID2] = this.adjacencyList[ID2].filter(ele => ele.id !== ID1);
                                 return true;
                             }
                             else {
@@ -4157,8 +4172,8 @@ class UWUDGraph{
                     }
                     else if(currentType === 'string'){
                         if (this.adjacencyList.hasOwnProperty(ID1) && this.adjacencyList.hasOwnProperty(ID2)) {
-                            this.adjacencyList[ID1] = this.adjacencyList[ID1].filter(ele => ele.id != ID2);
-                            this.adjacencyList[ID2] = this.adjacencyList[ID2].filter(ele => ele.id != ID1);
+                            this.adjacencyList[ID1] = this.adjacencyList[ID1].filter(ele => ele.id !== ID2);
+                            this.adjacencyList[ID2] = this.adjacencyList[ID2].filter(ele => ele.id !== ID1);
                             return true;
                         }
                         else {
@@ -4178,6 +4193,106 @@ class UWUDGraph{
             console.log(e);
         }
     }
+
+    removeVertex(ID){
+        try{
+            if(arguments.length > 0){
+                const currentType = typeID[this.type];
+                if(currentType === typeof(ID)){
+                    if(currentType === 'number'){
+                        if(isFinite(ID)){
+                            if(this.adjacencyList.hasOwnProperty(ID)){
+                                delete this.allVertex[ID];
+                                delete this.adjacencyList[ID];
+                                for(let i in this.adjacencyList){
+                                    this.adjacencyList[i] = this.adjacencyList[i].filter(ele => ele.id !== ID);
+                                }
+                                return true;
+                            }
+                            else{
+                                return false;
+                            }
+                        }
+                        else{
+                            throw new Error('ID passed is not Finite');
+                        }
+                    }
+                    else if(currentType === 'string'){
+                        if (this.adjacencyList.hasOwnProperty(ID)) {
+                            delete this.allVertex[ID];
+                            delete this.adjacencyList[ID];
+                            for (let i in this.adjacencyList) {
+                                this.adjacencyList[i] = this.adjacencyList[i].filter(ele => ele.id !== ID);
+                            }
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                }
+                else{
+                    throw new Error('ID passed does not match the type of graph');
+                }
+            }
+            else{
+                throw new Error('Argument not passed');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    BFS(ID){
+        try{
+            if(arguments.length > 0){
+                const currentType = typeID[this.type];
+                if(currentType === typeof(ID)){
+                    if(currentType === 'number'){
+                        if(isFinite(ID)){
+                            let myans = [];
+                            if(this.allVertex.hasOwnProperty(ID)){
+                                let myqueue = new Queue();
+                                let visited = {};
+                                myqueue.enqueue(ID);
+                                BFSHelper.call(this,myans,myqueue,visited);
+                                return myans;
+                            }
+                            else{
+                                return myans;
+                            }
+                        }
+                        else{
+                            throw new Error('ID passed is not finite');
+                        }
+                    }
+                    else if(currentType === 'string'){
+                        let myans = [];
+                        if (this.allVertex.hasOwnProperty(ID)) {
+                            let myqueue = new Queue();
+                            let visited = {};
+                            myqueue.enqueue(ID);
+                            BFSHelper.call(this, myans, myqueue, visited);
+                            return myans;
+                        }
+                        else {
+                            return myans;
+                        }
+                    }
+                }
+                else{
+                    throw new Error('ID passed does not match the type of graph');
+                }
+            }
+            else{
+                throw new Error('Argument not passed');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
 }
 
 
@@ -4188,8 +4303,9 @@ my.addVertex(null,1);
 my.addVertex(null,2);
 my.addEdge(4,5);
 my.addEdge(1,2);
+my.updateValue(4,'This is now should be shown');
+console.log(my.BFS(4));
 
-console.log(my.removeEdge(4,5));
 
 
 
