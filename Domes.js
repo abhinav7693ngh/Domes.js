@@ -3915,7 +3915,7 @@ const typeID = {
 
 
 
-function BFSHelper(myans,myqueue,visited){
+function GraphBFSHelper(myans,myqueue,visited){
     while(myqueue.size > 0){
         let myvertex = myqueue.dequeue();
         if(!visited[myvertex]){
@@ -3923,6 +3923,19 @@ function BFSHelper(myans,myqueue,visited){
             visited[myvertex] = true;
             for(let i of this.adjacencyList[myvertex]){
                 myqueue.enqueue(i.id);
+            }
+        }
+    }
+}
+
+function GraphDFSHelper(myans,mystack,visited){
+    while(mystack.size > 0){
+        let myvertex = mystack.pop();
+        if(!visited[myvertex]){
+            myans.push({value : this.allVertex[myvertex].value, id : this.allVertex[myvertex].id});
+            visited[myvertex] = true;
+            for(let i of this.adjacencyList[myvertex]){
+                mystack.push(i.id);
             }
         }
     }
@@ -4256,7 +4269,7 @@ class UWUDGraph{
                                 let myqueue = new Queue();
                                 let visited = {};
                                 myqueue.enqueue(ID);
-                                BFSHelper.call(this,myans,myqueue,visited);
+                                GraphBFSHelper.call(this,myans,myqueue,visited);
                                 return myans;
                             }
                             else{
@@ -4273,7 +4286,7 @@ class UWUDGraph{
                             let myqueue = new Queue();
                             let visited = {};
                             myqueue.enqueue(ID);
-                            BFSHelper.call(this, myans, myqueue, visited);
+                            GraphBFSHelper.call(this, myans, myqueue, visited);
                             return myans;
                         }
                         else {
@@ -4293,6 +4306,56 @@ class UWUDGraph{
             console.log(e);
         }
     }
+
+    DFS(ID){
+        try {
+            if (arguments.length > 0) {
+                const currentType = typeID[this.type];
+                if (currentType === typeof (ID)) {
+                    if (currentType === 'number') {
+                        if (isFinite(ID)) {
+                            let myans = [];
+                            if (this.allVertex.hasOwnProperty(ID)) {
+                                let visited = {};
+                                let mystack = new Stack();
+                                mystack.push(ID);
+                                GraphDFSHelper.call(this,myans,mystack,visited);
+                                return myans;
+                            }
+                            else {
+                                return myans;
+                            }
+                        }
+                        else {
+                            throw new Error('ID passed is not finite');
+                        }
+                    }
+                    else if (currentType === 'string') {
+                        let myans = [];
+                        if (this.allVertex.hasOwnProperty(ID)) {
+                            let visited = {};
+                            let mystack = new Stack();
+                            mystack.push(ID);
+                            GraphDFSHelper.call(this,myans,mystack,visited);
+                            return myans;
+                        }
+                        else {
+                            return myans;
+                        }
+                    }
+                }
+                else {
+                    throw new Error('ID passed does not match the type of graph');
+                }
+            }
+            else {
+                throw new Error('Argument not passed');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
 }
 
 
@@ -4304,9 +4367,4 @@ my.addVertex(null,2);
 my.addEdge(4,5);
 my.addEdge(1,2);
 my.updateValue(4,'This is now should be shown');
-console.log(my.BFS(4));
-
-
-
-
 console.log(my);
