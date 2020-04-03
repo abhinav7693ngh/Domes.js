@@ -4356,6 +4356,54 @@ class UWUDGraph{
             console.log(e);
         }
     }
+
+    neighbours(ID){
+        try {
+            if (arguments.length > 0) {
+                const currentType = typeID[this.type];
+                if (currentType === typeof (ID)) {
+                    if (currentType === 'number') {
+                        if (isFinite(ID)) {
+                            let myans = [];
+                            if (this.allVertex.hasOwnProperty(ID)) {
+                                for(let i of this.adjacencyList[ID]){
+                                    myans.push({value : i.value, id : i.id});
+                                }
+                                return myans;
+                            }
+                            else {
+                                return myans;
+                            }
+                        }
+                        else {
+                            throw new Error('ID passed is not finite');
+                        }
+                    }
+                    else if (currentType === 'string') {
+                        let myans = [];
+                        if (this.allVertex.hasOwnProperty(ID)) {
+                            for(let i of this.adjacencyList[ID]){
+                                myans.push({value : i.value, id : i.id});
+                            }
+                            return myans;
+                        }
+                        else {
+                            return myans;
+                        }
+                    }
+                }
+                else {
+                    throw new Error('ID passed does not match the type of graph');
+                }
+            }
+            else {
+                throw new Error('Argument not passed');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
 }
 
 
@@ -4366,5 +4414,7 @@ my.addVertex(null,1);
 my.addVertex(null,2);
 my.addEdge(4,5);
 my.addEdge(1,2);
+my.addEdge(1,4);
 my.updateValue(4,'This is now should be shown');
+console.log(my.neighbours(1));
 console.log(my);
