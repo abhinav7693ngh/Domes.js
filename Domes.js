@@ -4404,17 +4404,157 @@ class UWUDGraph{
             console.log(e);
         }
     }
+
+    shortestPath(ID1,ID2){
+        try{
+            if(arguments.length > 0){
+                const currentType = typeID[this.type];
+                if(currentType === typeof(ID1) && currentType === typeof(ID2)){
+                    if(currentType === 'number'){
+                        if(isFinite(ID1) && isFinite(ID2)){
+                            let path = {
+                                steps: 0,
+                                nodes: []
+                            };
+                            if(this.allVertex.hasOwnProperty(ID1) && this.allVertex.hasOwnProperty(ID2)){
+                                let levelMap = {};
+                                let visited = {};
+                                let helperVisited = {};
+                                if (ID1 === ID2) {
+                                    path.nodes.push(ID1);
+                                    return path;
+                                }
+                                else {
+                                    let found = 0;
+                                    let myqueue = new Queue();
+                                    myqueue.enqueue(ID1);
+                                    levelMap[ID1] = { parent: null, level: 0 };
+                                    while (myqueue.size > 0) {
+                                        let current = myqueue.dequeue();
+                                        if (!visited[current]) {
+                                            visited[current] = true;
+                                            helperVisited[current] = true;
+                                            for (let i of this.adjacencyList[current]) {
+                                                if(!helperVisited[i.id]){
+                                                    myqueue.enqueue(i.id);
+                                                    levelMap[i.id] = { parent: current, level: levelMap[current].level + 1 };
+                                                    helperVisited[i.id] = true;
+                                                }
+                                                if (i.id === ID2) {
+                                                    found = 1;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    console.log(levelMap);
+                                    if (found === 1) {
+                                        path.steps = levelMap[ID2].level;
+                                        let my = levelMap[ID2];
+                                        path.nodes.push(ID2);
+                                        while (my.parent != null) {
+                                            path.nodes.push(my.parent);
+                                            my = levelMap[my.parent];
+                                        }
+                                        path.nodes.reverse();
+                                        return path;
+                                    }
+                                    else {
+                                        return path;
+                                    }
+                                }
+                            }
+                            else{
+                                return path;
+                            }
+                        }
+                        else{
+                            throw new Error('Either of the ID passed is not finite');
+                        }
+                    }
+                    else if(currentType === 'string'){
+                        let path = {
+                            steps: 0,
+                            nodes: []
+                        };
+                        if (this.allVertex.hasOwnProperty(ID1) && this.allVertex.hasOwnProperty(ID2)) {
+                            let levelMap = {};
+                            let visited = {};
+                            let helperVisited = {};
+                            if (ID1 === ID2) {
+                                path.nodes.push(ID1);
+                                return path;
+                            }
+                            else {
+                                let found = 0;
+                                let myqueue = new Queue();
+                                myqueue.enqueue(ID1);
+                                levelMap[ID1] = { parent: null, level: 0 };
+                                while (myqueue.size > 0) {
+                                    let current = myqueue.dequeue();
+                                    if (!visited[current]) {
+                                        visited[current] = true;
+                                        helperVisited[current] = true;
+                                        for (let i of this.adjacencyList[current]) {
+                                            if (!helperVisited[i.id]) {
+                                                myqueue.enqueue(i.id);
+                                                levelMap[i.id] = { parent: current, level: levelMap[current].level + 1 };
+                                                helperVisited[i.id] = true;
+                                            }
+                                            if (i.id === ID2) {
+                                                found = 1;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                                console.log(levelMap);
+                                if (found === 1) {
+                                    path.steps = levelMap[ID2].level;
+                                    let my = levelMap[ID2];
+                                    path.nodes.push(ID2);
+                                    while (my.parent != null) {
+                                        path.nodes.push(my.parent);
+                                        my = levelMap[my.parent];
+                                    }
+                                    path.nodes.reverse();
+                                    return path;
+                                }
+                                else {
+                                    return path;
+                                }
+                            }
+                        }
+                        else {
+                            return path;
+                        }
+                    }
+                }
+                else{
+                    throw new Error('Either of the ID passed do not match the type of the graph');
+                }
+            }
+            else{
+                throw new Error('Arguments not passed');
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
 }
 
 
 
 
 let my  = new UWUDGraph(1);
-my.addVertex(null,1);
-my.addVertex(null,2);
-my.addEdge(4,5);
+
 my.addEdge(1,2);
-my.addEdge(1,4);
-my.updateValue(4,'This is now should be shown');
-console.log(my.neighbours(1));
+my.addEdge(2,4);
+my.addEdge(1,3);
+my.addEdge(3,4);
+my.addEdge(3,5);
+my.addEdge(4,5);
+my.addEdge(4,6);
+console.log(my.shortestPath(1,4));
 console.log(my);
