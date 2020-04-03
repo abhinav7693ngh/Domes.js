@@ -4157,6 +4157,46 @@ class UWUDGraph{
         }
     }
 
+    getValue(ID){
+        try {
+            if (arguments.length > 0) {
+                const currentType = typeID[this.type];
+                if (currentType === typeof (ID)) {
+                    if (currentType === 'number') {
+                        if (isFinite(ID)) {
+                            if (this.adjacencyList.hasOwnProperty(ID)) {
+                                return this.allVertex[ID].value;
+                            }
+                            else {
+                                return undefined;
+                            }
+                        }
+                        else {
+                            throw new Error('ID passed is not Finite');
+                        }
+                    }
+                    else if (currentType === 'string') {
+                        if (this.adjacencyList.hasOwnProperty(ID)) {
+                            return this.allVertex[ID].value;
+                        }
+                        else {
+                            return undefined;
+                        }
+                    }
+                }
+                else {
+                    throw new Error('ID passed does not match the type of graph');
+                }
+            }
+            else {
+                throw new Error('Argument not passed');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
     removeEdge(ID1,ID2){
         try{
             if(arguments.length > 0){
@@ -4447,7 +4487,6 @@ class UWUDGraph{
                                             }
                                         }
                                     }
-                                    console.log(levelMap);
                                     if (found === 1) {
                                         path.steps = levelMap[ID2].level;
                                         let my = levelMap[ID2];
@@ -4508,7 +4547,6 @@ class UWUDGraph{
                                         }
                                     }
                                 }
-                                console.log(levelMap);
                                 if (found === 1) {
                                     path.steps = levelMap[ID2].level;
                                     let my = levelMap[ID2];
@@ -4557,4 +4595,6 @@ my.addEdge(3,5);
 my.addEdge(4,5);
 my.addEdge(4,6);
 console.log(my.shortestPath(1,4));
+console.log(my.updateValue(1,'Yup this is updated'));
+console.log(my.getValue(7));
 console.log(my);
