@@ -838,3 +838,472 @@ Now you can run the following methods on this object.
         * Boolean true if empty.
         * Boolean false if not empty.
 
+---
+
+# Graphs
+
+We have divided graphs into four categories :-
+
+* UWUD Graph (Unweighted Undirected Graph).
+* UWD Graph (Unweighted Directed Graph).
+* UWD Graph (Weighted Undirected Graph).
+* WD Graph (Weighted Directed Graph).
+
+We are storing two things in our Graph Node.
+
+* **Value** - This can be anything apart from undefined.
+* **ID** - This is what we are using to identify nodes uniquely. In graphs we are giving these IDs by ourself unlike Binary Search Tree in which these are automatically handled.
+
+***Important -*** **We can derive these ID as vertex of the graph.**
+
+We have two formats of storing these IDs
+
+1. Number
+2. String
+
+So while making any type of graph we have to specify the format of ID by passing a argument in the constructor of graph in order to configure i.e. 1 for ID in number format, 2 for ID in string format.
+
+
+### Unweighted Undirected Graph
+
+You can make Unweighted Undirected Graph object in following ways.
+
+```javascript
+    const my_UWUDGraph = new UWUDGraph(1);
+```
+```javascript
+    const my_UWUDGraph = new UWUDGraph(2);
+```
+
+> Parameter number can be derived as argument number. E.g. 1 means first argument, 2 means 2nd argument... etc.
+
+Now you can run the following methods on this object.
+
+
+* **addVertex()**
+    * **Parameter/s**
+        1. Value of the node.
+        1. ID of the node according to the type of graph.
+    * **Returns**
+        * Boolean true if successful.
+        * Boolean false if unsuccessful (means ID already exist).
+
+* **addEdge()**
+    * **Parameter/s**
+        1. ID of first node.
+        1. ID of second node.
+    * **Returns**
+        * Boolean true if successful.
+
+* **removeVertex()**
+    * **Parameter/s**
+        1. ID of the node.
+    * **Returns**
+        * Boolean true if successful.
+        * Boolean false if unsuccessful (means node does not exist).
+
+* **removeEdge()**
+    * **Parameter/s**
+        1. ID of first node.
+        1. ID of second node.
+    * **Returns**
+        * Boolean true if successful.
+        * Boolean false if unsuccessful (means edge does not exist).
+
+* **updateValue()**
+    * **Parameter/s**
+        1. ID of the node of which we want to update the value.
+        1. Updated Value.
+    * **Returns**
+        * Boolean true if successful.
+        * Boolean false if unsuccessful (means node with that ID does not exist).
+
+* **getValue()**
+    * **Parameter/s**
+        1. ID of the node.
+    * **Returns**
+        * Value associated with that node.
+        * undefined if node does not exist.
+
+* **BFS()**
+    * **Parameter/s**
+        1. ID of starting node.
+    * **Returns**
+        * An Array of objects with **value** and **id** property in BFS order. 
+
+* **DFS()**
+    * **Parameter/s**
+        1. ID of starting node.
+    * **Returns**
+        * An Array of objects with **value** and **id** property in DFS order.
+
+* **neighbours()**
+    * **Parameter/s**
+        1. ID of the node of which you want the neighbours.
+    * **Returns**
+        * An Array of objects with **value** and **id** property of all neighbouring nodes. 
+
+* **hasEdge()**
+    * **Parameter/s**
+        1. ID of first node.
+        1. ID of second node.
+    * **Returns**
+        * Boolean true if exist.
+        * Boolean false if does not exist.
+
+* **shortestPath()**
+    * **Parameter/s**
+        1. ID of start node.
+        1. ID of end node.
+    * **Returns**
+        * An Object with two properties.
+            * **steps** - Shows number of edges between start and end node.
+            * **nodes** - This is an array which contains all nodes in that path from start to end node both inclusive.
+
+* **noOfNodes()**
+    * **Parameter/s** - None.
+    * **Returns**
+        * Number of nodes present in the graph.
+
+
+
+### Unweighted Directed Graph
+
+You can make Unweighted Undirected Graph object in following ways.
+
+```javascript
+    const my_UWDGraph = new UWDGraph(1);
+```
+```javascript
+    const my_UWDGraph = new UWDGraph(2);
+```
+
+> Parameter number can be derived as argument number. E.g. 1 means first argument, 2 means 2nd argument... etc.
+
+Now you can run the following methods on this object.
+
+
+* **addVertex()**
+    * **Parameter/s**
+        1. Value of the node.
+        1. ID of the node according to the type of graph.
+    * **Returns**
+        * Boolean true if successful.
+        * Boolean false if unsuccessful (means ID already exist).
+
+* **addEdge()** - **Edge will be directed from first node to second node.**
+    * **Parameter/s**
+        1. ID of first node.
+        1. ID of second node.
+    * **Returns**
+        * Boolean true if successful.
+
+* **removeVertex()**
+    * **Parameter/s**
+        1. ID of the node.
+    * **Returns**
+        * Boolean true if successful.
+        * Boolean false if unsuccessful (means node does not exist).
+
+* **removeEdge()** - **Edge is directed from first node to second node.**
+    * **Parameter/s**
+        1. ID of first node.
+        1. ID of second node.
+    * **Returns**
+        * Boolean true if successful.
+        * Boolean false if unsuccessful (means edge does not exist).
+
+* **updateValue()**
+    * **Parameter/s**
+        1. ID of the node of which we want to update the value.
+        1. Updated Value.
+    * **Returns**
+        * Boolean true if successful.
+        * Boolean false if unsuccessful (means node with that ID does not exist).
+
+* **getValue()**
+    * **Parameter/s**
+        1. ID of the node.
+    * **Returns**
+        * Value associated with that node.
+        * undefined if node does not exist.
+
+* **BFS()**
+    * **Parameter/s**
+        1. ID of starting node.
+    * **Returns**
+        * An Array of objects with **value** and **id** property in BFS order. 
+
+* **DFS()**
+    * **Parameter/s**
+        1. ID of starting node.
+    * **Returns**
+        * An Array of objects with **value** and **id** property in DFS order.
+
+* **neighbours()**
+    * **Parameter/s**
+        1. ID of the node of which you want the neighbours.
+    * **Returns**
+        * An Array of objects with **value** and **id** property of all neighbouring nodes. 
+
+* **hasEdge()** - **Edge is directed from first node to second node.**
+    * **Parameter/s**
+        1. ID of first node.
+        1. ID of second node.
+    * **Returns**
+        * Boolean true if exist.
+        * Boolean false if does not exist.
+
+* **shortestPath()**
+    * **Parameter/s**
+        1. ID of start node.
+        1. ID of end node.
+    * **Returns**
+        * An Object with two properties.
+            * **steps** - Shows number of edges between start and end node.
+            * **nodes** - This is an array which contains all nodes in that path from start to end node both inclusive.
+
+* **noOfNodes()**
+    * **Parameter/s** - None.
+    * **Returns**
+        * Number of nodes present in the graph.
+
+
+### Weighted Undirected Graph
+
+You can make Unweighted Undirected Graph object in following ways.
+
+```javascript
+    const my_WUDGraph = new WUDGraph(1);
+```
+```javascript
+    const my_WUDGraph = new WUDGraph(2);
+```
+
+> Parameter number can be derived as argument number. E.g. 1 means first argument, 2 means 2nd argument... etc.
+
+Now you can run the following methods on this object.
+
+
+* **addVertex()**
+    * **Parameter/s**
+        1. Value of the node.
+        1. ID of the node according to the type of graph.
+    * **Returns**
+        * Boolean true if successful.
+        * Boolean false if unsuccessful (means ID already exist).
+
+* **addEdge()**
+    * **Parameter/s**
+        1. ID of first node.
+        1. ID of second node.
+        1. weight in number format **(Should be greater than or equal to 0 and finite).**
+    * **Returns**
+        * Boolean true if successful.
+
+* **removeVertex()**
+    * **Parameter/s**
+        1. ID of the node.
+    * **Returns**
+        * Boolean true if successful.
+        * Boolean false if unsuccessful (means node does not exist).
+
+* **removeEdge()**
+    * **Parameter/s**
+        1. ID of first node.
+        1. ID of second node.
+    * **Returns**
+        * Boolean true if successful.
+        * Boolean false if unsuccessful (means edge does not exist).
+
+* **updateValue()**
+    * **Parameter/s**
+        1. ID of the node of which we want to update the value.
+        1. Updated Value.
+    * **Returns**
+        * Boolean true if successful.
+        * Boolean false if unsuccessful (means node with that ID does not exist).
+
+* **getValue()**
+    * **Parameter/s**
+        1. ID of the node.
+    * **Returns**
+        * Value associated with that node.
+        * undefined if node does not exist.
+
+* **BFS()**
+    * **Parameter/s**
+        1. ID of starting node.
+    * **Returns**
+        * An Array of objects with **value** and **id** property in BFS order. 
+
+* **DFS()**
+    * **Parameter/s**
+        1. ID of starting node.
+    * **Returns**
+        * An Array of objects with **value** and **id** property in DFS order.
+
+* **neighbours()**
+    * **Parameter/s**
+        1. ID of the node of which you want the neighbours.
+    * **Returns**
+        * An Array of objects with **value**,**id** and **weight** property of all neighbouring nodes. Weight shows the weight of edge between them.
+
+* **hasEdge()**
+    * **Parameter/s**
+        1. ID of first node.
+        1. ID of second node.
+    * **Returns**
+        * Boolean true if exist.
+        * Boolean false if does not exist.
+
+* **getWeight()**
+    * **Parameter/s**
+        1. ID of first node.
+        1. ID of second node.
+    * **Returns**
+        * Weight between first node and second node.
+        * undefined if edge does not exist.
+
+* **updateWeight()**
+    * **Parameter/s**
+        1. ID of first node.
+        1. ID of second node.
+        1. Updated Weight.
+    * **Returns**
+        * Boolean true if successful.
+        * Boolean false if unsuccessful (Edge not found).
+
+* **shortestPath()** - **Uses Dijkstra Algorithm**
+    * **Parameter/s**
+        1. ID of start node.
+        1. ID of end node.
+    * **Returns**
+        * An Object with two properties.
+            * **distance** - Shows overall distance i.e. sum of all weight of edges in path between start and end node.
+            * **nodes** - This is an array which contains ID of all nodes in that path from start to end node both inclusive.
+
+* **noOfNodes()**
+    * **Parameter/s** - None.
+    * **Returns**
+        * Number of nodes present in the graph.
+
+
+### Weighted Directed Graph
+
+You can make Unweighted Undirected Graph object in following ways.
+
+```javascript
+    const my_WDGraph = new WDGraph(1);
+```
+```javascript
+    const my_WDGraph = new WDGraph(2);
+```
+
+> Parameter number can be derived as argument number. E.g. 1 means first argument, 2 means 2nd argument... etc.
+
+Now you can run the following methods on this object.
+
+
+* **addVertex()**
+    * **Parameter/s**
+        1. Value of the node.
+        1. ID of the node according to the type of graph.
+    * **Returns**
+        * Boolean true if successful.
+        * Boolean false if unsuccessful (means ID already exist).
+
+* **addEdge()** - **Edge will be directed from first node to second node.**
+    * **Parameter/s**
+        1. ID of first node.
+        1. ID of second node.
+        1. weight in number format **(Should be greater than or equal to 0 and finite).**
+    * **Returns**
+        * Boolean true if successful.
+
+* **removeVertex()**
+    * **Parameter/s**
+        1. ID of the node.
+    * **Returns**
+        * Boolean true if successful.
+        * Boolean false if unsuccessful (means node does not exist).
+
+* **removeEdge()** - **Edge is directed from first node to second node.**
+    * **Parameter/s**
+        1. ID of first node.
+        1. ID of second node.
+    * **Returns**
+        * Boolean true if successful.
+        * Boolean false if unsuccessful (means edge does not exist).
+
+* **updateValue()**
+    * **Parameter/s**
+        1. ID of the node of which we want to update the value.
+        1. Updated Value.
+    * **Returns**
+        * Boolean true if successful.
+        * Boolean false if unsuccessful (means node with that ID does not exist).
+
+* **getValue()**
+    * **Parameter/s**
+        1. ID of the node.
+    * **Returns**
+        * Value associated with that node.
+        * undefined if node does not exist.
+
+* **BFS()**
+    * **Parameter/s**
+        1. ID of starting node.
+    * **Returns**
+        * An Array of objects with **value** and **id** property in BFS order. 
+
+* **DFS()**
+    * **Parameter/s**
+        1. ID of starting node.
+    * **Returns**
+        * An Array of objects with **value** and **id** property in DFS order.
+
+* **neighbours()**
+    * **Parameter/s**
+        1. ID of the node of which you want the neighbours.
+    * **Returns**
+        * An Array of objects with **value**,**id** and **weight** property of all neighbouring nodes. Weight shows the weight of edge between them.
+
+* **hasEdge()** - **Edge is directed from first node to second node.**
+    * **Parameter/s**
+        1. ID of first node.
+        1. ID of second node.
+    * **Returns**
+        * Boolean true if exist.
+        * Boolean false if does not exist.
+
+* **getWeight()**
+    * **Parameter/s**
+        1. ID of first node.
+        1. ID of second node.
+    * **Returns**
+        * Weight between first node and second node.
+        * undefined if edge does not exist.
+
+* **updateWeight()**
+    * **Parameter/s**
+        1. ID of first node.
+        1. ID of second node.
+        1. Updated Weight.
+    * **Returns**
+        * Boolean true if successful.
+        * Boolean false if unsuccessful (Edge not found).
+
+* **shortestPath()** - **Uses Dijkstra Algorithm**
+    * **Parameter/s**
+        1. ID of start node.
+        1. ID of end node.
+    * **Returns**
+        * An Object with two properties.
+            * **distance** - Shows overall distance i.e. sum of all weight of edges in path between start and end node.
+            * **nodes** - This is an array which contains ID of all nodes in that path from start to end node both inclusive.
+
+* **noOfNodes()**
+    * **Parameter/s** - None.
+    * **Returns**
+        * Number of nodes present in the graph.
