@@ -4,14 +4,14 @@
 ## Introduction
 ---
 
-If you want to give your boost to your javascript code or afraid of implementing complex data structures then this is the perfect library for you to use. Domes has implementations of many useful extended data sttuctures, which if smartly which if smartly used can give javascript code an edge in terms of performance and time complexity. We have implemented the methods of these data structures in order to reduce the time complexity to the best possible. So rest assured and use efficiently to get best results out of it.
+If you want to give boost to your javascript code or always afraid of implementing complex data structures then this is the perfect library for you to use. Domes has implementations of many useful extended data structures like Singly Linked List, Doubly Liked List, Stacks, Queues, Binary Search Trees and many more which if smartly used can give your javascript code an edge in terms of performance and time complexity. We have also implemented many possible methods for these data structures that might be helpful in doing your daily tasks. So rest assured and use efficiently to get best results out of it.
 
 Currently we have implementations of below data structures which you can use.
 * Singly Linked List
 * Doubly Linked List
-* Stacks
-* Queues
-* Binary Search Trees
+* Stack
+* Queue
+* Binary Search Tree
 * Binary Heaps
     * Max Binary Heap
     * Min Binary Heap
@@ -25,10 +25,9 @@ Currently we have implementations of below data structures which you can use.
     * Weighted Directed Graph (WD)
 
 
-These data structures are implemented as classes, so you just have to import the desired class and start using by normally making an object of that class.
+We have implemented these data structures as classes.
 
-
-*IF Built in methods don't suffice the needs you are free to dive in and create your own extended methods for these classes.*
+*IF Built in methods don't suffice the needs then you are free to dive in and create your own extended methods for these classes.*
 
 *Suggestions are always welcomed for improvements.*
 
