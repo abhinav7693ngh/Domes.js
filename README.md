@@ -36,7 +36,7 @@ We have implemented these data structures as classes.
 
 You can install this normally using npm command
 ```
-npm install domes.js
+npm install --save domes.js
 ```
 ---
 ## How to use
