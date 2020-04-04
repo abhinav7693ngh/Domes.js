@@ -7194,11 +7194,27 @@ class WDGraph{
 // ======================================================== //
 
 
-let my = new Queue();
+// ====================== Exports ========================= //
 
-my.enqueue(10);
-my.enqueue(20);
-my.enqueue(30);
-my.enqueue(40);
 
-console.log(my.toArray());
+
+module.exports = {
+    SinglyLinkedList : SinglyLinkedList,
+    DoublyLinkedList : DoublyLinkedList,
+    Stack : Stack,
+    Queue : Queue,
+    BinarySearchTree : BinarySearchTree,
+    MaxBinaryHeap : MaxBinaryHeap,
+    MinBinaryHeap : MinBinaryHeap,
+    MaxPriorityQueue : MaxPriorityQueue,
+    MinPriorityQueue : MinPriorityQueue,
+    UWUDGraph : UWUDGraph,
+    WUDGraph : WUDGraph,
+    UWDGraph : UWDGraph,
+    WDGraph : WDGraph
+}
+
+
+
+
+// ======================================================== //
