@@ -6719,6 +6719,471 @@ class WDGraph{
         }
     }
 
+    BFS(ID) {
+        try {
+            if (arguments.length > 0) {
+                const currentType = typeID[this.type];
+                if (currentType === typeof (ID)) {
+                    if (currentType === 'number') {
+                        if (isFinite(ID)) {
+                            let myans = [];
+                            if (this.allVertex.hasOwnProperty(ID)) {
+                                let myqueue = new Queue();
+                                let visited = {};
+                                myqueue.enqueue(ID);
+                                WeightedGraphBFSHelper.call(this, myans, myqueue, visited);
+                                return myans;
+                            }
+                            else {
+                                return myans;
+                            }
+                        }
+                        else {
+                            throw new Error('ID passed is not finite');
+                        }
+                    }
+                    else if (currentType === 'string') {
+                        let myans = [];
+                        if (this.allVertex.hasOwnProperty(ID)) {
+                            let myqueue = new Queue();
+                            let visited = {};
+                            myqueue.enqueue(ID);
+                            WeightedGraphBFSHelper.call(this, myans, myqueue, visited);
+                            return myans;
+                        }
+                        else {
+                            return myans;
+                        }
+                    }
+                }
+                else {
+                    throw new Error('ID passed does not match the type of graph');
+                }
+            }
+            else {
+                throw new Error('Argument not passed');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    DFS(ID) {
+        try {
+            if (arguments.length > 0) {
+                const currentType = typeID[this.type];
+                if (currentType === typeof (ID)) {
+                    if (currentType === 'number') {
+                        if (isFinite(ID)) {
+                            let myans = [];
+                            if (this.allVertex.hasOwnProperty(ID)) {
+                                let visited = {};
+                                let mystack = new Stack();
+                                mystack.push(ID);
+                                WeightedGraphDFSHelper.call(this, myans, mystack, visited);
+                                return myans;
+                            }
+                            else {
+                                return myans;
+                            }
+                        }
+                        else {
+                            throw new Error('ID passed is not finite');
+                        }
+                    }
+                    else if (currentType === 'string') {
+                        let myans = [];
+                        if (this.allVertex.hasOwnProperty(ID)) {
+                            let visited = {};
+                            let mystack = new Stack();
+                            mystack.push(ID);
+                            WeightedGraphDFSHelper.call(this, myans, mystack, visited);
+                            return myans;
+                        }
+                        else {
+                            return myans;
+                        }
+                    }
+                }
+                else {
+                    throw new Error('ID passed does not match the type of graph');
+                }
+            }
+            else {
+                throw new Error('Argument not passed');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    neighbours(ID) {
+        try {
+            if (arguments.length > 0) {
+                const currentType = typeID[this.type];
+                if (currentType === typeof (ID)) {
+                    if (currentType === 'number') {
+                        if (isFinite(ID)) {
+                            let myans = [];
+                            if (this.allVertex.hasOwnProperty(ID)) {
+                                for (let i of this.adjacencyList[ID]) {
+                                    myans.push({ value: i.node.value, id: i.node.id, weight: i.weight });
+                                }
+                                return myans;
+                            }
+                            else {
+                                return myans;
+                            }
+                        }
+                        else {
+                            throw new Error('ID passed is not finite');
+                        }
+                    }
+                    else if (currentType === 'string') {
+                        let myans = [];
+                        if (this.allVertex.hasOwnProperty(ID)) {
+                            for (let i of this.adjacencyList[ID]) {
+                                myans.push({ value: i.node.value, id: i.node.id, weight: i.weight });
+                            }
+                            return myans;
+                        }
+                        else {
+                            return myans;
+                        }
+                    }
+                }
+                else {
+                    throw new Error('ID passed does not match the type of graph');
+                }
+            }
+            else {
+                throw new Error('Argument not passed');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    hasEdge(ID1, ID2) {
+        try {
+            if (arguments.length > 0) {
+                const currentType = typeID[this.type];
+                if (typeof (ID1) === currentType && typeof (ID2) === currentType) {
+                    if (currentType === 'number') {
+                        if (isFinite(ID1) && isFinite(ID2)) {
+                            if (this.adjacencyList.hasOwnProperty(ID1)) {
+                                let found = this.adjacencyList[ID1].findIndex(ele => ele.node.id === ID2);
+                                if (found === -1) {
+                                    return false;
+                                }
+                                else {
+                                    return true;
+                                }
+                            }
+                            else {
+                                return false;
+                            }
+                        }
+                        else {
+                            throw new Error('Either of the ID passed are not finite');
+                        }
+                    }
+                    else if (currentType === 'string') {
+                        if (this.adjacencyList.hasOwnProperty(ID1)) {
+                            let found = this.adjacencyList[ID1].findIndex(ele => ele.node.id === ID2);
+                            if (found === -1) {
+                                return false;
+                            }
+                            else {
+                                return true;
+                            }
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                }
+                else {
+                    throw new Error('Either of the ID does not match the type of graph');
+                }
+            }
+            else {
+                throw new Error('Arguments not passed');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    updateWeight(ID1, ID2, updatedWeight) {
+        try {
+            if (arguments.length > 0) {
+                const currentType = typeID[this.type];
+                if (typeof (ID1) === currentType && typeof (ID2) === currentType) {
+                    if (currentType === 'number') {
+                        if (isFinite(ID1) && isFinite(ID2)) {
+                            if (updatedWeight >= 0 && typeof (updatedWeight) === 'number' && isFinite(updatedWeight)) {
+                                if (this.adjacencyList.hasOwnProperty(ID1)) {
+                                    let toFind1 = this.adjacencyList[ID1].find(ele => ele.node.id === ID2);
+                                    if (toFind1) {
+                                        toFind1.weight = updatedWeight;
+                                        return true;
+                                    }
+                                    else {
+                                        return false;
+                                    }
+                                }
+                                else {
+                                    return false;
+                                }
+                            }
+                            else {
+                                throw new Error('Weight should be of number format and should be greater than or equal to 0 and finite');
+                            }
+                        }
+                        else {
+                            throw new Error('Either of the ID passed is not finite');
+                        }
+                    }
+                    else if (currentType === 'string') {
+                        if (updatedWeight >= 0 && typeof (updatedWeight) === 'number' && isFinite(updatedWeight)) {
+                            if (this.adjacencyList.hasOwnProperty(ID1)) {
+                                let toFind1 = this.adjacencyList[ID1].find(ele => ele.node.id === ID2);
+                                if (toFind1) {
+                                    toFind1.weight = updatedWeight;
+                                    return true;
+                                }
+                                else {
+                                    return false;
+                                }
+                            }
+                            else {
+                                return false;
+                            }
+                        }
+                        else {
+                            throw new Error('Weight should be of number format and should be greater than or equal to 0 and finite');
+                        }
+                    }
+                }
+                else {
+                    throw new Error('Either of the ID passed do not match the type of graph');
+                }
+            }
+            else {
+                throw new Error('Arguments not passed');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    getWeight(ID1, ID2) {
+        try {
+            if (arguments.length > 0) {
+                const currentType = typeID[this.type];
+                if (typeof (ID1) === currentType && typeof (ID2) === currentType) {
+                    if (currentType === 'number') {
+                        if (isFinite(ID1) && isFinite(ID2)) {
+                            if (this.adjacencyList.hasOwnProperty(ID1)) {
+                                let tofind1 = this.adjacencyList[ID1].find(ele => ele.node.id === ID2);
+                                if (tofind1) {
+                                    return tofind1.weight;
+                                }
+                                else {
+                                    return undefined;
+                                }
+                            }
+                            else {
+                                return undefined;
+                            }
+                        }
+                        else {
+                            throw new Error('Either of the ID passed is not finite');
+                        }
+                    }
+                    else if (currentType === 'string') {
+                        if (this.adjacencyList.hasOwnProperty(ID1)) {
+                            let tofind1 = this.adjacencyList[ID1].find(ele => ele.node.id === ID2);
+                            if (tofind1) {
+                                return tofind1.weight;
+                            }
+                            else {
+                                return undefined;
+                            }
+                        }
+                        else {
+                            return undefined;
+                        }
+                    }
+                }
+                else {
+                    throw new Error('Either of the ID passed do not match the type of graph');
+                }
+            }
+            else {
+                throw new Error('Arguments not passed');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    shortestPath(ID1, ID2) {
+        try {
+            if (arguments.length > 0) {
+                const currentType = typeID[this.type];
+                if (typeof (ID1) === currentType && typeof (ID2) === currentType) {
+                    if (currentType === 'number') {
+                        if (isFinite(ID1) && isFinite(ID2)) {
+                            let path = {
+                                distance: 0,
+                                nodes: []
+                            };
+                            if (this.allVertex.hasOwnProperty(ID1) && this.allVertex.hasOwnProperty(ID2)) {
+                                let optimumDistance = 0;
+                                let visited = {};
+                                let previous = {};
+                                let myDistanceQueue = new MinGraphPriorityQueue();
+                                for (let i in this.adjacencyList) {
+                                    if (i == ID1) {
+                                        myDistanceQueue.enqueue(i, 0);
+                                    }
+                                    else {
+                                        myDistanceQueue.enqueue(i, Infinity);
+                                    }
+                                }
+                                for (let i in this.adjacencyList) {
+                                    previous[i] = null;
+                                }
+                                let visiting = myDistanceQueue.values[0];
+                                let updatedDistance;
+                                while (myDistanceQueue.size() > 0) {
+                                    for (let j of this.adjacencyList[visiting.value]) {
+                                        if (!visited[j.node.id]) {
+                                            updatedDistance = visiting.priority + j.weight;
+                                            let myDistanceNode = myDistanceQueue.values.find(ele => parseInt(ele.value) === parseInt(j.node.id));
+                                            if(updatedDistance === Infinity){
+                                                break;
+                                            }
+                                            if (updatedDistance < myDistanceNode.priority) {
+                                                myDistanceNode.priority = updatedDistance;
+                                                previous[j.node.id] = visiting.value;
+                                            }
+                                        }
+                                    }
+                                    visited[visiting.value] = true;
+                                    myDistanceQueue.dequeue();
+                                    visiting = myDistanceQueue.values[0];
+                                }
+                                if (updatedDistance !== Infinity) {
+                                    path.nodes.push(ID2);
+                                }
+                                while (previous[ID2]) {
+                                    path.nodes.push(parseInt(previous[ID2]));
+                                    ID2 = previous[ID2];
+                                }
+                                path.nodes = path.nodes.reverse();
+                                for (let i in path.nodes) {
+                                    if (parseInt(i) + 1 === path.nodes.length) {
+                                        break;
+                                    }
+                                    let myWeight = this.adjacencyList[path.nodes[i]].find(ele => ele.node.id === path.nodes[parseInt(i) + 1]);
+                                    optimumDistance = optimumDistance + myWeight.weight;
+                                }
+                                path.distance = optimumDistance;
+                                return path;
+                            }
+                            else {
+                                return path;
+                            }
+                        }
+                        else {
+                            throw new Error('Either of the ID passed is not finite');
+                        }
+                    }
+                    else if (currentType === 'string') {
+                        let path = {
+                            distance: 0,
+                            nodes: []
+                        };
+                        if (this.allVertex.hasOwnProperty(ID1) && this.allVertex.hasOwnProperty(ID2)) {
+                            let optimumDistance = 0;
+                            let visited = {};
+                            let previous = {};
+                            let myDistanceQueue = new MinGraphPriorityQueue();
+                            for (let i in this.adjacencyList) {
+                                if (i == ID1) {
+                                    myDistanceQueue.enqueue(i, 0);
+                                }
+                                else {
+                                    myDistanceQueue.enqueue(i, Infinity);
+                                }
+                            }
+                            for (let i in this.adjacencyList) {
+                                previous[i] = null;
+                            }
+                            let visiting = myDistanceQueue.values[0];
+                            let updatedDistance;
+                            while (myDistanceQueue.size() > 0) {
+                                for (let j of this.adjacencyList[visiting.value]) {
+                                    if (!visited[j.node.id]) {
+                                        updatedDistance = visiting.priority + j.weight;
+                                        let myDistanceNode = myDistanceQueue.values.find(ele => String(ele.value) === String(j.node.id));
+                                        if (updatedDistance === Infinity) {
+                                            break;
+                                        }
+                                        if (updatedDistance < myDistanceNode.priority) {
+                                            myDistanceNode.priority = updatedDistance;
+                                            previous[j.node.id] = visiting.value;
+                                        }
+                                    }
+                                }
+                                visited[visiting.value] = true;
+                                myDistanceQueue.dequeue();
+                                visiting = myDistanceQueue.values[0];
+                            }
+                            if(updatedDistance !== Infinity){
+                                path.nodes.push(ID2);
+                            }
+                            while (previous[ID2]) {
+                                path.nodes.push(previous[ID2]);
+                                ID2 = previous[ID2];
+                            }
+                            path.nodes = path.nodes.reverse();
+                            for (let i in path.nodes) {
+                                if (parseInt(i) + 1 === path.nodes.length) {
+                                    break;
+                                }
+                                let myWeight = this.adjacencyList[path.nodes[i]].find(ele => ele.node.id === path.nodes[parseInt(i) + 1]);
+                                optimumDistance = optimumDistance + myWeight.weight;
+                            }
+                            path.distance = optimumDistance;
+                            return path;
+                        }
+                        else {
+                            return path;
+                        }
+                    }
+                }
+                else {
+                    throw new Error('Either of the ID passed do not match the type of graph');
+                }
+            }
+            else {
+                throw new Error('Arguments not passed');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
 }
 
 
@@ -6746,11 +7211,7 @@ my.addEdge(0,2,3);
 my.addEdge(3,2,6);
 my.addEdge(3,0,2);
 
-my.updateValue(0,'updated value');
-console.log(my.removeVertex(4));
-
-// console.log(my.removeEdge(0,1));
-// console.log(my.removeEdge(3,0));
+// console.log(my.shortestPath(3,));
 
 
 
