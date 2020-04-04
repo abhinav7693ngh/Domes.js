@@ -43,7 +43,7 @@ npm install domes.js
 
 ## Singly Linked List
 
-You can simply create an object.
+You can simply create a Singly Linked List object.
 
 ```javascript
     const my_Singly_Linked_List = new SinglyLinkedList();
@@ -188,7 +188,7 @@ Now you can run the following methods on this object.
 
 ## Doubly Linked List
 
-You can simply create an object.
+You can simply create a Doubly Linked List object.
 
 ```javascript
     const my_Doubly_Linked_List = new DoublyLinkedList();
@@ -335,7 +335,7 @@ Now you can run the following methods on this object.
 
 ## Stacks
 
-You can simply create an object.
+You can simply create a Stack object.
 
 ```javascript
     const my_Stack = new Stack();
@@ -386,10 +386,10 @@ Now you can run the following methods on this object.
 
 ## Queues
 
-You can simply create an object.
+You can simply create a Queue object.
 
 ```javascript
-    const my_Stack = new Queue();
+    const my_Queue = new Queue();
 ```
 
 > *Keep in mind - All values are accepted apart from Undefined and null.*
