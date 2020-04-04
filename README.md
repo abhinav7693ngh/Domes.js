@@ -444,9 +444,12 @@ Now you can run the following methods on this object.
 As Binary Search Tree work on the fundamental of values greater or less than a value in terms of storing data, So in our implementation currently you can store data either in number or string format as of now and there are 2 comparsion methods also. So when making a Binary Search Tree object you have to pass the configuration in the constructor.
 
 **Available types of data that can be stored.**
+
     1. Number
     2. String
+
 **Comparison methods.**
+
     1. Normal Comparion (>,<)
         1. In Number config it simply compares whether the number is greater or small.
         2. In String config it compares according to the ASCII value.
@@ -608,9 +611,12 @@ As Binary Heaps work on the fundamental of values greater or less than a value i
 > We have implemented Array implementation of Binary Heaps.
 
 **Available types of data that can be stored.**
+
     1. Number
     2. String
+
 **Comparison methods.**
+
     1. Normal Comparion (>,<)
         1. In Number config it simply compares whether the number is greater or small.
         2. In String config it compares according to the ASCII value.
