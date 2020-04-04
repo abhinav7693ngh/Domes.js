@@ -56,7 +56,7 @@ You can simply create a Singly Linked List object.
 
 > *Keep in mind - All values are accepted apart from Undefined and null.*
 
-> Parameter number can be derived as argument number. E.g. 1 means first argument, 2 means 2nd argument... etc.
+> Parameter number can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
 > SLL - Singly Linked List.
 
@@ -201,7 +201,7 @@ You can simply create a Doubly Linked List object.
 
 > *Keep in mind - All values are accepted apart from Undefined and null.*
 
-> Parameter number can be derived as argument number. E.g. 1 means first argument, 2 means 2nd argument... etc.
+> Parameter number can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
 > DLL - Doubly Linked List.
 
@@ -348,7 +348,7 @@ You can simply create a Stack object.
 
 > *Keep in mind - All values are accepted apart from Undefined and null.*
 
-> Parameter number can be derived as argument number. E.g. 1 means first argument, 2 means 2nd argument... etc.
+> Parameter number can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
 Now you can run the following methods on this object.
 
@@ -399,7 +399,7 @@ You can simply create a Queue object.
 
 > *Keep in mind - All values are accepted apart from Undefined and null.*
 
-> Parameter number can be derived as argument number. E.g. 1 means first argument, 2 means 2nd argument... etc.
+> Parameter number can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
 Now you can run the following methods on this object.
 
@@ -443,10 +443,10 @@ Now you can run the following methods on this object.
 
 As Binary Search Tree work on the fundamental of values greater or less than a value in terms of storing data, So in our implementation currently you can store data either in number or string format as of now and there are 2 comparsion methods also. So when making a Binary Search Tree object you have to pass the configuration in the constructor.
 
-* **Available types of data that can be stored.**
+**Available types of data that can be stored.**
     1. Number
     2. String
-* **Comparison methods.**
+**Comparison methods.**
     1. Normal Comparion (>,<)
         1. In Number config it simply compares whether the number is greater or small.
         2. In String config it compares according to the ASCII value.
@@ -483,7 +483,7 @@ In addition we are using the concept of ID in these as values can be more than 1
 
 > *Keep in mind - Values are accepted as per the configuration.*
 
-> Parameter number can be derived as argument number. E.g. 1 means first argument, 2 means 2nd argument... etc.
+> Parameter number can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
 > BST - Binary Search Tree.
 
@@ -607,10 +607,10 @@ As Binary Heaps work on the fundamental of values greater or less than a value i
 
 > We have implemented Array implementation of Binary Heaps.
 
-* **Available types of data that can be stored.**
+**Available types of data that can be stored.**
     1. Number
     2. String
-* **Comparison methods.**
+**Comparison methods.**
     1. Normal Comparion (>,<)
         1. In Number config it simply compares whether the number is greater or small.
         2. In String config it compares according to the ASCII value.
@@ -640,7 +640,7 @@ You can make Max Binary Heap object in following ways.
 
 > *Keep in mind - Values are accepted as per the configuration.*
 
-> Parameter number can be derived as argument number. E.g. 1 means first argument, 2 means 2nd argument... etc.
+> Parameter number can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
 Now you can run the following methods on this object.
 
@@ -687,7 +687,7 @@ You can make Max Binary Heap object in following ways.
 
 > *Keep in mind - Values are accepted as per the configuration.*
 
-> Parameter number can be derived as argument number. E.g. 1 means first argument, 2 means 2nd argument... etc.
+> Parameter number can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
 Now you can run the following methods on this object.
 
@@ -738,7 +738,7 @@ You can make Max Priority Queue object as follows.
     const my_Max_Priority_Queue = new MaxPriorityQueue();
 ```
 
-> Parameter number can be derived as argument number. E.g. 1 means first argument, 2 means 2nd argument... etc.
+> Parameter number can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
 Now you can run the following methods on this object.
 
@@ -792,7 +792,7 @@ You can make Min Priority Queue object as follows.
     const my_Min_Priority_Queue = new MinPriorityQueue();
 ```
 
-> Parameter number can be derived as argument number. E.g. 1 means first argument, 2 means 2nd argument... etc.
+> Parameter number can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
 Now you can run the following methods on this object.
 
@@ -875,7 +875,7 @@ You can make Unweighted Undirected Graph object in following ways.
     const my_UWUDGraph = new UWUDGraph(2);
 ```
 
-> Parameter number can be derived as argument number. E.g. 1 means first argument, 2 means 2nd argument... etc.
+> Parameter number can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
 Now you can run the following methods on this object.
 
@@ -978,7 +978,7 @@ You can make Unweighted Undirected Graph object in following ways.
     const my_UWDGraph = new UWDGraph(2);
 ```
 
-> Parameter number can be derived as argument number. E.g. 1 means first argument, 2 means 2nd argument... etc.
+> Parameter number can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
 Now you can run the following methods on this object.
 
@@ -1080,7 +1080,7 @@ You can make Unweighted Undirected Graph object in following ways.
     const my_WUDGraph = new WUDGraph(2);
 ```
 
-> Parameter number can be derived as argument number. E.g. 1 means first argument, 2 means 2nd argument... etc.
+> Parameter number can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
 Now you can run the following methods on this object.
 
@@ -1200,7 +1200,7 @@ You can make Unweighted Undirected Graph object in following ways.
     const my_WDGraph = new WDGraph(2);
 ```
 
-> Parameter number can be derived as argument number. E.g. 1 means first argument, 2 means 2nd argument... etc.
+> Parameter number can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
 Now you can run the following methods on this object.
 
