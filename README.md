@@ -2,7 +2,6 @@
 ---
 
 ## Introduction
----
 
 If you want to give boost to your javascript code or always afraid of implementing complex data structures then this is the perfect library for you to use. Domes has implementations of many useful extended data structures like Singly Linked List, Doubly Liked List, Stacks, Queues, Binary Search Trees and many more which if smartly used can give your javascript code an edge in terms of performance and time complexity. We have also implemented many possible methods for these data structures that might be helpful in doing your daily tasks. So rest assured and use efficiently to get best results out of it.
 
