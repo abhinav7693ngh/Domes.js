@@ -466,13 +466,13 @@ As Binary Search Tree work on the fundamental of values greater or less than a v
 Now you can make different types of Binary Search Trees as follows.
 
 *   ```javascript
-    const my_Binary_Search_Tree = new BinarySearchTree(1,1);
+    const my_Binary_Search_Tree = new domes.BinarySearchTree(1,1);
     ```
 *   ```javascript
-    const my_Binary_Search_Tree = new BinarySearchTree(2,1);
+    const my_Binary_Search_Tree = new domes.BinarySearchTree(2,1);
     ```
 *   ```javascript
-    const my_Binary_Search_Tree = new BinarySearchTree(2,2);
+    const my_Binary_Search_Tree = new domes.BinarySearchTree(2,2);
     ```
 
 In addition we are using the concept of ID in these as values can be more than 1 so to really specify which node we are targeting we have to specify its ID.
@@ -635,13 +635,13 @@ As Binary Heaps work on the fundamental of values greater or less than a value i
 You can make Max Binary Heap object in following ways.
 
 *   ```javascript
-    const my_Max_Binary_Heap = new MaxBinaryHeap(1,1);
+    const my_Max_Binary_Heap = new domes.MaxBinaryHeap(1,1);
     ```
 *   ```javascript
-    const my_Max_Binary_Heap = new MaxBinaryHeap(2,1);
+    const my_Max_Binary_Heap = new domes.MaxBinaryHeap(2,1);
     ```
 *   ```javascript
-    const my_Max_Binary_Heap = new MaxBinaryHeap(2,2);
+    const my_Max_Binary_Heap = new domes.MaxBinaryHeap(2,2);
     ```
 
 > *Keep in mind - Values are accepted as per the configuration.*
@@ -682,13 +682,13 @@ Now you can run the following methods on this object.
 You can make Max Binary Heap object in following ways.
 
 *   ```javascript
-    const my_Min_Binary_Heap = new MinBinaryHeap(1,1);
+    const my_Min_Binary_Heap = new domes.MinBinaryHeap(1,1);
     ```
 *   ```javascript
-    const my_Min_Binary_Heap = new MinBinaryHeap(2,1);
+    const my_Min_Binary_Heap = new domes.MinBinaryHeap(2,1);
     ```
 *   ```javascript
-    const my_Min_Binary_Heap = new MinBinaryHeap(2,2);
+    const my_Min_Binary_Heap = new domes.MinBinaryHeap(2,2);
     ```
 
 > *Keep in mind - Values are accepted as per the configuration.*
@@ -741,7 +741,7 @@ Now you can run the following methods on this object.
 You can make Max Priority Queue object as follows.
 
 ```javascript
-    const my_Max_Priority_Queue = new MaxPriorityQueue();
+    const my_Max_Priority_Queue = new domes.MaxPriorityQueue();
 ```
 
 > Parameter number can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
@@ -795,7 +795,7 @@ Now you can run the following methods on this object.
 You can make Min Priority Queue object as follows.
 
 ```javascript
-    const my_Min_Priority_Queue = new MinPriorityQueue();
+    const my_Min_Priority_Queue = new domes.MinPriorityQueue();
 ```
 
 > Parameter number can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
@@ -875,10 +875,10 @@ So while making any type of graph we have to specify the format of ID by passing
 You can make Unweighted Undirected Graph object in following ways.
 
 ```javascript
-    const my_UWUDGraph = new UWUDGraph(1);
+    const my_UWUDGraph = new domes.UWUDGraph(1);
 ```
 ```javascript
-    const my_UWUDGraph = new UWUDGraph(2);
+    const my_UWUDGraph = new domes.UWUDGraph(2);
 ```
 
 > Parameter number can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
@@ -978,10 +978,10 @@ Now you can run the following methods on this object.
 You can make Unweighted Undirected Graph object in following ways.
 
 ```javascript
-    const my_UWDGraph = new UWDGraph(1);
+    const my_UWDGraph = new domes.UWDGraph(1);
 ```
 ```javascript
-    const my_UWDGraph = new UWDGraph(2);
+    const my_UWDGraph = new domes.UWDGraph(2);
 ```
 
 > Parameter number can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
@@ -1080,10 +1080,10 @@ Now you can run the following methods on this object.
 You can make Unweighted Undirected Graph object in following ways.
 
 ```javascript
-    const my_WUDGraph = new WUDGraph(1);
+    const my_WUDGraph = new domes.WUDGraph(1);
 ```
 ```javascript
-    const my_WUDGraph = new WUDGraph(2);
+    const my_WUDGraph = new domes.WUDGraph(2);
 ```
 
 > Parameter number can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
@@ -1200,10 +1200,10 @@ Now you can run the following methods on this object.
 You can make Unweighted Undirected Graph object in following ways.
 
 ```javascript
-    const my_WDGraph = new WDGraph(1);
+    const my_WDGraph = new domes.WDGraph(1);
 ```
 ```javascript
-    const my_WDGraph = new WDGraph(2);
+    const my_WDGraph = new domes.WDGraph(2);
 ```
 
 > Parameter number can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
