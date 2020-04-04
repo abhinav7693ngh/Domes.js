@@ -30,8 +30,6 @@ We have implemented these data structures as classes.
 
 *Suggestions are always welcomed for improvements.*
 
-### Below is the list of all methods with their parameter/s and returning value/s available to you by the classes.
-
 ---
 
 ## Installation
