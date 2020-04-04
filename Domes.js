@@ -6360,6 +6360,366 @@ class WUDGraph{
 
 
 
+class WDGraph{
+
+    constructor(type){
+        this.adjacencyList = {};
+        this.type = type;
+        this.allVertex = {};
+    }
+
+    noOfNodes() {
+        try {
+            return Object.keys(this.allVertex).length;
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    addVertex(val, ID) {
+        try {
+            if (arguments.length > 0) {
+                const currentType = typeID[this.type];
+                if (currentType === typeof (ID)) {
+                    if (currentType === 'number') {
+                        if (isFinite(ID)) {
+                            if (val === 0 || val === false || val === null || val) {
+                                if (this.allVertex.hasOwnProperty(ID)) {
+                                    return false;
+                                }
+                                else {
+                                    let newNode = new GraphNode(val, ID);
+                                    this.allVertex[ID] = newNode;
+                                    this.adjacencyList[ID] = [];
+                                    return true;
+                                }
+                            }
+                            else {
+                                throw new Error('Value passed is undefined');
+                            }
+                        }
+                        else {
+                            throw new Error('ID passed is not finite');
+                        }
+                    }
+                    else if (currentType === 'string') {
+                        if (val === 0 || val === false || val === null || val) {
+                            if (this.allVertex.hasOwnProperty(ID)) {
+                                return false;
+                            }
+                            else {
+                                let newNode = new GraphNode(val, ID);
+                                this.allVertex[ID] = newNode;
+                                this.adjacencyList[ID] = [];
+                                return true;
+                            }
+                        }
+                        else {
+                            throw new Error('Value passed is undefined');
+                        }
+                    }
+                }
+                else {
+                    throw new Error('ID passed do not match the type of Graph');
+                }
+            }
+            else {
+                throw new Error('Arguments not passed')
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    addEdge(ID1, ID2, weight) {
+        try {
+            if (arguments.length > 0) {
+                const currentType = typeID[this.type];
+                if (typeof (ID1) === currentType && typeof (ID2) === currentType) {
+                    if (currentType === 'number') {
+                        if (isFinite(ID1) && isFinite(ID2)) {
+                            if (weight >= 0 && typeof (weight) === 'number' && isFinite(weight)) {
+                                if (this.adjacencyList.hasOwnProperty(ID1)) {
+                                    let found = this.adjacencyList[ID1].find(ele => ele.node.id === ID2);
+                                    if (found) {
+                                        return true;
+                                    }
+                                }
+                                if (this.adjacencyList.hasOwnProperty(ID1) && !this.adjacencyList.hasOwnProperty(ID2)) {
+                                    this.addVertex(null, ID2);
+                                    this.adjacencyList[ID1].push({ weight: weight, node: this.allVertex[ID2] });
+                                    return true;
+                                }
+                                else if (this.adjacencyList.hasOwnProperty(ID2) && !this.adjacencyList.hasOwnProperty(ID1)) {
+                                    this.addVertex(null, ID1);
+                                    this.adjacencyList[ID1].push({ weight: weight, node: this.allVertex[ID2] });
+                                    return true;
+                                }
+                                else if (!this.adjacencyList.hasOwnProperty(ID1) && !this.adjacencyList.hasOwnProperty(ID2)) {
+                                    this.addVertex(null, ID1);
+                                    this.addVertex(null, ID2);
+                                    this.adjacencyList[ID1].push({ weight: weight, node: this.allVertex[ID2] });
+                                    return true;
+                                }
+                                else if (this.adjacencyList.hasOwnProperty(ID1) && this.adjacencyList.hasOwnProperty(ID2)) {
+                                    this.adjacencyList[ID1].push({ weight: weight, node: this.allVertex[ID2] });
+                                    return true;
+                                }
+                            }
+                            else {
+                                throw new Error('Weight should be of number format and should be greater than or equal to 0 and finite');
+                            }
+                        }
+                        else {
+                            throw new Error('Either of the ID passed is not finite');
+                        }
+                    }
+                    else if (currentType === 'string') {
+                        if (weight >= 0 && typeof (weight) === 'number' && isFinite(weight)) {
+                            if (this.adjacencyList.hasOwnProperty(ID1)) {
+                                let found = this.adjacencyList[ID1].find(ele => ele.node.id === ID2);
+                                if (found) {
+                                    return true;
+                                }
+                            }
+                            if (this.adjacencyList.hasOwnProperty(ID1) && !this.adjacencyList.hasOwnProperty(ID2)) {
+                                this.addVertex(null, ID2);
+                                this.adjacencyList[ID1].push({ weight: weight, node: this.allVertex[ID2] });
+                                return true;
+                            }
+                            else if (this.adjacencyList.hasOwnProperty(ID2) && !this.adjacencyList.hasOwnProperty(ID1)) {
+                                this.addVertex(null, ID1);
+                                this.adjacencyList[ID1].push({ weight: weight, node: this.allVertex[ID2] });
+                                return true;
+                            }
+                            else if (!this.adjacencyList.hasOwnProperty(ID1) && !this.adjacencyList.hasOwnProperty(ID2)) {
+                                this.addVertex(null, ID1);
+                                this.addVertex(null, ID2);
+                                this.adjacencyList[ID1].push({ weight: weight, node: this.allVertex[ID2] });
+                                return true;
+                            }
+                            else if (this.adjacencyList.hasOwnProperty(ID1) && this.adjacencyList.hasOwnProperty(ID2)) {
+                                this.adjacencyList[ID1].push({ weight: weight, node: this.allVertex[ID2] });
+                                return true;
+                            }
+                        }
+                        else {
+                            throw new Error('Weight should be of number format and should be greater than or equal to 0 and finite');
+                        }
+                    }
+                }
+                else {
+                    throw new Error('Either of the ID passed do not match the type of graph');
+                }
+            }
+            else {
+                throw new Error('Arguments not passed');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    updateValue(ID, updatedValue) {
+        try {
+            if (arguments.length > 0) {
+                const currentType = typeID[this.type];
+                if (typeof (ID) === currentType) {
+                    if (currentType === 'number') {
+                        if (isFinite(ID)) {
+                            if (updatedValue === 0 || updatedValue === false || updatedValue === null || updatedValue) {
+                                if (this.allVertex.hasOwnProperty(ID)) {
+                                    this.allVertex[ID].value = updatedValue;
+                                    return true;
+                                }
+                                else {
+                                    return false;
+                                }
+                            }
+                            else {
+                                throw new Error('Value passed is undefined');
+                            }
+                        }
+                        else {
+                            throw new Error('ID passed is not finite');
+                        }
+                    }
+                    else if (currentType === 'string') {
+                        if (updatedValue === 0 || updatedValue === false || updatedValue === null || updatedValue) {
+                            if (this.allVertex.hasOwnProperty(ID)) {
+                                this.allVertex[ID].value = updatedValue;
+                                return true;
+                            }
+                            else {
+                                return false;
+                            }
+                        }
+                        else {
+                            throw new Error('Value passed is undefined');
+                        }
+                    }
+                }
+                else {
+                    throw new Error('ID passed do not match the type of graph');
+                }
+            }
+            else {
+                throw new Error('Arguments not passed');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    getValue(ID) {
+        try {
+            if (arguments.length > 0) {
+                const currentType = typeID[this.type];
+                if (currentType === typeof (ID)) {
+                    if (currentType === 'number') {
+                        if (isFinite(ID)) {
+                            if (this.adjacencyList.hasOwnProperty(ID)) {
+                                return this.allVertex[ID].value;
+                            }
+                            else {
+                                return undefined;
+                            }
+                        }
+                        else {
+                            throw new Error('ID passed is not Finite');
+                        }
+                    }
+                    else if (currentType === 'string') {
+                        if (this.adjacencyList.hasOwnProperty(ID)) {
+                            return this.allVertex[ID].value;
+                        }
+                        else {
+                            return undefined;
+                        }
+                    }
+                }
+                else {
+                    throw new Error('ID passed does not match the type of graph');
+                }
+            }
+            else {
+                throw new Error('Argument not passed');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    removeEdge(ID1, ID2) {
+        try {
+            if (arguments.length > 0) {
+                const currentType = typeID[this.type];
+                if (typeof (ID1) === currentType && typeof (ID2) === currentType) {
+                    if (currentType === 'number') {
+                        if (isFinite(ID1) && isFinite(ID2)) {
+                            if (this.adjacencyList.hasOwnProperty(ID1)) {
+                                let found = this.adjacencyList[ID1].findIndex(ele => ele.node.id === ID2);
+                                if (found === -1) {
+                                    return false;
+                                }
+                            }
+                            if (this.adjacencyList.hasOwnProperty(ID1) && this.adjacencyList.hasOwnProperty(ID2)) {
+                                this.adjacencyList[ID1] = this.adjacencyList[ID1].filter(ele => ele.node.id !== ID2);
+                                return true;
+                            }
+                            else {
+                                return false;
+                            }
+                        }
+                        else {
+                            throw new Error('Either of the ID passed are not finite');
+                        }
+                    }
+                    else if (currentType === 'string') {
+                        if (this.adjacencyList.hasOwnProperty(ID1)) {
+                            let found = this.adjacencyList[ID1].findIndex(ele => ele.node.id === ID2);
+                            if (found === -1) {
+                                return false;
+                            }
+                        }
+                        if (this.adjacencyList.hasOwnProperty(ID1) && this.adjacencyList.hasOwnProperty(ID2)) {
+                            this.adjacencyList[ID1] = this.adjacencyList[ID1].filter(ele => ele.node.id !== ID2);
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                }
+                else {
+                    throw new Error('Either of the ID does not match the type of graph');
+                }
+            }
+            else {
+                throw new Error('Arguments not passed');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    removeVertex(ID) {
+        try {
+            if (arguments.length > 0) {
+                const currentType = typeID[this.type];
+                if (currentType === typeof (ID)) {
+                    if (currentType === 'number') {
+                        if (isFinite(ID)) {
+                            if (this.adjacencyList.hasOwnProperty(ID)) {
+                                delete this.allVertex[ID];
+                                delete this.adjacencyList[ID];
+                                for (let i in this.adjacencyList) {
+                                    this.adjacencyList[i] = this.adjacencyList[i].filter(ele => ele.node.id !== ID);
+                                }
+                                return true;
+                            }
+                            else {
+                                return false;
+                            }
+                        }
+                        else {
+                            throw new Error('ID passed is not Finite');
+                        }
+                    }
+                    else if (currentType === 'string') {
+                        if (this.adjacencyList.hasOwnProperty(ID)) {
+                            delete this.allVertex[ID];
+                            delete this.adjacencyList[ID];
+                            for (let i in this.adjacencyList) {
+                                this.adjacencyList[i] = this.adjacencyList[i].filter(ele => ele.node.id !== ID);
+                            }
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                }
+                else {
+                    throw new Error('ID passed does not match the type of graph');
+                }
+            }
+            else {
+                throw new Error('Argument not passed');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+}
 
 
 
@@ -6367,32 +6727,32 @@ class WUDGraph{
 
 
 
-let my = new WUDGraph(1);
 
-// my.addEdge('A','B',4);
-// my.addEdge('A', 'C', 2);
-// my.addEdge('B', 'E', 3);
-// my.addEdge('C', 'D', 2);
-// my.addEdge('D', 'E', 3);
-// my.addEdge('C', 'F', 4);
-// my.addEdge('D', 'F', 1);
-// my.addEdge('F', 'E', 1);
+
+
+
+
+
+
+
+
+let my = new WDGraph(1);
+
+
+my.addVertex(null,1);
 
 my.addEdge(0,1,10);
-my.addEdge(0,3,2);
-my.addEdge(3,2,6);
 my.addEdge(0,2,3);
+my.addEdge(3,2,6);
+my.addEdge(3,0,2);
+
+my.updateValue(0,'updated value');
+console.log(my.removeVertex(4));
+
+// console.log(my.removeEdge(0,1));
+// console.log(my.removeEdge(3,0));
 
 
-console.log(my.shortestPath(2,1));
-// my.updateValue(0,'This is my updated value');
-
-// console.log(my.removeVertex(1));
-
-// console.log(my.DFS(1));
-
-// console.log(my.neighbours(0));
-// console.log(my.hasEdge(4,1));
 
 
 
