@@ -32,13 +32,22 @@ These data structures are implemented as classes, so you just have to import the
 
 *Suggestions are always welcomed for improvements.*
 
-To install just run the following command
+### Below is the list of all methods with their parameter/s and returning value/s available to you by the classes.
+
+---
+
+## Installation
+
+You can install this normally using npm command
 ```
 npm install domes.js
 ```
-
-### Below is the list of all methods with their parameter/s and returning value/s available to you by the classes.
-
+---
+## How to use
+You can use this in node.js by simply importing it using require().
+```javascript
+const domes = require('domes.js');
+```
 ---
 
 ## Singly Linked List
@@ -46,7 +55,7 @@ npm install domes.js
 You can simply create a Singly Linked List object.
 
 ```javascript
-    const my_Singly_Linked_List = new SinglyLinkedList();
+    const my_Singly_Linked_List = new domes.SinglyLinkedList();
 ```
 
 > *Keep in mind - All values are accepted apart from Undefined and null.*
@@ -191,7 +200,7 @@ Now you can run the following methods on this object.
 You can simply create a Doubly Linked List object.
 
 ```javascript
-    const my_Doubly_Linked_List = new DoublyLinkedList();
+    const my_Doubly_Linked_List = new domes.DoublyLinkedList();
 ```
 
 > *Keep in mind - All values are accepted apart from Undefined and null.*
@@ -338,7 +347,7 @@ Now you can run the following methods on this object.
 You can simply create a Stack object.
 
 ```javascript
-    const my_Stack = new Stack();
+    const my_Stack = new domes.Stack();
 ```
 
 > *Keep in mind - All values are accepted apart from Undefined and null.*
@@ -389,7 +398,7 @@ Now you can run the following methods on this object.
 You can simply create a Queue object.
 
 ```javascript
-    const my_Queue = new Queue();
+    const my_Queue = new domes.Queue();
 ```
 
 > *Keep in mind - All values are accepted apart from Undefined and null.*
