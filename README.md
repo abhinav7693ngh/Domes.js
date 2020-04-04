@@ -154,7 +154,7 @@ Now you can run the following methods on this object.
     * **Returns**
         * An Object with 2 properties
             1. **count** - Number of occurence of that value.
-            1. **positions** - This contains all the indexes that contains that value.
+            2. **positions** - This contains all the indexes that contains that value.
 
 * **deleteAll()** - This does not delete all arguments but insteas returns a new SLL which does not have this value.
     * **Parameter/s**
@@ -299,7 +299,7 @@ Now you can run the following methods on this object.
     * **Returns**
         * An Object with 2 properties
             1. **count** - Number of occurence of that value.
-            1. **positions** - This contains all the indexes that contains that value.
+            2. **positions** - This contains all the indexes that contains that value.
 
 * **deleteAll()** - This does not delete all arguments but insteas returns a new DLL which does not have this value.
     * **Parameter/s**
@@ -578,7 +578,7 @@ Now you can run the following methods on this object.
     * **Keep in Mind (Behind the scenes)**
         * Behind the scenes this operation is doing 2 operations.
             1. Deleting the node with that value
-            1. Inserting a new node with the updated value, Hence IDs will reshuffle in this operation in order to keep the property of BST.
+            2. Inserting a new node with the updated value, Hence IDs will reshuffle in this operation in order to keep the property of BST.
 
 * **updateWithID()**
     * **Parameter/s**
@@ -589,7 +589,7 @@ Now you can run the following methods on this object.
     * **Keep in Mind (Behind the scenes)**
         * Behind the scenes this operation is doing 2 operations.
             1. Deleting the node with that ID.
-            1. Inserting a new node with the updated value, Hence IDs will reshuffle in this operation in order to keep the property of BST.
+            2. Inserting a new node with the updated value, Hence IDs will reshuffle in this operation in order to keep the property of BST.
 
 * **getNodeValueWithID()**
     * **Parameter/s**
@@ -745,7 +745,7 @@ Now you can run the following methods on this object.
 * **enqueue()**
     * **Parameter/s**
         1. Value that is needed to be inserted.
-        1. Priority in number format apart from Infinity/-Infinity.
+        2. Priority in number format apart from Infinity/-Infinity.
     * **Returns**
         * The same passed value.
 
@@ -774,7 +774,7 @@ Now you can run the following methods on this object.
 * **updateValue()**
     * **Parameter/s**
         1. Index of the node.
-        1. Updated value.
+        2. Updated value.
     * **Returns**
         * Boolean true.
 
@@ -799,7 +799,7 @@ Now you can run the following methods on this object.
 * **enqueue()**
     * **Parameter/s**
         1. Value that is needed to be inserted.
-        1. Priority in number format apart from Infinity/-Infinity.
+        2. Priority in number format apart from Infinity/-Infinity.
     * **Returns**
         * The same passed value.
 
@@ -828,7 +828,7 @@ Now you can run the following methods on this object.
 * **updateValue()**
     * **Parameter/s**
         1. Index of the node.
-        1. Updated value.
+        2. Updated value.
     * **Returns**
         * Boolean true.
 
@@ -883,7 +883,7 @@ Now you can run the following methods on this object.
 * **addVertex()**
     * **Parameter/s**
         1. Value of the node.
-        1. ID of the node according to the type of graph.
+        2. ID of the node according to the type of graph.
     * **Returns**
         * Boolean true if successful.
         * Boolean false if unsuccessful (means ID already exist).
@@ -891,7 +891,7 @@ Now you can run the following methods on this object.
 * **addEdge()**
     * **Parameter/s**
         1. ID of first node.
-        1. ID of second node.
+        2. ID of second node.
     * **Returns**
         * Boolean true if successful.
 
@@ -905,7 +905,7 @@ Now you can run the following methods on this object.
 * **removeEdge()**
     * **Parameter/s**
         1. ID of first node.
-        1. ID of second node.
+        2. ID of second node.
     * **Returns**
         * Boolean true if successful.
         * Boolean false if unsuccessful (means edge does not exist).
@@ -913,7 +913,7 @@ Now you can run the following methods on this object.
 * **updateValue()**
     * **Parameter/s**
         1. ID of the node of which we want to update the value.
-        1. Updated Value.
+        2. Updated Value.
     * **Returns**
         * Boolean true if successful.
         * Boolean false if unsuccessful (means node with that ID does not exist).
@@ -946,7 +946,7 @@ Now you can run the following methods on this object.
 * **hasEdge()**
     * **Parameter/s**
         1. ID of first node.
-        1. ID of second node.
+        2. ID of second node.
     * **Returns**
         * Boolean true if exist.
         * Boolean false if does not exist.
@@ -954,7 +954,7 @@ Now you can run the following methods on this object.
 * **shortestPath()**
     * **Parameter/s**
         1. ID of start node.
-        1. ID of end node.
+        2. ID of end node.
     * **Returns**
         * An Object with two properties.
             * **steps** - Shows number of edges between start and end node.
@@ -986,7 +986,7 @@ Now you can run the following methods on this object.
 * **addVertex()**
     * **Parameter/s**
         1. Value of the node.
-        1. ID of the node according to the type of graph.
+        2. ID of the node according to the type of graph.
     * **Returns**
         * Boolean true if successful.
         * Boolean false if unsuccessful (means ID already exist).
@@ -994,7 +994,7 @@ Now you can run the following methods on this object.
 * **addEdge()** - **Edge will be directed from first node to second node.**
     * **Parameter/s**
         1. ID of first node.
-        1. ID of second node.
+        2. ID of second node.
     * **Returns**
         * Boolean true if successful.
 
@@ -1008,7 +1008,7 @@ Now you can run the following methods on this object.
 * **removeEdge()** - **Edge is directed from first node to second node.**
     * **Parameter/s**
         1. ID of first node.
-        1. ID of second node.
+        2. ID of second node.
     * **Returns**
         * Boolean true if successful.
         * Boolean false if unsuccessful (means edge does not exist).
@@ -1016,7 +1016,7 @@ Now you can run the following methods on this object.
 * **updateValue()**
     * **Parameter/s**
         1. ID of the node of which we want to update the value.
-        1. Updated Value.
+        2. Updated Value.
     * **Returns**
         * Boolean true if successful.
         * Boolean false if unsuccessful (means node with that ID does not exist).
@@ -1049,7 +1049,7 @@ Now you can run the following methods on this object.
 * **hasEdge()** - **Edge is directed from first node to second node.**
     * **Parameter/s**
         1. ID of first node.
-        1. ID of second node.
+        2. ID of second node.
     * **Returns**
         * Boolean true if exist.
         * Boolean false if does not exist.
@@ -1057,7 +1057,7 @@ Now you can run the following methods on this object.
 * **shortestPath()**
     * **Parameter/s**
         1. ID of start node.
-        1. ID of end node.
+        2. ID of end node.
     * **Returns**
         * An Object with two properties.
             * **steps** - Shows number of edges between start and end node.
@@ -1088,7 +1088,7 @@ Now you can run the following methods on this object.
 * **addVertex()**
     * **Parameter/s**
         1. Value of the node.
-        1. ID of the node according to the type of graph.
+        2. ID of the node according to the type of graph.
     * **Returns**
         * Boolean true if successful.
         * Boolean false if unsuccessful (means ID already exist).
@@ -1096,8 +1096,8 @@ Now you can run the following methods on this object.
 * **addEdge()**
     * **Parameter/s**
         1. ID of first node.
-        1. ID of second node.
-        1. weight in number format **(Should be greater than or equal to 0 and finite).**
+        2. ID of second node.
+        3. weight in number format **(Should be greater than or equal to 0 and finite).**
     * **Returns**
         * Boolean true if successful.
 
@@ -1111,7 +1111,7 @@ Now you can run the following methods on this object.
 * **removeEdge()**
     * **Parameter/s**
         1. ID of first node.
-        1. ID of second node.
+        2. ID of second node.
     * **Returns**
         * Boolean true if successful.
         * Boolean false if unsuccessful (means edge does not exist).
@@ -1119,7 +1119,7 @@ Now you can run the following methods on this object.
 * **updateValue()**
     * **Parameter/s**
         1. ID of the node of which we want to update the value.
-        1. Updated Value.
+        2. Updated Value.
     * **Returns**
         * Boolean true if successful.
         * Boolean false if unsuccessful (means node with that ID does not exist).
@@ -1152,7 +1152,7 @@ Now you can run the following methods on this object.
 * **hasEdge()**
     * **Parameter/s**
         1. ID of first node.
-        1. ID of second node.
+        2. ID of second node.
     * **Returns**
         * Boolean true if exist.
         * Boolean false if does not exist.
@@ -1160,7 +1160,7 @@ Now you can run the following methods on this object.
 * **getWeight()**
     * **Parameter/s**
         1. ID of first node.
-        1. ID of second node.
+        2. ID of second node.
     * **Returns**
         * Weight between first node and second node.
         * undefined if edge does not exist.
@@ -1168,8 +1168,8 @@ Now you can run the following methods on this object.
 * **updateWeight()**
     * **Parameter/s**
         1. ID of first node.
-        1. ID of second node.
-        1. Updated Weight.
+        2. ID of second node.
+        3. Updated Weight.
     * **Returns**
         * Boolean true if successful.
         * Boolean false if unsuccessful (Edge not found).
@@ -1177,7 +1177,7 @@ Now you can run the following methods on this object.
 * **shortestPath()** - **Uses Dijkstra Algorithm**
     * **Parameter/s**
         1. ID of start node.
-        1. ID of end node.
+        2. ID of end node.
     * **Returns**
         * An Object with two properties.
             * **distance** - Shows overall distance i.e. sum of all weight of edges in path between start and end node.
@@ -1208,7 +1208,7 @@ Now you can run the following methods on this object.
 * **addVertex()**
     * **Parameter/s**
         1. Value of the node.
-        1. ID of the node according to the type of graph.
+        2. ID of the node according to the type of graph.
     * **Returns**
         * Boolean true if successful.
         * Boolean false if unsuccessful (means ID already exist).
@@ -1216,8 +1216,8 @@ Now you can run the following methods on this object.
 * **addEdge()** - **Edge will be directed from first node to second node.**
     * **Parameter/s**
         1. ID of first node.
-        1. ID of second node.
-        1. weight in number format **(Should be greater than or equal to 0 and finite).**
+        2. ID of second node.
+        3. weight in number format **(Should be greater than or equal to 0 and finite).**
     * **Returns**
         * Boolean true if successful.
 
@@ -1231,7 +1231,7 @@ Now you can run the following methods on this object.
 * **removeEdge()** - **Edge is directed from first node to second node.**
     * **Parameter/s**
         1. ID of first node.
-        1. ID of second node.
+        2. ID of second node.
     * **Returns**
         * Boolean true if successful.
         * Boolean false if unsuccessful (means edge does not exist).
@@ -1239,7 +1239,7 @@ Now you can run the following methods on this object.
 * **updateValue()**
     * **Parameter/s**
         1. ID of the node of which we want to update the value.
-        1. Updated Value.
+        2. Updated Value.
     * **Returns**
         * Boolean true if successful.
         * Boolean false if unsuccessful (means node with that ID does not exist).
@@ -1272,7 +1272,7 @@ Now you can run the following methods on this object.
 * **hasEdge()** - **Edge is directed from first node to second node.**
     * **Parameter/s**
         1. ID of first node.
-        1. ID of second node.
+        2. ID of second node.
     * **Returns**
         * Boolean true if exist.
         * Boolean false if does not exist.
@@ -1280,7 +1280,7 @@ Now you can run the following methods on this object.
 * **getWeight()**
     * **Parameter/s**
         1. ID of first node.
-        1. ID of second node.
+        2. ID of second node.
     * **Returns**
         * Weight between first node and second node.
         * undefined if edge does not exist.
@@ -1288,8 +1288,8 @@ Now you can run the following methods on this object.
 * **updateWeight()**
     * **Parameter/s**
         1. ID of first node.
-        1. ID of second node.
-        1. Updated Weight.
+        2. ID of second node.
+        3. Updated Weight.
     * **Returns**
         * Boolean true if successful.
         * Boolean false if unsuccessful (Edge not found).
@@ -1297,7 +1297,7 @@ Now you can run the following methods on this object.
 * **shortestPath()** - **Uses Dijkstra Algorithm**
     * **Parameter/s**
         1. ID of start node.
-        1. ID of end node.
+        2. ID of end node.
     * **Returns**
         * An Object with two properties.
             * **distance** - Shows overall distance i.e. sum of all weight of edges in path between start and end node.
