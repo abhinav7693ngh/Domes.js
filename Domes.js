@@ -7218,3 +7218,19 @@ module.exports = {
 
 
 // ======================================================== //
+
+
+let my = new BinarySearchTree(1,1);
+my.insert(8);
+my.insert(3);
+my.insert(10);
+my.insert(1);
+my.insert(6);
+my.insert(14);
+my.insert(4);
+my.insert(7);
+my.insert(13);
+my.insert(8);
+
+console.log(my.childNodes(1));
+
