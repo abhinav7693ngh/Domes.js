@@ -7192,3 +7192,13 @@ class WDGraph{
 
 
 // ======================================================== //
+
+
+let my = new Queue();
+
+my.enqueue(10);
+my.enqueue(20);
+my.enqueue(30);
+my.enqueue(40);
+
+console.log(my.toArray());
