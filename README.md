@@ -1323,4 +1323,4 @@ Now you can run the following methods on this object.
 
 ---
 
-## Yippee you guys made it 🎉!!..., Now its time to show off your coding skills with these awesome Data Structures..🚀
+## Yayy you guys did it 🎉!!..., Now its time to show off your coding skills with these awesome Data Structures..🚀
