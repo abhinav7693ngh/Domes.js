@@ -1,6 +1,6 @@
 {
   "name": "domes.js",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Hey, This is Domes.js",
   "main": "Domes.js",
   "scripts": {
@@ -10,8 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/abhinav7693ngh/Domes.js.git"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": ["Javascript","JS","Data Structures","DS","Domes.js","Domes","DSA"],
+  "author": "Abhinav Singh",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/abhinav7693ngh/Domes.js/issues"
   },
