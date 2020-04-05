@@ -1,6 +1,6 @@
 {
   "name": "domes.js",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Hey, This is Domes.js",
   "main": "Domes.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/abhinav7693ngh/Domes.js.git"
   },
-  "keywords": ["Javascript","JS","Data Structures","DS","Domes.js","Domes","DSA"],
+  "keywords": ["Javascript","JS","Data Structures","DS","Domes.js","Domes","DSA","Linked Lists","Binary Search Tree","Stack","Queue","Priority Queue","Binary Heap","Graphs"],
   "author": "Abhinav Singh",
   "license": "MIT",
   "bugs": {
