@@ -54,7 +54,7 @@ You can simply create a Singly Linked List object using new keyword as shown bel
     const my_Singly_Linked_List = new domes.SinglyLinkedList();
 ```
 
-> ***Keep in mind - All values are accepted apart from Undefined and null. Objects with some undefined values for some corresponding keys can be stored but cannot be searched/deletes using methods involving passing value as parameter instead you can use index methods. But Object with null values can be stored and can be searched/deletes normally using both value as well as index methods.***
+> ***Keep in mind - All values are accepted apart from Undefined/null.***
 
 > Parameter number/alphabet can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
@@ -199,7 +199,7 @@ You can simply create a Doubly Linked List object using new keyword as shown bel
     const my_Doubly_Linked_List = new domes.DoublyLinkedList();
 ```
 
-> ***Keep in mind - All values are accepted apart from Undefined and null. Objects with some undefined values for some corresponding keys can be stored but cannot be searched/deletes using methods involving passing value as parameter instead you can use index methods. But Object with null values can be stored and can be searched/deletes normally using both value as well as index methods.***
+> ***Keep in mind - All values are accepted apart from Undefined/null.***
 
 > Parameter number/alphabet can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
@@ -346,7 +346,7 @@ You can simply create a Stack object using the new keyword as shown below.
     const my_Stack = new domes.Stack();
 ```
 
-> ***Keep in mind - All values are accepted apart from Undefined and null. Objects with some undefined values for some corresponding keys can be stored but cannot be searched using search() method apart from this every other method would work normally. But on the other hand Object with null values can be stored and can be searched normally using search() method.***
+> ***Keep in mind - All values are accepted apart from Undefined/null.***
 
 > Parameter number/alphabet can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
@@ -398,7 +398,7 @@ You can simply create a Queue object using the new keyword as shown below.
     const my_Queue = new domes.Queue();
 ```
 
-> ***Keep in mind - All values are accepted apart from Undefined and null. Objects with some undefined values for some corresponding keys can be stored but cannot be searched using search() method apart from this every other method would work normally. But on the other hand Object with null values can be stored and can be searched normally using search() method.***
+> ***Keep in mind - All values are accepted apart from Undefined/null.***
 
 > Parameter number/alphabet can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
