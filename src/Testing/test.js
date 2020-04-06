@@ -38,8 +38,9 @@ let yup = () =>{
 }
 let num2 = 200;
 let str2 = 'sum';
-let arrobj = [{first : null},{second : 'second'},{third : {fourth : 'fourth',fifth : 'fifth'}}];
-let arrobj2 = [{ first: null }, { second: 'scond' }, { third: { fourth: 'fourth', fifth: 'fifth' } }];
+let arrobj = [{first : function(){console.log('I am')}},{second : 'second'},{third : {fourth : null,fifth : 'fifth'}}];
+let arrobj3 = [{ first: function () { console.log('I') } }, { second: 'second' }, { third: { fourth: null, fifth: 'fifth' } }];
+let arrobj2 = [{ first: null }, { second: 'scond' }, { third: { fourth: 'fourth', fifth: undefined } }];
 
 my.insertAtEnd(num1);
 my.insertAtEnd(str1);

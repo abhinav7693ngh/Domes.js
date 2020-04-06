@@ -1,7 +1,4 @@
 function comparator(obj1,obj2){
-    if(obj1 != null && obj2 != null){
-        
-    }
     //Loop through properties in object 1
     if ((typeof (obj1) !== 'function' && typeof (obj2) === 'function') || (typeof (obj1) === 'function' && typeof (obj2) !== 'function')) {
         return false;
@@ -19,7 +16,7 @@ function comparator(obj1,obj2){
         for (var p in obj1) {
             //Check property exists on both objects
             if (obj1.hasOwnProperty(p) !== obj2.hasOwnProperty(p)) return false;
-
+            
             switch (typeof (obj1[p])) {
                 //Deep compare objects
                 case 'object':
@@ -29,7 +26,7 @@ function comparator(obj1,obj2){
                     else{
                         if (!comparator(obj1[p], obj2[p])) return false;
                     }
-                    break;
+                    break;                 
                 //Compare function code
                 case 'function':
                     if (typeof (obj2[p]) == 'undefined' || (p != 'compare' && obj1[p].toString() != obj2[p].toString())) return false;

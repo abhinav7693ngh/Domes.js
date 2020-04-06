@@ -54,7 +54,7 @@ You can simply create a Singly Linked List object using new keyword as shown bel
     const my_Singly_Linked_List = new domes.SinglyLinkedList();
 ```
 
-> *Keep in mind - All values are accepted apart from Undefined and null.*
+> ***Keep in mind - All values are accepted apart from Undefined and null. Objects with some undefined values for some corresponding keys can be stored but cannot be searched/deletes using methods involving passing value as parameter instead you can use index methods. But Object with null values can be stored and can be searched/deletes normally using both value as well as index methods.***
 
 > Parameter number/alphabet can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
@@ -199,7 +199,7 @@ You can simply create a Doubly Linked List object using new keyword as shown bel
     const my_Doubly_Linked_List = new domes.DoublyLinkedList();
 ```
 
-> *Keep in mind - All values are accepted apart from Undefined and null.*
+> ***Keep in mind - All values are accepted apart from Undefined and null. Objects with some undefined values for some corresponding keys can be stored but cannot be searched/deletes using methods involving passing value as parameter instead you can use index methods. But Object with null values can be stored and can be searched/deletes normally using both value as well as index methods.***
 
 > Parameter number/alphabet can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
@@ -346,7 +346,7 @@ You can simply create a Stack object using the new keyword as shown below.
     const my_Stack = new domes.Stack();
 ```
 
-> *Keep in mind - All values are accepted apart from Undefined and null.*
+> ***Keep in mind - All values are accepted apart from Undefined and null. Objects with some undefined values for some corresponding keys can be stored but cannot be searched using search() method apart from this every other method would work normally. But on the other hand Object with null values can be stored and can be searched normally using search() method.***
 
 > Parameter number/alphabet can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
@@ -398,7 +398,7 @@ You can simply create a Queue object using the new keyword as shown below.
     const my_Queue = new domes.Queue();
 ```
 
-> *Keep in mind - All values are accepted apart from Undefined and null.*
+> ***Keep in mind - All values are accepted apart from Undefined and null. Objects with some undefined values for some corresponding keys can be stored but cannot be searched using search() method apart from this every other method would work normally. But on the other hand Object with null values can be stored and can be searched normally using search() method.***
 
 > Parameter number/alphabet can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
@@ -487,7 +487,7 @@ In addition we are using the concept of ID in these as values can be redundant s
 > **IMPORTANT**
 * As you will see in many of our methods it will ask you to provide ID as a parameter and if the method involves a task that will be performed on the whole tree e.g. BFS or DFS etc, these tasks are performed on whole tree and you are just asked to provide the root node, So in these type of methods you can provide any valid ID and the node with that ID will be treated as root node even if it is not of the main tree, Hence these type of methods can also work on ***Sub Trees*** as well.
 
-> *Keep in mind - Values are accepted as per the configuration.*
+> ***Keep in mind - Values are accepted as per the configuration.***
 
 > Parameter number/alphabet can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
@@ -648,7 +648,7 @@ You can make Max Binary Heap object using new keyword as shown below.
     const my_Max_Binary_Heap = new domes.MaxBinaryHeap(2,2);
     ```
 
-> *Keep in mind - Values are accepted as per the configuration.*
+> ***Keep in mind - Values are accepted as per the configuration.***
 
 > Parameter number/alphabet can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
@@ -696,7 +696,7 @@ You can make Min Binary Heap using new keyword as shown below.
     const my_Min_Binary_Heap = new domes.MinBinaryHeap(2,2);
     ```
 
-> *Keep in mind - Values are accepted as per the configuration.*
+> ***Keep in mind - Values are accepted as per the configuration.***
 
 > Parameter number/alphabet can be derived as argument number. E.g. 1/a means first argument, 2/b means 2nd argument... etc.
 
@@ -738,7 +738,7 @@ Now you can run the following methods on this object and start using your Min Bi
 
 > ***Keep in mind while using this, you can only give priority only in number format apart from Infinity/-Infinity***
 
-> *All values are accepted to store apart from undefined/null.*
+> ***All values are accepted to store apart from undefined/null.***
 
 > *If Priority are same for two or more elements then they can come in any order for that priority, it doesn't depend on their value.*
 
@@ -1323,4 +1323,4 @@ Now you can run the following methods on this object.
 
 ---
 
-## Yayy you guys did it 🎉!!..., Now its time to show off your coding skills with these awesome Data Structures..🚀
+## Yayy you did it 🎉!!..., Now its time to show off your coding skills with these awesome Data Structures..🚀
