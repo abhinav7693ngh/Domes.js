@@ -1,41 +1,4 @@
-
-
-// === Deeply check two objects are equal or not === //
-
-
-
-Object.compare = function (obj1, obj2) {
-    //Loop through properties in object 1
-    for (var p in obj1) {
-        //Check property exists on both objects
-        if (obj1.hasOwnProperty(p) !== obj2.hasOwnProperty(p)) return false;
-
-        switch (typeof (obj1[p])) {
-            //Deep compare objects
-            case 'object':
-                if (!Object.compare(obj1[p], obj2[p])) return false;
-                break;
-            //Compare function code
-            case 'function':
-                if (typeof (obj2[p]) == 'undefined' || (p != 'compare' && obj1[p].toString() != obj2[p].toString())) return false;
-                break;
-            //Compare values
-            default:
-                if (obj1[p] !== obj2[p]) return false;
-        }
-    }
-
-    //Check object 2 for any extra properties
-    for (var p in obj2) {
-        if (typeof (obj1[p]) == 'undefined') return false;
-    }
-    return true;
-};
-
-
-
-
-// ================================================= //
+const { comparator } = require('../../Comparator/comparator');
 
 
 // ====== Doubly Linked List ====== //
@@ -59,6 +22,7 @@ class DoublyLinkedList {
         this.head = null;
         this.tail = null;
         this.size = 0;
+        this.comparatorHelperDLL = null;
     }
 
     insertAtStart(val) {
@@ -247,12 +211,12 @@ class DoublyLinkedList {
                     if ((typeof (val) === 'object') || (typeof (val) === 'function')) {
                         let traverse = this.head;
                         while (traverse.next != null) {
-                            if (Object.compare(traverse.value, val)) {
+                            if (comparator(traverse.value, val)) {
                                 return traverse;
                             }
                             traverse = traverse.next;
                         }
-                        if (Object.compare(traverse.value, val)) {
+                        if (comparator(traverse.value, val)) {
                             return traverse;
                         }
                         return null;
@@ -362,10 +326,10 @@ class DoublyLinkedList {
                 if (!this.isEmpty()) {
                     if (this.search(val)) {
                         if ((typeof (val) === 'object') || (typeof (val) === 'function')) {
-                            if (Object.compare(this.head.value, val)) {
+                            if (comparator(this.head.value, val)) {
                                 return this.deleteFromStart(val);
                             }
-                            else if (Object.compare(this.tail.value, val)) {
+                            else if (comparator(this.tail.value, val)) {
                                 return this.deleteFromEnd(val);
                             }
                             else {
@@ -373,7 +337,7 @@ class DoublyLinkedList {
                                 let currentNode = this.head.next;
                                 let frontNode = this.head.next.next;
                                 while (frontNode.next != null) {
-                                    if (Object.compare(currentNode.value, val)) {
+                                    if (comparator(currentNode.value, val)) {
                                         let deletedNodeValue = currentNode.value;
                                         backNode.next = frontNode;
                                         frontNode.prev = backNode;
@@ -386,7 +350,7 @@ class DoublyLinkedList {
                                     currentNode = frontNode;
                                     frontNode = frontNode.next;
                                 }
-                                if (Object.compare(currentNode.value, val)) {
+                                if (comparator(currentNode.value, val)) {
                                     let deletedNodeValue = currentNode.value;
                                     backNode.next = frontNode;
                                     frontNode.prev = backNode;
@@ -493,13 +457,13 @@ class DoublyLinkedList {
                         let traverse = this.head;
                         let i;
                         for (i = 0; i < (this.size - 1); i++) {
-                            if (Object.compare(traverse.value, val)) {
+                            if (comparator(traverse.value, val)) {
                                 toReturn.count++;
                                 toReturn.positions.push(i);
                             }
                             traverse = traverse.next;
                         }
-                        if (Object.compare(traverse.value, val)) {
+                        if (comparator(traverse.value, val)) {
                             toReturn.count++;
                             toReturn.positions.push(i);
                         }
@@ -543,12 +507,12 @@ class DoublyLinkedList {
                     if ((typeof (val) === 'object') || (typeof (val) === 'function')) {
                         let traverse = this.head;
                         while (traverse.next != null) {
-                            if (!Object.compare(traverse.value, val)) {
+                            if (!comparator(traverse.value, val)) {
                                 newDoubly.insertAtEnd(traverse.value);
                             }
                             traverse = traverse.next;
                         }
-                        if (!Object.compare(traverse.value, val)) {
+                        if (!comparator(traverse.value, val)) {
                             newDoubly.insertAtEnd(traverse.value);
                         }
                         return newDoubly;
@@ -676,13 +640,13 @@ class DoublyLinkedList {
                         let traverse = this.head;
                         let count = 0;
                         while (traverse.next != null) {
-                            if (Object.compare(traverse.value, val)) {
+                            if (comparator(traverse.value, val)) {
                                 traverse.value = updatedVal;
                                 count++;
                             }
                             traverse = traverse.next;
                         }
-                        if (Object.compare(traverse.value, val)) {
+                        if (comparator(traverse.value, val)) {
                             traverse.value = updatedVal;
                             count++;
                         }
