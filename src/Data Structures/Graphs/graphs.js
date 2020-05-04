@@ -73,6 +73,18 @@ function WeightedGraphDFSHelper(myans, mystack, visited) {
 
 
 
+
+class PriorityQueueNode {
+
+    constructor(data, prior) {
+        this.value = data;
+        this.priority = prior;
+    }
+
+}
+
+
+
 class MinGraphPriorityQueue {
 
     constructor() {
