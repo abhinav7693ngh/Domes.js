@@ -28,8 +28,6 @@ We have implemented these data structures as classes.
 
 *IF Built in methods don't suffice the needs then you are free to dive in and create your own extended methods for these classes.*
 
-*Suggestions are always welcomed for improvements.*
-
 ---
 
 ## Installation
@@ -1322,5 +1320,3 @@ Now you can run the following methods on this object.
 
 
 ---
-
-## Yayy you did it 🎉!!..., Now its time to show off your coding skills with these awesome Data Structures..🚀
